@@ -1,8 +1,27 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Brain, ChevronDown } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Brain,
+  ChevronDown,
+  Activity,
+  MessageSquare,
+  Lightbulb,
+  Baby,
+  GraduationCap,
+  BrainCircuit,
+  Sparkles,
+  HeartHandshake,
+  Pencil,
+  Apple,
+  Puzzle,
+  Utensils,
+  MonitorSmartphone,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { services } from '../../data/servicesData';
+import { DropdownNavigation, type DropdownNavItem } from '../ui/dropdown-navigation';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,96 +63,163 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  const desktopNavItems: DropdownNavItem[] = [
+    { id: 1, label: 'Home', link: '/' },
+    { id: 2, label: 'About', link: '/about' },
+    {
+      id: 3,
+      label: 'Services',
+      subMenus: [
+        {
+          title: 'Core therapy',
+          items: [
+            {
+              label: 'Occupational Therapy',
+              description: 'Daily living, sensory, and motor development',
+              icon: Activity,
+              link: '/services/occupational-therapy',
+            },
+            {
+              label: 'Speech & Language',
+              description: 'Communication and expressive language support',
+              icon: MessageSquare,
+              link: '/services/speech-therapy',
+            },
+            {
+              label: 'Behaviour (ABA)',
+              description: 'Structured behaviour and learning strategies',
+              icon: Lightbulb,
+              link: '/services/aba-therapy',
+            },
+            {
+              label: 'Early Intervention',
+              description: 'Infant and toddler milestone support',
+              icon: Baby,
+              link: '/services/early-intervention',
+            },
+          ],
+        },
+        {
+          title: 'Learning support',
+          items: [
+            {
+              label: 'Special Education',
+              description: 'Individualized educational support',
+              icon: GraduationCap,
+              link: '/services/special-education',
+            },
+            {
+              label: 'School Readiness',
+              description: 'Prepare children for classroom routines',
+              icon: Apple,
+              link: '/school-readiness-program',
+            },
+            {
+              label: 'Brain Gym Activities',
+              description: 'Movement-based cognitive activation',
+              icon: BrainCircuit,
+              link: '/services/brain-gym',
+            },
+            {
+              label: 'Cognitive & Learning',
+              description: 'Attention, memory, and learning skills',
+              icon: Puzzle,
+              link: '/programs/cognitive-learning-skills',
+            },
+          ],
+        },
+        {
+          title: 'Specialized programs',
+          items: [
+            {
+              label: 'Sensory Integration',
+              description: 'Regulation and sensory processing support',
+              icon: Sparkles,
+              link: '/programs/sensory-integration',
+            },
+            {
+              label: 'Play Therapy',
+              description: 'Emotional and social development through play',
+              icon: HeartHandshake,
+              link: '/programs/play-therapy',
+            },
+            {
+              label: 'Mindfulness',
+              description: 'Calm focus and self-regulation techniques',
+              icon: Brain,
+              link: '/programs/mindfulness',
+            },
+            {
+              label: 'Feeding & Oral Motor',
+              description: 'Chewing, swallowing, and mealtime support',
+              icon: Utensils,
+              link: '/programs/feeding-oral-motor',
+            },
+            {
+              label: 'Assistive Technology',
+              description: 'AAC and adaptive learning tools',
+              icon: MonitorSmartphone,
+              link: '/programs/assistive-technology-support',
+            },
+            {
+              label: 'Parent & Caregiver Training',
+              description: 'Practical home strategies for families',
+              icon: HeartHandshake,
+              link: '/programs/parent-caregiver-training',
+            },
+            {
+              label: 'Handwriting & Fine Motor',
+              description: 'Writing readiness and hand control',
+              icon: Pencil,
+              link: '/programs/handwriting-fine-motor',
+            },
+          ],
+        },
+      ],
+    },
+    { id: 4, label: 'Conditions', link: '/conditions' },
+    { id: 5, label: 'Testimonials', link: '/testimonials' },
+    { id: 6, label: 'Contact', link: '/contact' },
+  ];
+
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+      className={`sticky top-0 w-full z-50 transition-all duration-300 border-b border-primary-100 ${
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/95 backdrop-blur-sm py-3'
       }`}
     >
-      <div className="container-custom flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-          <Brain className="w-8 h-8 text-primary-600" />
-          <span className="text-xl font-heading font-bold text-neutral-900">Aadhiraa</span>
+      <div className="container-custom grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
+        <Link to="/" className="flex items-center gap-3 min-w-0" onClick={() => setIsMenuOpen(false)}>
+          <img
+            src="/logo.png"
+            alt="Arura Integral Therapy Services logo"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain flex-shrink-0 drop-shadow-md"
+          />
+          <span className="min-w-0 leading-tight">
+            <span className="block text-[0.78rem] md:text-[0.9rem] font-semibold uppercase tracking-[0.2em] text-primary-700">
+              Arura Integral
+            </span>
+            <span className="block text-[1.08rem] md:text-[1.3rem] font-heading font-black tracking-[0.01em] text-neutral-900 truncate">
+              Therapy Services
+            </span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
-          <NavLink to="/" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            Home
-          </NavLink>
-          <NavLink to="/about" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            About
-          </NavLink>
-          
-          {/* Services Dropdown */}
-          <div className="relative group">
-            <button 
-              className="nav-link flex items-center"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onClick={() => setIsServicesOpen(!isServicesOpen)}
-            >
-              Services <ChevronDown className="w-4 h-4 ml-1" />
-            </button>
-            
-            <AnimatePresence>
-              {isServicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2"
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                >
-                  {services.map((service) => (
-                    <Link
-                      key={service.id}
-                      to={`/services/${service.id}`}
-                      className="block px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600"
-                      onClick={() => {
-                        setIsServicesOpen(false);
-                        setIsMenuOpen(false);
-                      }}
-                    >
-                      {service.title}
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-          
-          <NavLink to="/school-readiness-program" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            Programs
-          </NavLink>
-          <NavLink to="/conditions" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            Conditions
-          </NavLink>
-          <NavLink to="/testimonials" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            Testimonials
-          </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => 
-            isActive ? 'nav-link-active' : 'nav-link'
-          }>
-            Contact
-          </NavLink>
-          <Link to="/book-appointment" className="btn-primary ml-4">
+        <nav className="hidden md:flex items-center justify-center justify-self-center min-w-0">
+          <DropdownNavigation navItems={desktopNavItems} />
+        </nav>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:flex justify-self-end">
+          <Link to="/book-appointment" className="btn-primary whitespace-nowrap">
             Book Appointment
           </Link>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-neutral-800 focus:outline-none" 
+          className="md:hidden text-neutral-800 focus:outline-none justify-self-end" 
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
         >

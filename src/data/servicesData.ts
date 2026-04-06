@@ -49,7 +49,7 @@ export const services: Service[] = [
     ],
     ageGroups: "1-18 years",
     borderColor: "border-primary-500",
-    image: "https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/occupationa_therapy.png"
   },
   {
     id: "speech-therapy",
@@ -88,7 +88,7 @@ export const services: Service[] = [
     ],
     ageGroups: "1-15 years",
     borderColor: "border-secondary-500",
-    image: "https://images.pexels.com/photos/5905492/pexels-photo-5905492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/speech_therapy.png"
   },
   {
     id: "special-education",
@@ -127,7 +127,7 @@ export const services: Service[] = [
     ],
     ageGroups: "3-16 years",
     borderColor: "border-accent-500",
-    image: "https://images.pexels.com/photos/8613319/pexels-photo-8613319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/Learning_disabiliites.png"
   },
   {
     id: "aba-therapy",
@@ -166,7 +166,7 @@ export const services: Service[] = [
     ],
     ageGroups: "2-15 years",
     borderColor: "border-primary-500",
-    image: "https://images.pexels.com/photos/8942991/pexels-photo-8942991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/behaviural_challenges.png"
   },
   {
     id: "early-intervention",
@@ -205,7 +205,7 @@ export const services: Service[] = [
     ],
     ageGroups: "0-3 years",
     borderColor: "border-secondary-500",
-    image: "https://images.pexels.com/photos/5905720/pexels-photo-5905720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/developmental_Delay.png"
   },
   {
     id: "brain-gym",
@@ -244,6 +244,6 @@ export const services: Service[] = [
     ],
     ageGroups: "3-18 years",
     borderColor: "border-accent-500",
-    image: "https://images.pexels.com/photos/8942714/pexels-photo-8942714.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    image: "/brain_gym.png"
   }
 ];

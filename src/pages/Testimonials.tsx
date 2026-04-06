@@ -21,8 +21,9 @@ const Testimonials = () => {
       <PageHeader
         title="Testimonials"
         subtitle="Success stories from families we've helped"
+        description="Read how children and families improved communication, behaviour, learning readiness, and independence through consistent therapy, parent involvement, and individualized plans at our centres."
         backgroundImage="https://images.pexels.com/photos/8944024/pexels-photo-8944024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Read success stories and testimonials from families who have experienced positive outcomes with Aadhiraa Paediatric Therapy Services in Chennai."
+        metaDescription="Read success stories from families at Arura Integral Therapy Services — paediatric therapy across Chennai centers including Villivakkam, Valasaravakkam, Chengalpattu, and Nungambakkam."
       />
       
       <section className="py-16 md:py-20 bg-white">

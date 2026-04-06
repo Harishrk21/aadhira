@@ -15,6 +15,12 @@ export default {
           700: '#0066CC',
           800: '#0052A3',
           900: '#003A73',
+          950: '#001F3D',
+        },
+        brand: {
+          yellow: '#FACC15',
+          'yellow-deep': '#EAB308',
+          cream: '#FFFBEB',
         },
         secondary: {
           50: '#F7F2FF',

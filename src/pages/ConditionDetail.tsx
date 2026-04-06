@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { conditions } from '../data/conditionsData';
 import { ArrowLeft, CheckCircle, Brain, Activity, MessageSquare } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
-import SectionTitle from '../components/ui/SectionTitle';
 import CTASection from '../components/ui/CTASection';
 
 const ConditionDetail = () => {
@@ -27,8 +26,9 @@ const ConditionDetail = () => {
       <PageHeader
         title={condition.title}
         subtitle="Understanding and treating developmental conditions"
+        description={`We evaluate ${condition.title.toLowerCase()} with a child-centred lens, then build coordinated therapy strategies across communication, sensory, behaviour, learning, and functional participation based on your child’s profile.`}
         backgroundImage={condition.image}
-        metaDescription={`Learn about ${condition.title} treatment at Aadhiraa Paediatric Therapy Services. Understanding signs, symptoms, and our therapeutic approach.`}
+        metaDescription={`Learn about ${condition.title} — therapeutic support at Arura Integral Therapy Services (Chennai centers (Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam)). Signs, strategies, and our approach.`}
       />
       
       <section className="py-16 md:py-20 bg-white">

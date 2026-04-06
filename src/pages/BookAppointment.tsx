@@ -8,8 +8,9 @@ const BookAppointment = () => {
       <PageHeader
         title="Book an Appointment"
         subtitle="Schedule a consultation or therapy session for your child"
+        description="From first assessment to ongoing sessions, we design clear, measurable plans in occupational therapy, speech & language, ABA, early intervention, and learning support so progress continues at home and in school."
         backgroundImage="https://images.pexels.com/photos/5905476/pexels-photo-5905476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Schedule a therapy session or consultation at Aadhiraa Paediatric Therapy Services in Chennai. Book appointments for occupational therapy, speech therapy, and more."
+        metaDescription="Book a therapy session at Arura Integral Therapy Services — Chennai locations: Villivakkam, Valasaravakkam, Chengalpattu, or Nungambakkam. Occupational therapy, speech, ABA, and more."
       />
       
       <section className="py-16 md:py-20 bg-white">

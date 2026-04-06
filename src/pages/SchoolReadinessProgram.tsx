@@ -10,8 +10,9 @@ const SchoolReadinessProgram = () => {
       <PageHeader
         title="School Readiness Program"
         subtitle="Summer camp designed for children with developmental needs"
+        description="This programme builds classroom readiness through communication, attention, social interaction, behaviour regulation, pre-academic foundations, and daily routine independence before formal school transition."
         backgroundImage="https://images.pexels.com/photos/8943225/pexels-photo-8943225.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Aadhiraa's School Readiness Program helps prepare children with developmental needs for school success through a specialized summer camp with integrated therapy and skill development."
+        metaDescription="Arura Integral Therapy Services School Readiness Program — prepare children for school success with integrated therapy and skill development in Chennai."
       />
       
       <section className="py-16 md:py-20 bg-white">

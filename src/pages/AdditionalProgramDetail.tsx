@@ -1,208 +1,235 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { services } from '../data/servicesData';
 import {
-  Activity, MessageSquare, GraduationCap, Lightbulb, Baby, Brain,
-  CheckCircle2, ArrowLeft, Clock, Users, Target, ArrowRight, Phone,
-  ChevronRight, Star, Sparkles,
+  ArrowLeft, CheckCircle2, Clock, Target, Users, ArrowRight,
+  Phone, ChevronRight, Sparkles, Star,
 } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
+import { additionalPrograms } from '../data/additionalProgramsData';
 import { BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY } from '../config/brand';
 
-// ─── Per-service colour theme ─────────────────────────────────
-const SERVICE_THEME: Record<string, {
+// ─── Per-program colour theme ─────────────────────────────────
+const PROGRAM_THEME: Record<string, {
   gradient: string; softBg: string; border: string; text: string;
-  badge: string; btnClass: string; icon: JSX.Element; emoji: string;
-  tagline: string; signs: string[]; whoFor: string[];
+  btnClass: string; emoji: string; tagline: string; signs: string[]; whoFor: string[];
 }> = {
-  'occupational-therapy': {
-    gradient: 'from-blue-500 to-indigo-600',
-    softBg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-700',
-    badge: 'bg-blue-100 text-blue-700', btnClass: 'bg-blue-600 hover:bg-blue-700 text-white',
-    icon: <Activity className="w-7 h-7" />, emoji: '🖐️',
-    tagline: 'From fine motor to full daily independence',
+  'sensory-integration': {
+    gradient: 'from-rose-500 to-pink-600',
+    softBg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-700',
+    btnClass: 'bg-rose-600 hover:bg-rose-700 text-white',
+    emoji: '🌀', tagline: 'Helping children feel calm and in control',
     signs: [
-      'Difficulty with writing, drawing, or colouring',
-      'Trouble with buttons, zips, or cutlery',
-      'Sensitivity to touch, textures, or movement',
-      'Poor coordination or balance',
-      'Difficulty with self-care tasks like dressing',
-      'Avoidance of fine motor activities',
-    ],
-    whoFor: [
-      'Children with sensory processing difficulties',
-      'Kids with fine or gross motor delays',
-      'Children with autism or ADHD',
-      'Those with developmental delays',
-      'Children needing daily living skill support',
-    ],
-  },
-  'speech-therapy': {
-    gradient: 'from-emerald-500 to-teal-600',
-    softBg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700',
-    badge: 'bg-emerald-100 text-emerald-700', btnClass: 'bg-emerald-600 hover:bg-emerald-700 text-white',
-    icon: <MessageSquare className="w-7 h-7" />, emoji: '🗣️',
-    tagline: 'Every child deserves a confident voice',
-    signs: [
-      'Not babbling or cooing by 12 months',
-      'No single words by 16–18 months',
-      'Limited vocabulary compared to peers',
-      'Difficulty understanding simple instructions',
-      'Unclear or unintelligible speech for age',
-      'Stuttering or other fluency issues',
-    ],
-    whoFor: [
-      'Children with speech or language delay',
-      'Kids with autism spectrum disorder',
-      'Children with articulation difficulties',
-      'Those with hearing impairment',
-      'Children needing communication support',
-    ],
-  },
-  'special-education': {
-    gradient: 'from-violet-500 to-purple-700',
-    softBg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700',
-    badge: 'bg-violet-100 text-violet-700', btnClass: 'bg-violet-600 hover:bg-violet-700 text-white',
-    icon: <GraduationCap className="w-7 h-7" />, emoji: '📐',
-    tagline: 'Learning tailored to every unique mind',
-    signs: [
-      'Struggling to read, write, or do maths at grade level',
-      'Difficulty remembering instructions or sequences',
-      'Problems with organisation and time management',
-      'Inconsistent performance at school',
-      'Low confidence or avoidance of schoolwork',
-      'Difficulty understanding abstract concepts',
-    ],
-    whoFor: [
-      'Children with learning disabilities (dyslexia, dyscalculia)',
-      'Kids with intellectual disabilities',
-      'Children with autism needing academic support',
-      'Those in need of individualised education plans',
-      'Children preparing for mainstream education',
-    ],
-  },
-  'aba-therapy': {
-    gradient: 'from-orange-500 to-amber-600',
-    softBg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-700',
-    badge: 'bg-orange-100 text-orange-700', btnClass: 'bg-orange-600 hover:bg-orange-700 text-white',
-    icon: <Lightbulb className="w-7 h-7" />, emoji: '🎯',
-    tagline: 'Evidence-based behaviour change that lasts',
-    signs: [
-      'Frequent tantrums or aggressive behaviour',
-      'Difficulty following instructions or routines',
-      'Self-injurious or repetitive behaviours',
-      'Limited social interaction or play skills',
-      'Communication challenges in social settings',
+      'Extreme sensitivity to sounds, textures, or lights',
+      'Seeking intense sensory input (spinning, crashing)',
+      'Difficulty with clothing textures or food textures',
+      'Meltdowns in busy or noisy environments',
+      'Poor body awareness and coordination',
       'Difficulty transitioning between activities',
     ],
     whoFor: [
-      'Children with autism spectrum disorder',
-      'Kids with challenging or unsafe behaviours',
-      'Children with limited social or communication skills',
-      'Those needing structured skill-building programmes',
-      'Families needing consistent home-based strategies',
+      'Children with sensory over- or under-sensitivity',
+      'Kids with autism or ADHD',
+      'Children with developmental delay',
+      'Those with frequent meltdowns or behaviour issues',
+      'Children needing regulation support',
     ],
   },
-  'early-intervention': {
-    gradient: 'from-sky-500 to-blue-600',
-    softBg: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-700',
-    badge: 'bg-sky-100 text-sky-700', btnClass: 'bg-sky-600 hover:bg-sky-700 text-white',
-    icon: <Baby className="w-7 h-7" />, emoji: '🌱',
-    tagline: 'The earlier we start, the greater the impact',
+  'parent-caregiver-training': {
+    gradient: 'from-teal-500 to-cyan-600',
+    softBg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700',
+    btnClass: 'bg-teal-600 hover:bg-teal-700 text-white',
+    emoji: '👨‍👩‍👧', tagline: 'Empowering families to drive progress at home',
     signs: [
-      'Not reaching motor milestones (sitting, crawling, walking)',
-      'Delayed or absent babbling and early words',
-      'Limited response to name or faces',
-      'Unusual muscle tone (too stiff or too floppy)',
-      'Lack of social smiling or eye contact',
-      'Limited play or exploration behaviour',
+      'Struggling to implement therapy goals at home',
+      'Inconsistency between clinic and home behaviour',
+      'Unsure how to support communication or learning',
+      'Feeling overwhelmed by your child\'s needs',
+      'Wanting to be more involved in therapy',
+      'Difficulty managing routines or transitions at home',
     ],
     whoFor: [
-      'Infants and toddlers aged 0–3 years',
-      'Children at risk for developmental delay',
-      'Premature babies needing developmental support',
-      'Children with known genetic conditions',
-      'Families concerned about missed milestones',
+      'Parents and caregivers of children in therapy',
+      'Families wanting to support clinic goals at home',
+      'Grandparents or extended family involved in care',
+      'Single parents needing practical guidance',
+      'Families of newly diagnosed children',
     ],
   },
-  'brain-gym': {
-    gradient: 'from-fuchsia-500 to-pink-600',
-    softBg: 'bg-fuchsia-50', border: 'border-fuchsia-200', text: 'text-fuchsia-700',
-    badge: 'bg-fuchsia-100 text-fuchsia-700', btnClass: 'bg-fuchsia-600 hover:bg-fuchsia-700 text-white',
-    icon: <Brain className="w-7 h-7" />, emoji: '🧠',
-    tagline: 'Movement that unlocks learning potential',
+  'cognitive-learning-skills': {
+    gradient: 'from-amber-400 to-orange-500',
+    softBg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700',
+    btnClass: 'bg-amber-500 hover:bg-amber-600 text-white',
+    emoji: '💡', tagline: 'Building the thinking skills behind every task',
     signs: [
       'Short attention span and easy distractibility',
       'Difficulty remembering multi-step instructions',
-      'Poor coordination or body awareness',
-      'Stress or anxiety around schoolwork',
-      'Difficulty organising thoughts or tasks',
-      'Resistance or disengagement in learning',
+      'Poor problem-solving or planning skills',
+      'Trouble with reading comprehension or maths reasoning',
+      'Inconsistent classroom performance',
+      'Difficulty organising work or belongings',
     ],
     whoFor: [
-      'Children with attention and focus challenges',
-      'Kids with learning difficulties',
-      'Children experiencing school-related stress',
-      'Those with coordination or movement difficulties',
-      'Children needing cognitive performance support',
+      'Children with learning disabilities',
+      'Kids with ADHD or attention difficulties',
+      'Children with mild intellectual disability',
+      'Those needing academic readiness support',
+      'Children returning to school after a gap',
+    ],
+  },
+  'handwriting-fine-motor': {
+    gradient: 'from-violet-500 to-purple-700',
+    softBg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700',
+    btnClass: 'bg-violet-600 hover:bg-violet-700 text-white',
+    emoji: '✏️', tagline: 'Making writing easier, clearer, and less frustrating',
+    signs: [
+      'Unusual or painful pencil grip',
+      'Illegible handwriting for age',
+      'Avoidance of writing tasks',
+      'Difficulty with letter formation or spacing',
+      'Slow writing speed affecting schoolwork',
+      'Fatigue or hand pain during writing',
+    ],
+    whoFor: [
+      'Children with dysgraphia',
+      'Kids with developmental coordination disorder',
+      'Children with fine motor delays',
+      'Those struggling to keep up in class with writing',
+      'Children with autism or ADHD needing writing support',
+    ],
+  },
+  'play-therapy': {
+    gradient: 'from-emerald-500 to-green-600',
+    softBg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700',
+    btnClass: 'bg-emerald-600 hover:bg-emerald-700 text-white',
+    emoji: '🧩', tagline: "Play is a child's most natural language",
+    signs: [
+      'Difficulty expressing feelings verbally',
+      'Withdrawal, shyness, or social avoidance',
+      'Frequent emotional outbursts or crying',
+      'Anxiety in social situations or new environments',
+      'Aggressive or destructive play behaviour',
+      'Low self-esteem or confidence',
+    ],
+    whoFor: [
+      'Children aged 3–12 with emotional difficulties',
+      'Kids experiencing trauma or family changes',
+      'Children with anxiety or social challenges',
+      'Those who struggle to communicate verbally',
+      'Children with autism needing social-emotional support',
+    ],
+  },
+  'mindfulness': {
+    gradient: 'from-sky-500 to-indigo-600',
+    softBg: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-700',
+    btnClass: 'bg-sky-600 hover:bg-sky-700 text-white',
+    emoji: '🧘', tagline: 'Calm, focused, and ready to learn',
+    signs: [
+      'Difficulty calming down after being upset',
+      'High levels of stress or school anxiety',
+      'Impulsive behaviour with difficulty waiting',
+      'Poor sleep routines or bedtime anxiety',
+      'Difficulty sitting still or staying on task',
+      'Emotional dysregulation during transitions',
+    ],
+    whoFor: [
+      'Children with anxiety or stress',
+      'Kids with ADHD or impulsivity challenges',
+      'Children with emotional regulation difficulties',
+      'Those with trauma or adjustment difficulties',
+      'Children aged 5–16 needing coping skills',
+    ],
+  },
+  'feeding-oral-motor': {
+    gradient: 'from-orange-500 to-amber-600',
+    softBg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-700',
+    btnClass: 'bg-orange-600 hover:bg-orange-700 text-white',
+    emoji: '🥣', tagline: 'Safe, positive mealtimes for every child',
+    signs: [
+      'Gagging or vomiting at new foods or textures',
+      'Refusing to eat most foods (very selective eating)',
+      'Difficulty chewing or swallowing safely',
+      'Excessive drooling beyond typical age',
+      'Prolonged bottle or soft food dependency',
+      'Stressful mealtimes for the whole family',
+    ],
+    whoFor: [
+      'Infants and toddlers with feeding difficulties',
+      'Children with oral-motor weakness',
+      'Kids with extreme food selectivity',
+      'Children with autism or sensory food aversions',
+      'Children with neurological or physical conditions affecting eating',
+    ],
+  },
+  'assistive-technology-support': {
+    gradient: 'from-indigo-500 to-purple-700',
+    softBg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700',
+    btnClass: 'bg-indigo-600 hover:bg-indigo-700 text-white',
+    emoji: '🖥️', tagline: 'The right tools unlock independence',
+    signs: [
+      'Difficulty communicating verbally or with gestures',
+      'Inability to keep up with classroom demands',
+      'Dependence on physical assistance for daily tasks',
+      'Frustration due to communication barriers',
+      'Difficulty using standard learning materials',
+      'Limited independence in home or school routines',
+    ],
+    whoFor: [
+      'Non-verbal or minimally verbal children',
+      'Children with cerebral palsy or physical disabilities',
+      'Kids with autism using or needing AAC',
+      'Children with visual or learning impairments',
+      'Families wanting to increase child independence',
     ],
   },
 };
 
-const serviceIcons: Record<string, JSX.Element> = {
-  'occupational-therapy': <Activity className="w-5 h-5" />,
-  'speech-therapy': <MessageSquare className="w-5 h-5" />,
-  'special-education': <GraduationCap className="w-5 h-5" />,
-  'aba-therapy': <Lightbulb className="w-5 h-5" />,
-  'early-intervention': <Baby className="w-5 h-5" />,
-  'brain-gym': <Brain className="w-5 h-5" />,
-};
+const DEFAULT_THEME = PROGRAM_THEME['sensory-integration'];
 
-const ServiceDetail = () => {
-  const { serviceId } = useParams<{ serviceId: string }>();
+const AdditionalProgramDetail = () => {
+  const { programId } = useParams<{ programId: string }>();
   const navigate = useNavigate();
 
-  const service = services.find((s) => s.id === serviceId);
-  const theme = SERVICE_THEME[serviceId ?? ''] ?? SERVICE_THEME['occupational-therapy'];
+  const program = additionalPrograms.find((item) => item.id === programId);
+  const theme = PROGRAM_THEME[programId ?? ''] ?? DEFAULT_THEME;
 
   useEffect(() => {
-    if (!service) navigate('/services');
-  }, [service, navigate]);
+    if (!program) navigate('/services');
+  }, [program, navigate]);
 
-  if (!service) return null;
+  if (!program) return null;
 
-  const relatedServices = services.filter((s) => s.id !== serviceId).slice(0, 3);
+  const related = additionalPrograms.filter((p) => p.id !== program.id).slice(0, 3);
 
   return (
     <>
       <Helmet>
-        <title>{service.title} | {BRAND_NAME}</title>
-        <meta name="description" content={`${service.title} at ${BRAND_NAME}. ${service.shortDescription} Evidence-based therapy for children in Chennai — Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam.`} />
+        <title>{program.title} | {BRAND_NAME}</title>
+        <meta name="description" content={`${program.title} at ${BRAND_NAME}. ${program.shortDescription} Evidence-based programme for children in Chennai.`} />
       </Helmet>
 
       <PageHeader
-        title={service.title}
+        title={program.title}
         subtitle={theme.tagline}
-        description={`${service.title} at Arura follows a structured path from assessment and goal-setting to therapy sessions and home carryover — so children improve in ways that matter in everyday life.`}
-        backgroundImage={service.image}
-        metaDescription={`${service.title} at ${BRAND_NAME}. ${service.shortDescription}`}
+        description={`This ${program.title.toLowerCase()} programme combines targeted clinic sessions and family guidance to improve real-world participation, confidence, and functional outcomes for children.`}
+        backgroundImage={program.image}
+        metaDescription={`${program.title} at ${BRAND_NAME}. ${program.shortDescription}`}
       />
 
       {/* ── Colour Banner ── */}
       <section className={`bg-gradient-to-r ${theme.gradient} py-5`}>
         <div className="container-custom">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link to="/services" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium">
+            <Link to="/services" className="flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium">
               <ArrowLeft className="w-4 h-4" /> Back to Services
             </Link>
             <div className="flex flex-wrap items-center gap-3 justify-center">
               {[
-                { icon: <Users className="w-4 h-4" />, label: `Ages: ${service.ageGroups}` },
+                { icon: <Users className="w-4 h-4" />, label: `Ages: ${program.ageGroups}` },
                 { icon: <Clock className="w-4 h-4" />, label: '45–60 min / session' },
-                { icon: <Target className="w-4 h-4" />, label: '2–3 sessions / week' },
+                { icon: <Target className="w-4 h-4" />, label: 'Individualised plan' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                   {item.icon} {item.label}
@@ -229,15 +256,15 @@ const ServiceDetail = () => {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-white`}>
-                    {theme.icon}
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-2xl`}>
+                    {theme.emoji}
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-neutral-900">About {service.title}</h2>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-neutral-900">About {program.title}</h2>
                 </div>
-                <p className="text-neutral-700 leading-relaxed text-base">{service.longDescription}</p>
+                <p className="text-neutral-700 leading-relaxed text-base">{program.longDescription}</p>
               </motion.div>
 
-              {/* Signs + Who For — side by side */}
+              {/* Signs + Who For */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -291,10 +318,10 @@ const ServiceDetail = () => {
                 className="rounded-2xl border border-neutral-100 bg-neutral-50 p-6"
               >
                 <h3 className="font-extrabold text-xl text-neutral-900 mb-5 flex items-center gap-2">
-                  <Sparkles className={`w-5 h-5 ${theme.text}`} /> Benefits of {service.title}
+                  <Sparkles className={`w-5 h-5 ${theme.text}`} /> Benefits of {program.title}
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  {service.benefits.map((b, i) => (
+                  {program.benefits.map((b, i) => (
                     <div key={i} className={`flex items-start gap-3 ${theme.softBg} border ${theme.border} rounded-xl p-4`}>
                       <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-white text-xs font-bold shrink-0`}>
                         {i + 1}
@@ -313,10 +340,10 @@ const ServiceDetail = () => {
                 viewport={{ once: true }}
               >
                 <h3 className="font-extrabold text-xl text-neutral-900 mb-6 flex items-center gap-2">
-                  <Target className={`w-5 h-5 ${theme.text}`} /> Our Therapy Process
+                  <Target className={`w-5 h-5 ${theme.text}`} /> How This Programme Works
                 </h3>
                 <div className="space-y-4">
-                  {service.process.map((step, i) => (
+                  {program.process.map((step, i) => (
                     <div key={i} className="flex gap-4 items-start">
                       <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${theme.gradient} text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md`}>
                         {String(i + 1).padStart(2, '0')}
@@ -335,24 +362,21 @@ const ServiceDetail = () => {
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-5">
 
-                {/* Service quick-info card */}
+                {/* Program quick-info */}
                 <div className={`rounded-2xl overflow-hidden shadow-xl border-2 ${theme.border}`}>
                   <div className={`bg-gradient-to-br ${theme.gradient} p-5 text-white`}>
-                    <div className="flex items-center gap-3 mb-1">
-                      <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                        {theme.icon}
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">{theme.emoji}</span>
                       <div>
-                        <p className="text-white/70 text-xs">Service</p>
-                        <h3 className="font-extrabold text-base leading-tight">{service.title}</h3>
+                        <p className="text-white/70 text-xs">Programme</p>
+                        <h3 className="font-extrabold text-base leading-tight">{program.title}</h3>
                       </div>
                     </div>
                   </div>
                   <div className={`${theme.softBg} p-5 space-y-3`}>
                     {[
-                      { icon: <Users className="w-4 h-4" />, label: 'Age Group', value: service.ageGroups },
-                      { icon: <Clock className="w-4 h-4" />, label: 'Session Duration', value: '45–60 minutes' },
-                      { icon: <Target className="w-4 h-4" />, label: 'Frequency', value: '2–3 sessions / week' },
+                      { icon: <Users className="w-4 h-4" />, label: 'Age Group', value: program.ageGroups },
+                      { icon: <Clock className="w-4 h-4" />, label: 'Session Duration', value: '45–60 min (child plan)' },
                       { icon: <Star className="w-4 h-4" />, label: 'Approach', value: 'Evidence-based, play-led' },
                     ].map((row) => (
                       <div key={row.label} className="flex items-start gap-3 bg-white rounded-xl p-3 border border-white shadow-sm">
@@ -388,7 +412,7 @@ const ServiceDetail = () => {
                   </Link>
                 </div>
 
-                {/* Why Arura snippet */}
+                {/* Why Arura */}
                 <div className="bg-primary-900 rounded-2xl p-5 text-white">
                   <p className="text-xs text-white/60 uppercase tracking-widest mb-3">Why Arura?</p>
                   <ul className="space-y-2">
@@ -406,16 +430,16 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* ── Related Services ── */}
+      {/* ── Related Programmes ── */}
       <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50/30">
         <div className="container-custom">
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-extrabold text-neutral-900 mb-2">Related Services</h2>
-            <p className="text-neutral-600 text-sm">These therapies often work best when combined with {service.title}.</p>
+            <h2 className="text-2xl font-extrabold text-neutral-900 mb-2">Related Programmes</h2>
+            <p className="text-neutral-600 text-sm">These programmes often complement {program.title}.</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-6">
-            {relatedServices.map((rel, idx) => {
-              const relTheme = SERVICE_THEME[rel.id];
+            {related.map((rel, idx) => {
+              const relTheme = PROGRAM_THEME[rel.id] ?? DEFAULT_THEME;
               return (
                 <motion.div
                   key={rel.id}
@@ -426,15 +450,13 @@ const ServiceDetail = () => {
                   className={`rounded-2xl overflow-hidden shadow-md hover:shadow-xl border-2 ${relTheme.border} transition-all`}
                 >
                   <div className={`bg-gradient-to-br ${relTheme.gradient} p-4 flex items-center gap-3`}>
-                    <div className="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center text-white">
-                      {serviceIcons[rel.id]}
-                    </div>
+                    <span className="text-2xl">{relTheme.emoji}</span>
                     <h3 className="text-white font-extrabold text-sm leading-tight">{rel.title}</h3>
                   </div>
                   <div className={`${relTheme.softBg} p-4`}>
                     <p className="text-neutral-600 text-xs mb-3 leading-relaxed">{rel.shortDescription}</p>
                     <Link
-                      to={`/services/${rel.id}`}
+                      to={`/programs/${rel.id}`}
                       className={`flex items-center gap-1 text-xs font-bold ${relTheme.text} hover:underline`}
                     >
                       Learn More <ChevronRight className="w-3.5 h-3.5" />
@@ -448,11 +470,11 @@ const ServiceDetail = () => {
       </section>
 
       <CTASection
-        title={`Ready to Start ${service.title}?`}
+        title={`Ready to Start ${program.title}?`}
         subtitle={`Book an assessment at ${BRAND_NAME} and our team will create a personalised plan for your child.`}
       />
     </>
   );
 };
 
-export default ServiceDetail;
+export default AdditionalProgramDetail;
