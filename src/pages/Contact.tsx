@@ -18,6 +18,8 @@ import {
   CENTER_LOCATIONS,
 } from '../config/brand';
 
+const COMMON_PARTNER_NUMBERS = ['7200766120', '7200766143', '7200766720'];
+
 const FAQ_ITEMS = [
   {
     q: 'How do I book a first appointment?',
@@ -94,7 +96,7 @@ const Contact = () => {
     <>
       <Helmet>
         <title>Contact Arura Integral Therapy Services | Book Appointment Chennai</title>
-        <meta name="description" content="Contact Arura Integral Therapy Services in Chennai. HQ: Villivakkam + partner centres at Valasaravakkam (TWINKLEZZ), Chengalpattu (UNICARE), Nungambakkam (SMINGA). Call +91 82489 99216 or email reach@aruratherapy.com." />
+        <meta name="description" content="Contact Arura Integral Therapy Services in Chennai. HQ: Villivakkam + partner centres at Valasaravakkam (TWINKLEZZ), Chengalpattu (UNICARE), Nungambakkam (SMINGA). Call +91 82489 99216 or email info.dunmark@gmail.com." />
         <meta name="keywords" content="contact Arura therapy Chennai, book appointment paediatric therapy, Villivakkam therapy centre, TWINKLEZZ Valasaravakkam, UNICARE Chengalpattu, SMINGA Nungambakkam" />
       </Helmet>
 
@@ -307,17 +309,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium mb-1">Phone</p>
-                      <div className="space-y-1">
-                        {center.phones.map((ph) => (
-                          <a
-                            key={ph}
-                            href={`tel:+91${ph}`}
-                            className={`block text-sm font-bold ${center.textAccent} hover:underline transition-colors`}
-                          >
-                            +91 {ph}
-                          </a>
-                        ))}
-                      </div>
+                      <p className="text-sm text-neutral-600">Use common partner numbers below.</p>
                     </div>
                   </div>
 
@@ -334,6 +326,26 @@ const Contact = () => {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-8 rounded-2xl border border-primary-200 bg-white p-5 shadow-sm"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">Common clinical partner numbers</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {COMMON_PARTNER_NUMBERS.map((ph) => (
+                <a
+                  key={ph}
+                  href={`tel:+91${ph}`}
+                  className="inline-flex items-center rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-sm font-bold text-primary-700 transition hover:bg-primary-100"
+                >
+                  +91 {ph}
+                </a>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 

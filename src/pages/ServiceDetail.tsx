@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { services } from '../data/servicesData';
@@ -11,12 +11,17 @@ import {
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY } from '../config/brand';
+import { getSiteUrl } from '../config/site';
+import { clinicId } from '../config/structuredDataClinic';
+import ServicePageTemplate from '../components/seo-growth/ServicePageTemplate';
+import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
+import { getKeywordProfile } from '../config/keywordEngine';
 
 // ─── Per-service colour theme ─────────────────────────────────
 const SERVICE_THEME: Record<string, {
   gradient: string; softBg: string; border: string; text: string;
   badge: string; btnClass: string; icon: JSX.Element; emoji: string;
-  tagline: string; signs: string[]; whoFor: string[];
+  tagline: string; heroSummary: string; heroHighlights: string[]; signs: string[]; whoFor: string[];
 }> = {
   'occupational-therapy': {
     gradient: 'from-blue-500 to-indigo-600',
@@ -24,6 +29,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-blue-100 text-blue-700', btnClass: 'bg-blue-600 hover:bg-blue-700 text-white',
     icon: <Activity className="w-7 h-7" />, emoji: '🖐️',
     tagline: 'From fine motor to full daily independence',
+    heroSummary: 'Occupational Therapy helps children become more independent in daily routines by improving sensory regulation, motor planning, hand skills, and self-care confidence.',
+    heroHighlights: ['Daily-life skill building', 'Sensory regulation support', 'Motor planning + coordination', 'Parent-guided home carryover'],
     signs: [
       'Difficulty with writing, drawing, or colouring',
       'Trouble with buttons, zips, or cutlery',
@@ -46,6 +53,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-emerald-100 text-emerald-700', btnClass: 'bg-emerald-600 hover:bg-emerald-700 text-white',
     icon: <MessageSquare className="w-7 h-7" />, emoji: '🗣️',
     tagline: 'Every child deserves a confident voice',
+    heroSummary: 'Speech Therapy strengthens speech clarity, language understanding, and expressive communication so children can connect, learn, and participate with confidence.',
+    heroHighlights: ['Speech clarity + articulation', 'Language comprehension growth', 'Expressive communication confidence', 'Family communication strategies'],
     signs: [
       'Not babbling or cooing by 12 months',
       'No single words by 16–18 months',
@@ -68,6 +77,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-violet-100 text-violet-700', btnClass: 'bg-violet-600 hover:bg-violet-700 text-white',
     icon: <GraduationCap className="w-7 h-7" />, emoji: '📐',
     tagline: 'Learning tailored to every unique mind',
+    heroSummary: 'Special Education provides individualized, structured learning support that improves academic readiness, classroom participation, and day-to-day learning confidence.',
+    heroHighlights: ['Individualized learning plans', 'Academic skill strengthening', 'Multisensory teaching methods', 'School readiness progression'],
     signs: [
       'Struggling to read, write, or do maths at grade level',
       'Difficulty remembering instructions or sequences',
@@ -90,6 +101,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-orange-100 text-orange-700', btnClass: 'bg-orange-600 hover:bg-orange-700 text-white',
     icon: <Lightbulb className="w-7 h-7" />, emoji: '🎯',
     tagline: 'Evidence-based behaviour change that lasts',
+    heroSummary: 'ABA Therapy uses evidence-based behavioural strategies to reduce challenging behaviours and build communication, social, and adaptive skills in real-life settings.',
+    heroHighlights: ['Behaviour understanding + structure', 'Skill-based positive reinforcement', 'Communication and social growth', 'Home-school consistency support'],
     signs: [
       'Frequent tantrums or aggressive behaviour',
       'Difficulty following instructions or routines',
@@ -112,6 +125,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-sky-100 text-sky-700', btnClass: 'bg-sky-600 hover:bg-sky-700 text-white',
     icon: <Baby className="w-7 h-7" />, emoji: '🌱',
     tagline: 'The earlier we start, the greater the impact',
+    heroSummary: 'Early Intervention supports infants and toddlers during critical developmental years by building communication, play, motor, and social foundations through family-centered care.',
+    heroHighlights: ['Milestone-focused support', 'Play-led foundational learning', 'Family-centered goal setting', 'Strong preschool transition base'],
     signs: [
       'Not reaching motor milestones (sitting, crawling, walking)',
       'Delayed or absent babbling and early words',
@@ -134,6 +149,8 @@ const SERVICE_THEME: Record<string, {
     badge: 'bg-fuchsia-100 text-fuchsia-700', btnClass: 'bg-fuchsia-600 hover:bg-fuchsia-700 text-white',
     icon: <Brain className="w-7 h-7" />, emoji: '🧠',
     tagline: 'Movement that unlocks learning potential',
+    heroSummary: 'Brain Gym Activities use movement-based methods to improve focus, memory, coordination, and emotional regulation, helping children engage better in learning.',
+    heroHighlights: ['Movement-based brain activation', 'Focus + memory enhancement', 'Classroom learning readiness', 'Stress and regulation support'],
     signs: [
       'Short attention span and easy distractibility',
       'Difficulty remembering multi-step instructions',
@@ -161,35 +178,125 @@ const serviceIcons: Record<string, JSX.Element> = {
   'brain-gym': <Brain className="w-5 h-5" />,
 };
 
-const ServiceDetail = () => {
-  const { serviceId } = useParams<{ serviceId: string }>();
-  const navigate = useNavigate();
+const SERVICE_SLUG_ALIASES: Record<string, string> = {
+  'behaviour-therapy': 'aba-therapy',
+};
 
-  const service = services.find((s) => s.id === serviceId);
-  const theme = SERVICE_THEME[serviceId ?? ''] ?? SERVICE_THEME['occupational-therapy'];
+const ServiceDetail = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const resolvedSlug = slug ? (SERVICE_SLUG_ALIASES[slug] ?? slug) : '';
+
+  const service = services.find((s) => s.id === resolvedSlug);
+  const theme = SERVICE_THEME[resolvedSlug] ?? SERVICE_THEME['occupational-therapy'];
 
   useEffect(() => {
     if (!service) navigate('/services');
   }, [service, navigate]);
 
   if (!service) return null;
+  const keywordProfile = getKeywordProfile(`/services/${service.id}`);
 
-  const relatedServices = services.filter((s) => s.id !== serviceId).slice(0, 3);
+  if (service.id === 'speech-therapy') {
+    return (
+      <>
+        <Helmet>
+          <title>{service.title} in Chennai | {BRAND_NAME}</title>
+          <meta
+            name="description"
+            content="Speech Therapy in Chennai for speech delay, language development, and child communication confidence."
+          />
+          {keywordProfile ? <meta name="keywords" content={[keywordProfile.primary, ...keywordProfile.secondary, ...keywordProfile.local].join(', ')} /> : null}
+        </Helmet>
+        <PageHeader
+          title="Speech Therapy in Chennai"
+          subtitle="Solution-based service page"
+          description="Personalized speech and language intervention for children across Chennai, Korattur, Anna Nagar, and Ambattur."
+          backgroundImage={service.image}
+          metaDescription="Speech therapy at Arura for speech delay, language support, and communication outcomes."
+        />
+        <ServicePageTemplate
+          title="Speech Therapy"
+          intro="Our speech therapy program helps children improve articulation, expressive language, receptive understanding, and social communication through structured and play-based sessions."
+          benefits={service.benefits}
+          whoNeedsThis={[
+            'Children with delayed first words or language milestones',
+            'Kids with unclear speech or articulation concerns',
+            'Children needing communication support in school and home',
+            'Children with autism or ADHD with communication challenges',
+          ]}
+          process={service.process}
+          faq={[
+            { q: 'When should speech therapy start?', a: 'Early intervention is best. If milestones are delayed, starting sooner usually improves outcomes.' },
+            { q: 'How many sessions are needed?', a: 'Frequency depends on assessment and goals. Most children begin with weekly sessions and regular reviews.' },
+            { q: 'Can parents help at home?', a: 'Yes. Parent carryover is essential. We provide practical home strategies after sessions.' },
+          ]}
+        />
+        <SearchIntentLinks
+          problemHref="/blog/early-signs-speech-therapy"
+          solutionHref="/services/speech-therapy"
+          trustHref="/testimonials"
+        />
+      </>
+    );
+  }
+
+  const relatedServices = services.filter((s) => s.id !== resolvedSlug).slice(0, 3);
+  const processSteps = service.process.some((step) => step.title.toLowerCase().includes('group session'))
+    ? service.process
+    : [
+      ...service.process,
+      {
+        title: 'Group Sessions (When Suitable)',
+        description: 'Small-group sessions are available to support peer interaction, communication, and shared skill practice.',
+      },
+    ];
+
+  const siteUrl = getSiteUrl();
+  const servicePageUrl = siteUrl ? `${siteUrl}/services/${service.id}` : '';
+  const serviceJsonLd = useMemo(() => {
+    if (!siteUrl || !servicePageUrl) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${servicePageUrl}#service`,
+      name: `${service.title} — ${BRAND_NAME}`,
+      description: service.longDescription,
+      serviceType: service.title,
+      url: servicePageUrl,
+      provider: { '@id': clinicId(siteUrl) },
+      areaServed: { '@type': 'City', name: 'Chennai' },
+    };
+  }, [siteUrl, servicePageUrl, service.id, service.title, service.longDescription]);
 
   return (
     <>
       <Helmet>
         <title>{service.title} | {BRAND_NAME}</title>
         <meta name="description" content={`${service.title} at ${BRAND_NAME}. ${service.shortDescription} Evidence-based therapy for children in Chennai — Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam.`} />
+        {serviceJsonLd ? (
+          <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
+        ) : null}
       </Helmet>
 
       <PageHeader
         title={service.title}
         subtitle={theme.tagline}
-        description={`${service.title} at Arura follows a structured path from assessment and goal-setting to therapy sessions and home carryover — so children improve in ways that matter in everyday life.`}
+        description={theme.heroSummary}
         backgroundImage={service.image}
         metaDescription={`${service.title} at ${BRAND_NAME}. ${service.shortDescription}`}
-      />
+      >
+        <p className="max-w-3xl rounded-xl border border-white/80 bg-white/70 px-4 py-3 text-sm font-medium leading-relaxed text-neutral-700 shadow-sm">
+          Key focus:
+          {theme.heroHighlights.map((item) => (
+            <span key={item} className="font-semibold text-primary-800">
+              {' '}
+              {item}
+              {item !== theme.heroHighlights[theme.heroHighlights.length - 1] ? ' |' : '.'}
+            </span>
+          ))}
+        </p>
+      </PageHeader>
 
       {/* ── Colour Banner ── */}
       <section className={`bg-gradient-to-r ${theme.gradient} py-5`}>
@@ -199,10 +306,10 @@ const ServiceDetail = () => {
               <ArrowLeft className="w-4 h-4" /> Back to Services
             </Link>
             <div className="flex flex-wrap items-center gap-3 justify-center">
-              {[
+                {[
                 { icon: <Users className="w-4 h-4" />, label: `Ages: ${service.ageGroups}` },
                 { icon: <Clock className="w-4 h-4" />, label: '45–60 min / session' },
-                { icon: <Target className="w-4 h-4" />, label: '2–3 sessions / week' },
+                  { icon: <Target className="w-4 h-4" />, label: 'Frequency based on progress' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                   {item.icon} {item.label}
@@ -266,15 +373,15 @@ const ServiceDetail = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
                   viewport={{ once: true }}
-                  className="rounded-2xl p-6 border-2 border-primary-100 bg-primary-50"
+                  className={`rounded-2xl p-6 border-2 ${theme.border} ${theme.softBg}`}
                 >
-                  <h3 className="font-extrabold text-base mb-4 flex items-center gap-2 text-primary-700">
+                  <h3 className={`font-extrabold text-base mb-4 flex items-center gap-2 ${theme.text}`}>
                     <span className="text-lg">👶</span> Who Benefits
                   </h3>
                   <ul className="space-y-2.5">
                     {theme.whoFor.map((w) => (
                       <li key={w} className="flex items-start gap-2.5 text-sm text-neutral-700">
-                        <CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${theme.text}`} />
                         {w}
                       </li>
                     ))}
@@ -316,7 +423,7 @@ const ServiceDetail = () => {
                   <Target className={`w-5 h-5 ${theme.text}`} /> Our Therapy Process
                 </h3>
                 <div className="space-y-4">
-                  {service.process.map((step, i) => (
+                  {processSteps.map((step, i) => (
                     <div key={i} className="flex gap-4 items-start">
                       <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${theme.gradient} text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md`}>
                         {String(i + 1).padStart(2, '0')}
@@ -352,7 +459,7 @@ const ServiceDetail = () => {
                     {[
                       { icon: <Users className="w-4 h-4" />, label: 'Age Group', value: service.ageGroups },
                       { icon: <Clock className="w-4 h-4" />, label: 'Session Duration', value: '45–60 minutes' },
-                      { icon: <Target className="w-4 h-4" />, label: 'Frequency', value: '2–3 sessions / week' },
+                      { icon: <Target className="w-4 h-4" />, label: 'Frequency', value: 'Planned based on your child’s progress' },
                       { icon: <Star className="w-4 h-4" />, label: 'Approach', value: 'Evidence-based, play-led' },
                     ].map((row) => (
                       <div key={row.label} className="flex items-start gap-3 bg-white rounded-xl p-3 border border-white shadow-sm">

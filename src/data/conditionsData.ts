@@ -54,6 +54,50 @@ export const conditions: Condition[] = [
     image: "https://images.pexels.com/photos/8943242/pexels-photo-8943242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   },
   {
+    id: "speech-delay",
+    title: "Speech Delay",
+    description: "Speech delay means a child is not meeting expected speech and language milestones for their age. Children may have fewer words, unclear speech, or difficulty understanding and expressing language. Early speech-language intervention can significantly improve communication outcomes.",
+    signs: [
+      "Not babbling by around 12 months",
+      "No meaningful words by 16-18 months",
+      "Limited vocabulary compared with peers",
+      "Difficulty following simple instructions",
+      "Unclear speech for age",
+      "Frustration during communication"
+    ],
+    treatments: [
+      "Speech and Language Therapy",
+      "Language stimulation and parent coaching",
+      "Articulation therapy as needed",
+      "Oral-motor and feeding support when relevant",
+      "Home-based communication strategies"
+    ],
+    icon: "MessageSquare",
+    image: "https://images.pexels.com/photos/8612996/pexels-photo-8612996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    id: "developmental-delay",
+    title: "Developmental Delay",
+    description: "Developmental delay refers to slower progress in one or more areas such as motor, language, social, or cognitive development. Early identification and coordinated therapy support can help children build foundational skills and improve long-term outcomes.",
+    signs: [
+      "Delayed milestones in sitting, crawling, or walking",
+      "Late speech or language development",
+      "Difficulty with play and social interaction",
+      "Challenges with attention and learning tasks",
+      "Delays in self-care independence",
+      "Need for repeated prompts in daily routines"
+    ],
+    treatments: [
+      "Early Intervention services",
+      "Occupational Therapy for motor and daily skills",
+      "Speech and Language Therapy",
+      "Special Education and cognitive skill support",
+      "Parent coaching and home programs"
+    ],
+    icon: "Baby",
+    image: "https://images.pexels.com/photos/8943225/pexels-photo-8943225.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
     id: "learning-disabilities",
     title: "Learning Disabilities",
     description: "Learning disabilities are neurologically-based processing problems that can interfere with learning basic skills such as reading, writing, or math. They can also affect higher level skills like organization, time planning, and abstract reasoning. Learning disabilities are not related to intelligence - children with learning disabilities often have average or above average intelligence.",

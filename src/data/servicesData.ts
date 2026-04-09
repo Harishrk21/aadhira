@@ -36,7 +36,11 @@ export const services: Service[] = [
       },
       {
         title: "Intervention",
-        description: "Regular therapy sessions using play-based and goal-directed activities."
+        description: "Regular therapy sessions using play-based, goal-directed, and evidence-based activities."
+      },
+      {
+        title: "Group Sessions (When Suitable)",
+        description: "Small-group activities to build social participation, peer interaction, and real-world practice."
       },
       {
         title: "Parent Coaching",
@@ -78,6 +82,10 @@ export const services: Service[] = [
         description: "Engaging activities designed to build communication skills through play and structured practice."
       },
       {
+        title: "Group Sessions (When Suitable)",
+        description: "Peer-based communication groups to improve turn-taking, listening, and social language."
+      },
+      {
         title: "Family Involvement",
         description: "Teaching parents communication strategies to use at home."
       },
@@ -115,6 +123,10 @@ export const services: Service[] = [
       {
         title: "Structured Learning Sessions",
         description: "Using multisensory techniques and adaptive methods for academic skill building."
+      },
+      {
+        title: "Group Sessions (When Suitable)",
+        description: "Collaborative learning groups to strengthen attention, participation, and classroom readiness."
       },
       {
         title: "Progress Tracking",
@@ -156,6 +168,10 @@ export const services: Service[] = [
         description: "Regular sessions using positive reinforcement and systematic teaching."
       },
       {
+        title: "Group Sessions (When Suitable)",
+        description: "Guided peer interaction sessions to practice social skills, transitions, and shared routines."
+      },
+      {
         title: "Data Collection",
         description: "Continuous monitoring of progress through detailed behavior tracking."
       },
@@ -195,6 +211,10 @@ export const services: Service[] = [
         description: "Using natural play activities to build developmental skills."
       },
       {
+        title: "Group Sessions (When Suitable)",
+        description: "Supported group play sessions to promote social engagement, imitation, and communication."
+      },
+      {
         title: "Parent Coaching",
         description: "Empowering parents with techniques to support development throughout daily activities."
       },
@@ -232,6 +252,10 @@ export const services: Service[] = [
       {
         title: "Guided Practice",
         description: "Regular sessions to practice and refine movements for maximum benefit."
+      },
+      {
+        title: "Group Sessions (When Suitable)",
+        description: "Movement-based group activities that build focus, coordination, and shared learning participation."
       },
       {
         title: "Integration With Learning",

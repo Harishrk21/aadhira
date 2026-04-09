@@ -4,6 +4,7 @@ import {
   Menu,
   X,
   Brain,
+  Hand,
   ChevronDown,
   Activity,
   MessageSquare,
@@ -76,7 +77,7 @@ const Header = () => {
             {
               label: 'Occupational Therapy',
               description: 'Daily living, sensory, and motor development',
-              icon: Activity,
+              icon: Hand,
               link: '/services/occupational-therapy',
             },
             {
@@ -112,7 +113,7 @@ const Header = () => {
               label: 'School Readiness',
               description: 'Prepare children for classroom routines',
               icon: Apple,
-              link: '/school-readiness-program',
+              link: '/programs/school-readiness',
             },
             {
               label: 'Brain Gym Activities',
@@ -177,9 +178,12 @@ const Header = () => {
         },
       ],
     },
-    { id: 4, label: 'Conditions', link: '/conditions' },
-    { id: 5, label: 'Testimonials', link: '/testimonials' },
-    { id: 6, label: 'Contact', link: '/contact' },
+    { id: 4, label: 'Programs', link: '/programs' },
+    { id: 5, label: 'Conditions', link: '/conditions' },
+    { id: 6, label: 'Testimonials', link: '/testimonials' },
+    { id: 7, label: 'Gallery', link: '/gallery' },
+    { id: 8, label: 'Blog', link: '/blog' },
+    { id: 9, label: 'Contact', link: '/contact' },
   ];
 
   return (
@@ -292,7 +296,7 @@ const Header = () => {
                 </AnimatePresence>
               </div>
               
-              <NavLink to="/school-readiness-program" 
+              <NavLink to="/programs" 
                 className={({ isActive }) => 
                   isActive ? 'nav-link-active' : 'nav-link'
                 }
@@ -315,6 +319,22 @@ const Header = () => {
                 onClick={toggleMenu}
               >
                 Testimonials
+              </NavLink>
+              <NavLink to="/gallery" 
+                className={({ isActive }) => 
+                  isActive ? 'nav-link-active' : 'nav-link'
+                }
+                onClick={toggleMenu}
+              >
+                Gallery
+              </NavLink>
+              <NavLink to="/blog" 
+                className={({ isActive }) => 
+                  isActive ? 'nav-link-active' : 'nav-link'
+                }
+                onClick={toggleMenu}
+              >
+                Blog
               </NavLink>
               <NavLink to="/contact" 
                 className={({ isActive }) => 

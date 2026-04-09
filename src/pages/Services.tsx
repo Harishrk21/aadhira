@@ -174,7 +174,7 @@ const ALL_PROGRAMS = [
   { title: 'Developmental & Early Intervention', category: 'therapy' as ProgramCategory, emoji: '🌱', link: '/services/early-intervention', desc: 'Critical 0-3 year developmental window' },
   // Training
   { title: 'Special Education', category: 'training' as ProgramCategory, emoji: '📐', link: '/services/special-education', desc: 'Academic skills, learning strategies' },
-  { title: 'School Readiness Program', category: 'training' as ProgramCategory, emoji: '🏫', link: '/school-readiness-program', desc: '3-hour program for classroom readiness' },
+  { title: 'School Readiness Program', category: 'training' as ProgramCategory, emoji: '🏫', link: '/programs/school-readiness', desc: '3-hour program for classroom readiness' },
   { title: 'Parent & Caregiver Training', category: 'training' as ProgramCategory, emoji: '👨‍👩‍👧', link: '/programs/parent-caregiver-training', desc: 'Practical strategies for home support' },
   { title: 'Cognitive & Learning Skills', category: 'training' as ProgramCategory, emoji: '💡', link: '/programs/cognitive-learning-skills', desc: 'Attention, memory, reasoning' },
   { title: 'Handwriting & Fine Motor', category: 'training' as ProgramCategory, emoji: '✏️', link: '/programs/handwriting-fine-motor', desc: 'Pencil grip, letter formation, speed' },

@@ -11,11 +11,8 @@ import {
   BRAND_SHORT,
   BRAND_TAGLINE,
   ADDRESS_CHENNAI,
-  CENTER_LOCATIONS,
   PHONE_PRIMARY_E164,
   PHONE_PRIMARY_DISPLAY,
-  PHONE_SECONDARY_E164,
-  EMAIL,
 } from '../config/brand';
 import {
   Activity,
@@ -36,6 +33,9 @@ import {
   ChevronDown,
   Stethoscope,
 } from 'lucide-react';
+import AreasWeServe from '../components/seo-growth/AreasWeServe';
+import TestimonialPreview from '../components/seo-growth/TestimonialPreview';
+import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
 
 const serviceIcons: Record<string, JSX.Element> = {
   'occupational-therapy': <Activity className="w-6 h-6" />,
@@ -113,74 +113,8 @@ const Home = () => {
   const ogImage = siteUrl ? `${siteUrl}/specialised_therapy.png` : '/specialised_therapy.png';
   const totalTherapyPrograms = services.length + additionalPrograms.length + 1; // + School Readiness Program
 
-  const structuredData = useMemo(() => {
-    const postalChennai = {
-      '@type': 'PostalAddress',
-      streetAddress: ADDRESS_CHENNAI.street,
-      addressLocality: `${ADDRESS_CHENNAI.locality}, ${ADDRESS_CHENNAI.city}`,
-      addressRegion: ADDRESS_CHENNAI.region,
-      postalCode: ADDRESS_CHENNAI.postalCode,
-      addressCountry: ADDRESS_CHENNAI.country,
-    };
-    const branchPlaces = CENTER_LOCATIONS.map((center) => ({
-      '@type': 'Place',
-      name: center.name,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: center.locality,
-        addressRegion: 'Tamil Nadu',
-        addressCountry: 'IN',
-      },
-    }));
-
-    const clinic: Record<string, unknown> = {
-      '@context': 'https://schema.org',
-      '@type': 'MedicalClinic',
-      name: BRAND_NAME,
-      description: `${BRAND_TAGLINE}. Paediatric therapy in Chennai centres including Villivakkam, Valasaravakkam, Chengalpattu, and Nungambakkam: occupational therapy, speech & language therapy, behaviour (ABA), sensory integration, early intervention, special education, school readiness, parent training, play therapy, Brain Gym, mindfulness, feeding & oral motor, assistive technology, and more.`,
-      email: EMAIL,
-      contactPoint: [
-        {
-          '@type': 'ContactPoint',
-          telephone: PHONE_PRIMARY_E164,
-          contactType: 'customer service',
-          areaServed: 'IN',
-          availableLanguage: ['en', 'ta'],
-        },
-        {
-          '@type': 'ContactPoint',
-          telephone: PHONE_SECONDARY_E164,
-          contactType: 'customer service',
-        },
-      ],
-      address: postalChennai,
-      location: [
-        { '@type': 'Place', name: 'Chennai — Villivakkam', address: postalChennai },
-        ...branchPlaces,
-      ],
-      areaServed: [
-        { '@type': 'City', name: 'Chennai' },
-        { '@type': 'AdministrativeArea', name: 'Villivakkam' },
-        { '@type': 'AdministrativeArea', name: 'North Chennai' },
-        { '@type': 'AdministrativeArea', name: 'Valasaravakkam' },
-        { '@type': 'City', name: 'Chengalpattu' },
-        { '@type': 'AdministrativeArea', name: 'Nungambakkam' },
-      ],
-      medicalSpecialty: [
-        'Pediatric Occupational Therapy',
-        'Speech-Language Pathology',
-        'Applied Behavior Analysis',
-        'Special Education',
-        'Early Childhood Intervention',
-      ],
-      priceRange: '$$',
-    };
-    clinic.image = siteUrl ? `${siteUrl}/specialised_therapy.png` : '/specialised_therapy.png';
-    if (siteUrl) {
-      clinic.url = siteUrl;
-    }
-
-    const faqPage = {
+  const faqStructuredData = useMemo(
+    () => ({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: faqItems.map((item) => ({
@@ -191,35 +125,9 @@ const Home = () => {
           text: item.a,
         },
       })),
-    };
-
-    const website =
-      siteUrl ?
-        {
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: BRAND_NAME,
-          url: siteUrl,
-        }
-      : null;
-
-    const breadcrumb = siteUrl
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Home',
-              item: `${siteUrl}/`,
-            },
-          ],
-        }
-      : null;
-
-    return { clinic, faqPage, website, breadcrumb };
-  }, [siteUrl]);
+    }),
+    [],
+  );
 
   const pageTitle = `Paediatric Therapy Chennai Centers | ${BRAND_NAME}`;
   const pageDescription = `${BRAND_NAME} (${BRAND_TAGLINE}). Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam: OT, speech & language, ABA, sensory integration, early intervention, special education, school readiness, parent training, play therapy, Brain Gym, mindfulness, feeding & oral motor, assistive technology.`;
@@ -251,14 +159,7 @@ const Home = () => {
         <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={ogImage} />
 
-        <script type="application/ld+json">{JSON.stringify(structuredData.clinic)}</script>
-        <script type="application/ld+json">{JSON.stringify(structuredData.faqPage)}</script>
-        {structuredData.breadcrumb ? (
-          <script type="application/ld+json">{JSON.stringify(structuredData.breadcrumb)}</script>
-        ) : null}
-        {structuredData.website ? (
-          <script type="application/ld+json">{JSON.stringify(structuredData.website)}</script>
-        ) : null}
+        <script type="application/ld+json">{JSON.stringify(faqStructuredData)}</script>
       </Helmet>
 
       {/* Hero — glossy blue glass behind child imagery */}
@@ -627,13 +528,21 @@ const Home = () => {
         </div>
       </section>
 
+      <AreasWeServe />
+      <TestimonialPreview />
+      <SearchIntentLinks
+        problemHref="/blog/early-signs-speech-therapy"
+        solutionHref="/services/speech-therapy"
+        trustHref="/testimonials"
+      />
+
       {/* CTA */}
       <section className="relative overflow-hidden border-t border-primary-200/60 bg-gradient-to-br from-primary-100/80 via-primary-50 to-sky-100/70 py-16 md:py-20">
         <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-amber-300/20 blur-3xl" aria-hidden />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl rounded-3xl border border-white/80 bg-white/50 px-6 py-10 text-center shadow-[0_8px_32px_rgba(26,127,235,0.1)] backdrop-blur-xl md:px-12">
             <h2 className="mb-4 font-heading text-3xl font-bold text-primary-950 md:text-4xl">
-              Visit us in Villivakkam or book online
+              Meet In Real or book online
             </h2>
             <p className="mb-8 text-lg text-neutral-700">
               Same-week enquiries welcome. Ask about assessments, wait times, and which programme fits your child.

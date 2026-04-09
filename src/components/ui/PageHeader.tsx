@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, TrendingUp } from 'lucide-react';
 
 interface PageHeaderProps {
   title: string;
@@ -11,6 +11,48 @@ interface PageHeaderProps {
   backgroundImage?: string;
   metaDescription?: string;
 }
+
+const HEADER_IDEAS: Array<{ icon: JSX.Element; label: string; text: string }> = [
+  {
+    icon: <ShieldCheck className="h-4 w-4" />,
+    label: 'Clinical Clarity',
+    text: 'Assessment-driven planning for focused outcomes',
+  },
+  {
+    icon: <TrendingUp className="h-4 w-4" />,
+    label: 'Visible Progress',
+    text: 'Goals reviewed and refined as your child grows',
+  },
+  {
+    icon: <Sparkles className="h-4 w-4" />,
+    label: 'Family Partnership',
+    text: 'Home + therapy alignment for stronger carryover',
+  },
+];
+
+const highlightKeywords = (text: string) => {
+  const keywords = [
+    'therapy', 'support', 'assessment', 'progress', 'development',
+    'learning', 'communication', 'behaviour', 'independence', 'family',
+    'intervention', 'evidence-based', 'goals', 'children', 'child',
+  ];
+
+  const escapedKeywords = keywords
+    .map((keyword) => keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|');
+  const regex = new RegExp(`\\b(${escapedKeywords})\\b`, 'gi');
+  const parts = text.split(regex);
+
+  return parts.map((part, idx) => (
+    keywords.includes(part.toLowerCase()) ? (
+      <span key={`${part}-${idx}`} className="font-semibold text-primary-800">
+        {part}
+      </span>
+    ) : (
+      <span key={`${part}-${idx}`}>{part}</span>
+    )
+  ));
+};
 
 const PageHeader = ({ 
   title, 
@@ -46,14 +88,42 @@ const PageHeader = ({
                 </p>
                 <h1 className="mb-5 text-primary-950">{title}</h1>
                 {subtitle && (
-                  <p className="mx-auto mb-6 max-w-xl text-lg leading-relaxed text-neutral-700 lg:mx-0 lg:max-w-2xl">
-                    {subtitle}
+                  <p className="mx-auto mb-5 max-w-xl text-lg leading-relaxed text-neutral-700 lg:mx-0 lg:max-w-2xl">
+                    {highlightKeywords(subtitle)}
                   </p>
                 )}
                 {description && (
-                  <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-neutral-600 lg:mx-0">
-                    {description}
+                  <p className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-600 lg:mx-0">
+                    {highlightKeywords(description)}
                   </p>
+                )}
+                {(subtitle || description) && (
+                  <>
+                    <p className="mx-auto mb-4 max-w-2xl rounded-xl border border-primary-100/80 bg-white/75 px-4 py-3 text-sm leading-relaxed text-neutral-700 shadow-sm lg:mx-0">
+                      At Arura, each therapy path combines
+                      {' '}
+                      <span className="font-semibold text-primary-800">clinical precision</span>,
+                      {' '}
+                      <span className="font-semibold text-primary-800">play-based engagement</span>,
+                      {' '}
+                      and
+                      {' '}
+                      <span className="font-semibold text-primary-800">family-led carryover</span>
+                      {' '}
+                      so children can build meaningful skills that transfer into everyday life.
+                    </p>
+                    <div className="mx-auto mb-6 grid max-w-2xl gap-3 sm:grid-cols-3 lg:mx-0">
+                      {HEADER_IDEAS.map((item) => (
+                        <div key={item.label} className="rounded-xl border border-primary-100 bg-white/80 p-3 shadow-sm backdrop-blur-sm">
+                          <p className="mb-1 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary-700">
+                            {item.icon}
+                            {item.label}
+                          </p>
+                          <p className="text-xs leading-relaxed text-neutral-600">{item.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 )}
                 {children && <div className="mb-6">{children}</div>}
 
@@ -89,14 +159,6 @@ const PageHeader = ({
                     />
                     <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-br from-primary-600/20 via-transparent to-sky-300/25 mix-blend-soft-light" />
                     <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-primary-900/20 via-transparent to-white/20" />
-                  </div>
-
-                  <div className="relative z-30 mx-auto mt-4 max-w-md rounded-2xl border border-primary-200/60 bg-white/70 px-4 py-3 text-center shadow-md backdrop-blur-md sm:px-5">
-                    <p className="font-heading text-base font-bold text-primary-950 md:text-lg">Arura Integral Therapy Services</p>
-                    <p className="mt-1 flex items-center justify-center gap-2 text-sm text-neutral-700">
-                      <MapPin className="h-4 w-4 shrink-0 text-primary-600" />
-                      Villivakkam, Chennai
-                    </p>
                   </div>
                 </div>
               </div>

@@ -1,8 +1,24 @@
+import { useState } from 'react';
+import { Loader2, CheckCircle2, ExternalLink } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
-import AppointmentForm from '../components/ui/AppointmentForm';
+
+const GOOGLE_FORM_URL = 'https://forms.gle/4GYRwsD3cvX2B7WF9';
 
 const BookAppointment = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
+
+  const handleSubmittedClick = () => {
+    setIsSubmitting(true);
+    setIsBooked(false);
+
+    window.setTimeout(() => {
+      setIsSubmitting(false);
+      setIsBooked(true);
+    }, 1600);
+  };
+
   return (
     <>
       <PageHeader
@@ -16,13 +32,54 @@ const BookAppointment = () => {
       <section className="py-16 md:py-20 bg-white">
         <div className="container-custom">
           <SectionTitle
-            title="Request an Appointment"
-            subtitle="Complete the form below and our team will contact you to confirm your appointment"
+            title="Book / Consult Appointment"
+            subtitle="Complete the Google Form below and confirm submission"
           />
           
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <AppointmentForm />
+              <div className="overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-sm">
+                <iframe
+                  title="Book appointment Google Form"
+                  src={GOOGLE_FORM_URL}
+                  className="h-[980px] w-full"
+                  loading="lazy"
+                >
+                  Loading...
+                </iframe>
+              </div>
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleSubmittedClick}
+                  disabled={isSubmitting}
+                  className="inline-flex items-center rounded-xl bg-primary-700 px-5 py-3 font-semibold text-white transition hover:bg-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    'I have submitted the form'
+                  )}
+                </button>
+                <a
+                  href={GOOGLE_FORM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center rounded-xl border border-primary-200 bg-white px-4 py-3 text-sm font-semibold text-primary-700 transition hover:border-primary-300"
+                >
+                  Open form in new tab
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+              {isBooked && (
+                <div className="mt-4 inline-flex items-center rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-700">
+                  <CheckCircle2 className="mr-2 h-5 w-5" />
+                  Booked successfully! Our team will contact you soon.
+                </div>
+              )}
             </div>
             
             <div className="lg:col-span-1">

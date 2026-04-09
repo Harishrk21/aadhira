@@ -302,7 +302,7 @@ const SPECIAL_PROGRAMS = [
     border: 'border-sky-200',
     text: 'text-sky-700',
     emoji: '🏫',
-    link: '/school-readiness-program',
+    link: '/programs/school-readiness',
     items: [
       'Attention & Concentration Training',
       'Pre-Writing & Fine Motor Skills',

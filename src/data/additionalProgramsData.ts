@@ -11,6 +11,40 @@ export interface AdditionalProgram {
 
 export const additionalPrograms: AdditionalProgram[] = [
   {
+    id: 'school-readiness',
+    title: 'School Readiness Program',
+    shortDescription: 'Preparing children for classroom routines, communication, attention, and pre-academic participation.',
+    longDescription:
+      'Our School Readiness Program helps children transition confidently into structured school environments. The program integrates communication support, sensory regulation, early learning tasks, social interaction, and daily routine independence with parent guidance for carryover.',
+    ageGroups: '3-7 years',
+    image:
+      'https://images.pexels.com/photos/8943225/pexels-photo-8943225.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    benefits: [
+      'Improved classroom attention and participation',
+      'Better self-regulation and transition tolerance',
+      'Stronger communication and group interaction',
+      'Readiness for pre-writing and pre-academic tasks',
+    ],
+    process: [
+      {
+        title: 'Baseline Readiness Assessment',
+        description: 'We assess classroom skills including attention, communication, social participation, and routines.',
+      },
+      {
+        title: 'Individualised School Plan',
+        description: 'A targeted plan is built around your child’s strengths and school-entry goals.',
+      },
+      {
+        title: 'Structured Readiness Sessions',
+        description: 'Children practice classroom behaviors, early learning, and social group skills through guided activities.',
+      },
+      {
+        title: 'Parent Coaching & Transition Support',
+        description: 'Families receive practical home strategies to reinforce school-ready habits.',
+      },
+    ],
+  },
+  {
     id: 'sensory-integration',
     title: 'Sensory Integration',
     shortDescription: 'Helping children process sensory input for calmer behaviour and better participation.',

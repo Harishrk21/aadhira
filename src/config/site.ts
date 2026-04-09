@@ -1,5 +1,10 @@
-/** Public site origin for canonical URLs, Open Graph, and JSON-LD. Set `VITE_SITE_URL` in `.env` (e.g. https://www.yoursite.com) — no trailing slash. */
+/** Production host for canonicals / sitemap (no trailing slash). Override with `VITE_SITE_URL` in `.env`. */
+const PRODUCTION_SITE_URL = 'https://aruratherapy.com';
+
+/** Public site origin for canonical URLs, Open Graph, and JSON-LD. */
 export function getSiteUrl(): string {
   const raw = import.meta.env.VITE_SITE_URL as string | undefined;
-  return raw ? raw.replace(/\/$/, '') : '';
+  if (raw) return raw.replace(/\/$/, '');
+  if (import.meta.env.PROD) return PRODUCTION_SITE_URL;
+  return '';
 }

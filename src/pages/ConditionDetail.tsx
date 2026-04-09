@@ -4,12 +4,13 @@ import { conditions } from '../data/conditionsData';
 import { ArrowLeft, CheckCircle, Brain, Activity, MessageSquare } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
+import ConditionPageTemplate from '../components/seo-growth/ConditionPageTemplate';
 
 const ConditionDetail = () => {
-  const { conditionId } = useParams<{ conditionId: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   
-  const condition = conditions.find((c) => c.id === conditionId);
+  const condition = conditions.find((c) => c.id === slug);
   
   useEffect(() => {
     if (!condition) {
@@ -19,6 +20,31 @@ const ConditionDetail = () => {
   
   if (!condition) {
     return null;
+  }
+
+  if (condition.id === 'autism') {
+    return (
+      <>
+        <PageHeader
+          title="Autism Support in Chennai"
+          subtitle="Condition-based therapy pathway"
+          description="Understand symptoms, causes, and coordinated therapy options for autism support at Arura."
+          backgroundImage={condition.image}
+          metaDescription="Autism support in Chennai with OT, speech, ABA, and parent-guided strategies."
+        />
+        <ConditionPageTemplate
+          title="Autism Spectrum Disorder"
+          symptoms={condition.signs}
+          causes={[
+            'Neurodevelopmental differences affecting communication, behavior, and sensory processing',
+            'Combination of genetic and developmental factors',
+            'Variations in brain connectivity and information processing',
+          ]}
+          therapyApproach={condition.treatments}
+          relatedServiceSlugs={['speech-therapy', 'occupational-therapy', 'aba-therapy']}
+        />
+      </>
+    );
   }
   
   return (

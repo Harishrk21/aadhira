@@ -1,151 +1,145 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Star, ExternalLink, QrCode, MapPin } from 'lucide-react';
 import { testimonials } from '../data/testimonialsData';
-import { MessageSquare, Search } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
-import TestimonialCard from '../components/ui/TestimonialCard';
 import CTASection from '../components/ui/CTASection';
 
 const Testimonials = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const filteredTestimonials = testimonials.filter(
-    testimonial => 
-      testimonial.quote.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      testimonial.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      testimonial.role.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
   return (
     <>
       <PageHeader
         title="Testimonials"
-        subtitle="Success stories from families we've helped"
-        description="Read how children and families improved communication, behaviour, learning readiness, and independence through consistent therapy, parent involvement, and individualized plans at our centres."
+        subtitle="Google-style reviews from our families"
+        description="See 5-star parent feedback for Arura Therapy Services. Read real stories from families and scan the QR to leave your Google review."
         backgroundImage="https://images.pexels.com/photos/8944024/pexels-photo-8944024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         metaDescription="Read success stories from families at Arura Integral Therapy Services — paediatric therapy across Chennai centers including Villivakkam, Valasaravakkam, Chengalpattu, and Nungambakkam."
       />
-      
-      <section className="py-16 md:py-20 bg-white">
+
+      <section className="bg-white py-16 md:py-20">
         <div className="container-custom">
           <SectionTitle
-            title="Parent Stories"
-            subtitle="Hear from families about their experiences with our therapy services"
+            title="Google Reviews"
+            subtitle="Trusted by Chennai families for child-focused therapy care"
           />
-          
-          {/* Search Box */}
-          <div className="max-w-md mx-auto mb-12">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search testimonials..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-12 rounded-lg border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              />
-              <Search className="w-5 h-5 text-neutral-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
-            </div>
-          </div>
-          
-          {filteredTestimonials.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredTestimonials.map((testimonial) => (
-                <TestimonialCard
-                  key={testimonial.id}
-                  quote={testimonial.quote}
-                  author={testimonial.author}
-                  role={testimonial.role}
-                  image={testimonial.image}
+
+          <div className="mb-12 rounded-3xl border border-primary-100 bg-gradient-to-br from-primary-50 via-white to-sky-50 p-6 md:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+              <div>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-100 bg-white px-4 py-2 text-sm font-semibold text-neutral-700">
+                  <span className="text-lg font-black tracking-tight">
+                    <span className="text-[#4285F4]">G</span>
+                    <span className="text-[#EA4335]">o</span>
+                    <span className="text-[#FBBC05]">o</span>
+                    <span className="text-[#4285F4]">g</span>
+                    <span className="text-[#34A853]">l</span>
+                    <span className="text-[#EA4335]">e</span>
+                  </span>
+                  <span>Reviews</span>
+                </div>
+                <h2 className="text-3xl font-bold text-neutral-900 md:text-4xl">
+                  Rated 5.0 by happy parents
+                </h2>
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="flex items-center gap-1 text-amber-500">
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-sm font-semibold text-neutral-700">5.0 average rating</p>
+                </div>
+                <p className="mt-4 max-w-2xl text-neutral-600">
+                  Your support helps other parents discover quality therapy care. Please scan the QR code or click below to post your Google review.
+                </p>
+                <a
+                  href="https://g.page/r/CXIVuNbXNx7OEBM/review"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center rounded-xl bg-primary-700 px-5 py-3 font-semibold text-white transition hover:bg-primary-800"
+                >
+                  Open Review Page
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+
+              <div className="mx-auto w-full max-w-xs rounded-3xl border border-primary-100 bg-white p-5 text-center shadow-md">
+                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 text-primary-700">
+                  <QrCode className="h-7 w-7" />
+                </div>
+                <p className="text-sm font-semibold text-neutral-800">Google Review QR</p>
+                <p className="mt-2 text-xs text-neutral-500">
+                  Scan this QR to review us on Google.
+                </p>
+                <img
+                  src="/review.png"
+                  alt="Google review page QR code"
+                  className="mt-4 w-full rounded-xl border border-neutral-200"
+                  loading="lazy"
                 />
-              ))}
+                <a
+                  href="https://g.page/r/CXIVuNbXNx7OEBM/review"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex items-center text-sm font-semibold text-primary-700 hover:text-primary-900"
+                >
+                  <MapPin className="mr-1 h-4 w-4" />
+                  Tap to open review link
+                </a>
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <MessageSquare className="w-12 h-12 text-neutral-400 mx-auto mb-4" />
-              <p className="text-xl text-neutral-600">No testimonials found matching your search.</p>
-              <button 
-                className="mt-4 text-primary-600 font-medium hover:text-primary-800"
-                onClick={() => setSearchTerm('')}
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((testimonial) => (
+              <article
+                key={testimonial.id}
+                className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
-                Clear search and show all testimonials
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-      
-      <section className="py-16 md:py-20 bg-primary-50">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Share Your Story</h2>
-            <p className="text-lg text-neutral-700 mb-6">
-              Has your child benefited from our services? We'd love to hear about your experience and share it with other families who may be on a similar journey.
-            </p>
-            <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold mb-6">Submit Your Testimonial</h3>
-              
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-neutral-700 mb-2">Your Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    required
-                  />
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-amber-500">
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <span className="rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-700">Google Review</span>
                 </div>
-                
-                <div>
-                  <label htmlFor="relationship" className="block text-neutral-700 mb-2">Relationship to Child *</label>
-                  <input
-                    type="text"
-                    id="relationship"
-                    placeholder="e.g., Parent of 5-year-old"
-                    className="w-full px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    required
-                  />
+                <p className="line-clamp-5 text-sm leading-relaxed text-neutral-700">&quot;{testimonial.quote}&quot;</p>
+                <div className="mt-5 border-t border-neutral-100 pt-4">
+                  <p className="font-semibold text-neutral-900">{testimonial.author}</p>
+                  <p className="text-sm text-neutral-500">{testimonial.role}</p>
                 </div>
-                
-                <div>
-                  <label htmlFor="testimonial" className="block text-neutral-700 mb-2">Your Experience *</label>
-                  <textarea
-                    id="testimonial"
-                    rows={4}
-                    className="w-full px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    required
-                  ></textarea>
-                </div>
-                
-                <div>
-                  <label htmlFor="services" className="block text-neutral-700 mb-2">Services Received *</label>
-                  <select
-                    id="services"
-                    className="w-full px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    required
-                  >
-                    <option value="">Select a service</option>
-                    <option value="Occupational Therapy">Occupational Therapy</option>
-                    <option value="Speech Therapy">Speech Therapy</option>
-                    <option value="Special Education">Special Education</option>
-                    <option value="ABA Therapy">ABA Therapy</option>
-                    <option value="Early Intervention">Early Intervention</option>
-                    <option value="Brain Gym">Brain Gym Activities</option>
-                    <option value="School Readiness Program">School Readiness Program</option>
-                    <option value="Multiple Services">Multiple Services</option>
-                  </select>
-                </div>
-                
-                <div className="mt-2">
-                  <button type="submit" className="btn-primary w-full">
-                    Submit Testimonial
-                  </button>
-                </div>
-              </form>
-            </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link to="/contact" className="inline-flex items-center text-sm font-semibold text-primary-700 hover:text-primary-900">
+              Need directions before visiting our center?
+            </Link>
           </div>
         </div>
       </section>
-      
+
+      <section className="bg-primary-50 py-14 md:py-16">
+        <div className="container-custom">
+          <div className="mx-auto max-w-3xl rounded-3xl border border-primary-100 bg-white px-6 py-10 text-center shadow-sm">
+            <h3 className="text-2xl font-bold text-neutral-900 md:text-3xl">Share your review in 30 seconds</h3>
+            <p className="mt-3 text-neutral-600">
+              Tell other parents how therapy helped your child. Your Google review supports families searching for trusted care.
+            </p>
+            <a
+              href="https://g.page/r/CXIVuNbXNx7OEBM/review"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex items-center rounded-xl bg-amber-400 px-6 py-3 font-bold text-primary-950 transition hover:bg-amber-300"
+            >
+              Write a Google Review
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </>
   );
