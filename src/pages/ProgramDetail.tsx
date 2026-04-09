@@ -109,6 +109,12 @@ const ProgramDetail = () => {
   if (!program) return null;
 
   const related = additionalPrograms.filter((p) => p.id !== program.id).slice(0, 3);
+  const programFrameworkSummary = `The ${program.title} pathway combines structured sessions, clear milestones, and parent-guided carryover to improve daily performance and confidence in real environments.`;
+  const programFrameworkIdeas = [
+    { label: 'Program Goal', text: program.benefits[0] ?? 'Functional skills for real-life participation' },
+    { label: 'Session Focus', text: program.benefits[1] ?? 'Skill practice through guided therapeutic activities' },
+    { label: 'Home Follow-up', text: 'Family routines aligned with clinic strategies' },
+  ];
 
   return (
     <>
@@ -123,6 +129,8 @@ const ProgramDetail = () => {
         description={`This ${program.title.toLowerCase()} programme combines targeted clinic sessions and family guidance to improve real-world participation, confidence, and functional outcomes for children.`}
         backgroundImage={program.image}
         metaDescription={`${program.title} at ${BRAND_NAME}. ${program.shortDescription}`}
+        frameworkSummary={programFrameworkSummary}
+        frameworkIdeas={programFrameworkIdeas}
       />
 
       <section className={`bg-gradient-to-r ${theme.gradient} py-5`}>

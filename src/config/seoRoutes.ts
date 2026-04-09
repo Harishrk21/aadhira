@@ -2,6 +2,7 @@ import { services } from '../data/servicesData';
 import { conditions } from '../data/conditionsData';
 import { additionalPrograms } from '../data/additionalProgramsData';
 import { blogPosts } from '../data/blogPostsData';
+import { parentPrograms } from '../data/parentProgramsData';
 
 /** Paths that should be indexed and receive a canonical URL. */
 const STATIC_INDEXABLE = new Set([
@@ -10,6 +11,7 @@ const STATIC_INDEXABLE = new Set([
   '/services',
   '/programs',
   '/conditions',
+  '/parent-programs',
   '/testimonials',
   '/gallery',
   '/blog',
@@ -21,6 +23,7 @@ const serviceIds = new Set(services.map((s) => s.id));
 const conditionIds = new Set(conditions.map((c) => c.id));
 const programIds = new Set(additionalPrograms.map((p) => p.id));
 const blogSlugs = new Set(blogPosts.map((post) => post.slug));
+const parentProgramSlugs = new Set(parentPrograms.map((program) => program.id));
 const serviceSlugAliases = new Set(['behaviour-therapy']);
 const programSlugAliases = new Set(['handwriting-training']);
 
@@ -42,6 +45,9 @@ export function isIndexablePathname(pathname: string): boolean {
 
   const blogMatch = /^\/blog\/([^/]+)$/.exec(pathname);
   if (blogMatch && blogSlugs.has(blogMatch[1])) return true;
+
+  const parentProgramMatch = /^\/parent-programs\/([^/]+)$/.exec(pathname);
+  if (parentProgramMatch && parentProgramSlugs.has(parentProgramMatch[1])) return true;
 
   return false;
 }

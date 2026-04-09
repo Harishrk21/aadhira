@@ -405,6 +405,12 @@ const Conditions = () => {
         description="Our multidisciplinary team supports children with autism, ADHD, speech delay, learning differences, sensory processing challenges, and behavioural difficulties — using integrated, evidence-based frameworks tailored to each child."
         backgroundImage="/specialised_therapy.png"
         metaDescription="Arura Integral Therapy Services — support for Autism, ADHD, Speech Delay, Learning Disabilities, Sensory Processing, and Behavioural Challenges across Chennai."
+        frameworkSummary="For each condition, we map clinical signs to practical therapy goals and create coordinated support plans that improve communication, regulation, learning, and family confidence."
+        frameworkIdeas={[
+          { label: 'Condition Insight', text: 'Identify developmental signs early and accurately' },
+          { label: 'Integrated Plan', text: 'Combine OT, Speech, Behaviour, and Special Education where needed' },
+          { label: 'Progress Path', text: 'Regular reviews to adapt support as the child grows' },
+        ]}
       />
 
       {/* ── Condition Selector + Detail ── */}

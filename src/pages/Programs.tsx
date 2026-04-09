@@ -23,6 +23,12 @@ const Programs = () => {
         description="Browse our child development programs and choose the right pathway for your child's communication, learning, behavior, and daily-life goals."
         backgroundImage="https://images.pexels.com/photos/8613319/pexels-photo-8613319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         metaDescription="Arura programs for school readiness, sensory integration, cognitive skills, parent coaching, feeding support, and more."
+        frameworkSummary="Our programs are designed as focused pathways that strengthen school readiness, regulation, learning, and participation through structured therapist-family collaboration."
+        frameworkIdeas={[
+          { label: 'Program Mapping', text: 'Choose a pathway based on your child’s functional goals' },
+          { label: 'Skill Building', text: 'Targeted modules for attention, behaviour, communication, and daily living' },
+          { label: 'Family Carryover', text: 'Home strategies to sustain progress beyond sessions' },
+        ]}
       />
 
       <section className="bg-white py-16 md:py-20">
@@ -55,6 +61,17 @@ const Programs = () => {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-primary-100 bg-primary-50 p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-primary-900">Need Parent-Focused Support?</h2>
+            <p className="mt-2 max-w-3xl text-neutral-700">
+              Explore our dedicated parent support pathways including guidance sessions, home program coaching, and scheduled child progress reviews.
+            </p>
+            <Link to="/parent-programs" className="mt-5 inline-flex items-center font-semibold text-primary-700 hover:text-primary-900">
+              Explore Parent Programs
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

@@ -31,6 +31,12 @@ const ConditionDetail = () => {
           description="Understand symptoms, causes, and coordinated therapy options for autism support at Arura."
           backgroundImage={condition.image}
           metaDescription="Autism support in Chennai with OT, speech, ABA, and parent-guided strategies."
+          frameworkSummary="Autism support at Arura combines early understanding of sensory, communication, and behaviour patterns with coordinated therapy that builds meaningful everyday functioning."
+          frameworkIdeas={[
+            { label: 'Core Concern', text: 'Social communication and sensory-behaviour profile mapping' },
+            { label: 'Therapy Path', text: 'Integrated OT, Speech, ABA, and parent coaching plan' },
+            { label: 'Functional Gains', text: 'Focus on communication, regulation, and daily participation' },
+          ]}
         />
         <ConditionPageTemplate
           title="Autism Spectrum Disorder"
@@ -55,6 +61,12 @@ const ConditionDetail = () => {
         description={`We evaluate ${condition.title.toLowerCase()} with a child-centred lens, then build coordinated therapy strategies across communication, sensory, behaviour, learning, and functional participation based on your child’s profile.`}
         backgroundImage={condition.image}
         metaDescription={`Learn about ${condition.title} — therapeutic support at Arura Integral Therapy Services (Chennai centers (Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam)). Signs, strategies, and our approach.`}
+        frameworkSummary={`Our ${condition.title} care plan translates assessment findings into targeted therapy goals, structured intervention, and family-led carryover for sustainable progress.`}
+        frameworkIdeas={[
+          { label: 'Assessment Lens', text: 'Understand strengths, concerns, and developmental priorities' },
+          { label: 'Intervention Plan', text: 'Therapy combination matched to your child profile' },
+          { label: 'Family Alignment', text: 'Home guidance for stronger everyday outcomes' },
+        ]}
       />
       
       <section className="py-16 md:py-20 bg-white">

@@ -277,6 +277,12 @@ const Services = () => {
         description="Evidence-based occupational therapy, speech & language, ABA, sensory integration, early intervention, and 15+ specialised programmes — all coordinated into one child-specific plan across clinic, home, and school."
         backgroundImage="https://images.pexels.com/photos/8941590/pexels-photo-8941590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         metaDescription="Arura Integral Therapy Services: 15+ services including occupational therapy, speech, ABA, sensory integration, special education, school readiness, brain gym, mindfulness, feeding & oral motor, assistive technology — Chennai."
+        frameworkSummary="Our services model combines multidisciplinary expertise, measurable goals, and coordinated therapist-parent planning so each child receives one integrated care path."
+        frameworkIdeas={[
+          { label: 'Integrated Team', text: 'OT, Speech, ABA, and Special Education aligned together' },
+          { label: 'Goal Tracking', text: 'Structured plans with regular review checkpoints' },
+          { label: 'Real-Life Transfer', text: 'Skills practiced for home, school, and social settings' },
+        ]}
       />
 
       {/* ── Stats Bar ── */}

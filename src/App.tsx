@@ -10,6 +10,8 @@ const Services = lazy(() => import('./pages/Services.tsx'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.tsx'));
 const Programs = lazy(() => import('./pages/Programs.tsx'));
 const ProgramDetail = lazy(() => import('./pages/ProgramDetail.tsx'));
+const ParentPrograms = lazy(() => import('./pages/ParentPrograms.tsx'));
+const ParentProgramDetail = lazy(() => import('./pages/ParentProgramDetail.tsx'));
 const Conditions = lazy(() => import('./pages/Conditions.tsx'));
 const ConditionDetail = lazy(() => import('./pages/ConditionDetail.tsx'));
 const Testimonials = lazy(() => import('./pages/Testimonials.tsx'));
@@ -31,6 +33,8 @@ function App() {
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/programs/:slug" element={<ProgramDetail />} />
+          <Route path="/parent-programs" element={<ParentPrograms />} />
+          <Route path="/parent-programs/:slug" element={<ParentProgramDetail />} />
           <Route path="/conditions" element={<Conditions />} />
           <Route path="/conditions/:slug" element={<ConditionDetail />} />
           <Route path="/testimonials" element={<Testimonials />} />

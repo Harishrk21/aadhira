@@ -10,6 +10,10 @@ interface PageHeaderProps {
   children?: ReactNode;
   backgroundImage?: string;
   metaDescription?: string;
+  eyebrowText?: string;
+  showFramework?: boolean;
+  frameworkSummary?: string;
+  frameworkIdeas?: Array<{ label: string; text: string }>;
 }
 
 const HEADER_IDEAS: Array<{ icon: JSX.Element; label: string; text: string }> = [
@@ -29,6 +33,8 @@ const HEADER_IDEAS: Array<{ icon: JSX.Element; label: string; text: string }> = 
     text: 'Home + therapy alignment for stronger carryover',
   },
 ];
+
+const DEFAULT_FRAMEWORK_SUMMARY = 'At Arura, each therapy path combines clinical precision, play-based engagement, and family-led carryover so children can build meaningful skills that transfer into everyday life.';
 
 const highlightKeywords = (text: string) => {
   const keywords = [
@@ -60,8 +66,17 @@ const PageHeader = ({
   description,
   children,
   backgroundImage = "https://images.pexels.com/photos/8363025/pexels-photo-8363025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  metaDescription
+  metaDescription,
+  eyebrowText = 'Child-focused therapy support',
+  showFramework = true,
+  frameworkSummary = DEFAULT_FRAMEWORK_SUMMARY,
+  frameworkIdeas,
 }: PageHeaderProps) => {
+  const ideasToShow = (frameworkIdeas ?? HEADER_IDEAS.map((item) => ({
+    label: item.label,
+    text: item.text,
+  }))).slice(0, 3);
+
   return (
     <>
       <Helmet>
@@ -83,9 +98,11 @@ const PageHeader = ({
           <div className="rounded-[2rem] border border-white/80 bg-white/45 p-6 shadow-[0_8px_40px_rgba(26,127,235,0.12)] backdrop-blur-2xl ring-1 ring-primary-200/50 md:p-10 lg:p-12">
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
               <div className="text-center lg:text-left">
-                <p className="mb-4 inline-flex items-center rounded-full border border-amber-400/50 bg-amber-100/80 px-4 py-1.5 text-sm font-semibold text-amber-900 shadow-sm">
-                  Child-focused therapy support
-                </p>
+                {eyebrowText && (
+                  <p className="mb-4 inline-flex items-center rounded-full border border-amber-400/50 bg-amber-100/80 px-4 py-1.5 text-sm font-semibold text-amber-900 shadow-sm">
+                    {eyebrowText}
+                  </p>
+                )}
                 <h1 className="mb-5 text-primary-950">{title}</h1>
                 {subtitle && (
                   <p className="mx-auto mb-5 max-w-xl text-lg leading-relaxed text-neutral-700 lg:mx-0 lg:max-w-2xl">
@@ -97,26 +114,18 @@ const PageHeader = ({
                     {highlightKeywords(description)}
                   </p>
                 )}
-                {(subtitle || description) && (
+                {showFramework && (subtitle || description) && (
                   <>
                     <p className="mx-auto mb-4 max-w-2xl rounded-xl border border-primary-100/80 bg-white/75 px-4 py-3 text-sm leading-relaxed text-neutral-700 shadow-sm lg:mx-0">
-                      At Arura, each therapy path combines
-                      {' '}
-                      <span className="font-semibold text-primary-800">clinical precision</span>,
-                      {' '}
-                      <span className="font-semibold text-primary-800">play-based engagement</span>,
-                      {' '}
-                      and
-                      {' '}
-                      <span className="font-semibold text-primary-800">family-led carryover</span>
-                      {' '}
-                      so children can build meaningful skills that transfer into everyday life.
+                      {frameworkSummary}
                     </p>
                     <div className="mx-auto mb-6 grid max-w-2xl gap-3 sm:grid-cols-3 lg:mx-0">
-                      {HEADER_IDEAS.map((item) => (
+                      {ideasToShow.map((item, index) => (
                         <div key={item.label} className="rounded-xl border border-primary-100 bg-white/80 p-3 shadow-sm backdrop-blur-sm">
                           <p className="mb-1 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary-700">
-                            {item.icon}
+                            {index === 0 && <ShieldCheck className="h-4 w-4" />}
+                            {index === 1 && <TrendingUp className="h-4 w-4" />}
+                            {index === 2 && <Sparkles className="h-4 w-4" />}
                             {item.label}
                           </p>
                           <p className="text-xs leading-relaxed text-neutral-600">{item.text}</p>

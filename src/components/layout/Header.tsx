@@ -64,6 +64,21 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      // Close mobile drawer when entering desktop nav breakpoint.
+      if (window.innerWidth >= 1280) {
+        setIsMenuOpen(false);
+        setIsServicesOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const desktopNavItems: DropdownNavItem[] = [
     { id: 1, label: 'Home', link: '/' },
     { id: 2, label: 'About', link: '/about' },
@@ -179,11 +194,12 @@ const Header = () => {
       ],
     },
     { id: 4, label: 'Programs', link: '/programs' },
-    { id: 5, label: 'Conditions', link: '/conditions' },
-    { id: 6, label: 'Testimonials', link: '/testimonials' },
-    { id: 7, label: 'Gallery', link: '/gallery' },
-    { id: 8, label: 'Blog', link: '/blog' },
-    { id: 9, label: 'Contact', link: '/contact' },
+    { id: 5, label: 'Parent Programs', link: '/parent-programs' },
+    { id: 6, label: 'Conditions', link: '/conditions' },
+    { id: 7, label: 'Testimonials', link: '/testimonials' },
+    { id: 8, label: 'Gallery', link: '/gallery' },
+    { id: 9, label: 'Blog', link: '/blog' },
+    { id: 10, label: 'Contact', link: '/contact' },
   ];
 
   return (
@@ -210,12 +226,12 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center justify-center justify-self-center min-w-0">
+        <nav className="hidden xl:flex items-center justify-center justify-self-center min-w-0">
           <DropdownNavigation navItems={desktopNavItems} />
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex justify-self-end">
+        <div className="hidden xl:flex justify-self-end">
           <Link to="/book-appointment" className="btn-primary whitespace-nowrap">
             Book Appointment
           </Link>
@@ -223,7 +239,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-neutral-800 focus:outline-none justify-self-end" 
+          className="xl:hidden text-neutral-800 focus:outline-none justify-self-end" 
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
         >
@@ -243,7 +259,7 @@ const Header = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white shadow-lg"
+            className="xl:hidden bg-white shadow-lg"
           >
             <nav className="container-custom py-5 flex flex-col space-y-3">
               <NavLink to="/" 
@@ -303,6 +319,14 @@ const Header = () => {
                 onClick={toggleMenu}
               >
                 Programs
+              </NavLink>
+              <NavLink to="/parent-programs"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link-active' : 'nav-link'
+                }
+                onClick={toggleMenu}
+              >
+                Parent Programs
               </NavLink>
               <NavLink to="/conditions" 
                 className={({ isActive }) => 

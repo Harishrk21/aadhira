@@ -12,7 +12,7 @@ const Testimonials = () => {
         title="Testimonials"
         subtitle="Google-style reviews from our families"
         description="See 5-star parent feedback for Arura Therapy Services. Read real stories from families and scan the QR to leave your Google review."
-        backgroundImage="https://images.pexels.com/photos/8944024/pexels-photo-8944024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        backgroundImage="/Testimonial.png"
         metaDescription="Read success stories from families at Arura Integral Therapy Services — paediatric therapy across Chennai centers including Villivakkam, Valasaravakkam, Chengalpattu, and Nungambakkam."
       />
 

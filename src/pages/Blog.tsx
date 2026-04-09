@@ -7,7 +7,11 @@ import CTASection from '../components/ui/CTASection';
 import { blogPosts } from '../data/blogPostsData';
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'speech' | 'autism' | 'adhd'>('all');
+  const categories = useMemo(
+    () => ['all', ...Array.from(new Set(blogPosts.map((post) => post.category)))],
+    [],
+  );
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const filteredPosts = useMemo(
     () => blogPosts.filter((post) => activeCategory === 'all' || post.category === activeCategory),
     [activeCategory],
@@ -30,7 +34,7 @@ const Blog = () => {
             subtitle="Short reads made for busy parents"
           />
           <div className="mb-6 flex flex-wrap gap-2">
-            {(['all', 'speech', 'autism', 'adhd'] as const).map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

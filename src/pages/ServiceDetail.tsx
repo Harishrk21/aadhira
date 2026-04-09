@@ -189,6 +189,12 @@ const ServiceDetail = () => {
 
   const service = services.find((s) => s.id === resolvedSlug);
   const theme = SERVICE_THEME[resolvedSlug] ?? SERVICE_THEME['occupational-therapy'];
+  const serviceFrameworkSummary = `Each ${service?.title ?? 'therapy'} plan at Arura blends assessment-based goals, engaging sessions, and parent-guided practice so progress carries into home, school, and social routines.`;
+  const serviceFrameworkIdeas = [
+    { label: 'Primary Focus', text: theme.heroHighlights[0] ?? 'Goal-oriented intervention planning' },
+    { label: 'Therapy Goal', text: theme.heroHighlights[1] ?? 'Skill growth tracked with regular reviews' },
+    { label: 'Carryover Plan', text: theme.heroHighlights[2] ?? 'Parent coaching for daily routine practice' },
+  ];
 
   useEffect(() => {
     if (!service) navigate('/services');
@@ -214,6 +220,8 @@ const ServiceDetail = () => {
           description="Personalized speech and language intervention for children across Chennai, Korattur, Anna Nagar, and Ambattur."
           backgroundImage={service.image}
           metaDescription="Speech therapy at Arura for speech delay, language support, and communication outcomes."
+          frameworkSummary={serviceFrameworkSummary}
+          frameworkIdeas={serviceFrameworkIdeas}
         />
         <ServicePageTemplate
           title="Speech Therapy"
@@ -285,6 +293,8 @@ const ServiceDetail = () => {
         description={theme.heroSummary}
         backgroundImage={service.image}
         metaDescription={`${service.title} at ${BRAND_NAME}. ${service.shortDescription}`}
+        frameworkSummary={serviceFrameworkSummary}
+        frameworkIdeas={serviceFrameworkIdeas}
       >
         <p className="max-w-3xl rounded-xl border border-white/80 bg-white/70 px-4 py-3 text-sm font-medium leading-relaxed text-neutral-700 shadow-sm">
           Key focus:
