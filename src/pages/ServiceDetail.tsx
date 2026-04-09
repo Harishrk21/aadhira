@@ -1,5 +1,5 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { services } from '../data/servicesData';
@@ -184,8 +184,8 @@ const SERVICE_SLUG_ALIASES: Record<string, string> = {
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const resolvedSlug = slug ? (SERVICE_SLUG_ALIASES[slug] ?? slug) : '';
+  const normalizedSlug = slug ? decodeURIComponent(slug).trim().toLowerCase() : '';
+  const resolvedSlug = normalizedSlug ? (SERVICE_SLUG_ALIASES[normalizedSlug] ?? normalizedSlug) : '';
 
   const service = services.find((s) => s.id === resolvedSlug);
   const theme = SERVICE_THEME[resolvedSlug] ?? SERVICE_THEME['occupational-therapy'];
@@ -196,11 +196,24 @@ const ServiceDetail = () => {
     { label: 'Carryover Plan', text: theme.heroHighlights[2] ?? 'Parent coaching for daily routine practice' },
   ];
 
-  useEffect(() => {
-    if (!service) navigate('/services');
-  }, [service, navigate]);
-
-  if (!service) return null;
+  if (!service) {
+    return (
+      <section className="bg-white py-24">
+        <div className="container-custom text-center">
+          <h1 className="text-3xl font-bold text-neutral-900">Service Not Found</h1>
+          <p className="mt-3 text-neutral-600">
+            We could not find this therapy page. Please choose a service from the list below.
+          </p>
+          <Link
+            to="/services"
+            className="mt-6 inline-flex items-center rounded-full bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-700"
+          >
+            View All Services
+          </Link>
+        </div>
+      </section>
+    );
+  }
   const keywordProfile = getKeywordProfile(`/services/${service.id}`);
 
   if (service.id === 'speech-therapy') {
