@@ -23,7 +23,7 @@ const Blog = () => {
         title="Blog"
         subtitle="Parent guides and therapy insights"
         description="Read practical articles for child development, therapy support, and home-based strategies."
-        backgroundImage="https://images.pexels.com/photos/8612996/pexels-photo-8612996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        backgroundImage="/blog_post.png"
         metaDescription="Blog articles from Arura Paediatric Therapy Services."
       />
 

@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
+import { CalendarCheck2 } from 'lucide-react';
 import { useTracking } from '../../hooks/useTracking';
 
 const StickyBookButton = () => {
   const { trackEvent } = useTracking();
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-4 right-4 z-50 sm:bottom-5 sm:right-5">
       <Link
         to="/book-appointment"
         onClick={() => trackEvent('sticky_book_click', { source: 'global_sticky_button' })}
-        className="rounded-full bg-primary-700 px-5 py-3 text-sm font-bold text-white shadow-lg hover:bg-primary-800"
+        aria-label="Book appointment"
+        className="group flex h-14 w-14 items-center justify-center rounded-full bg-primary-700 text-white shadow-lg shadow-primary-500/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-primary-800 hover:shadow-xl hover:shadow-primary-500/40"
       >
-        Book Appointment
+        <CalendarCheck2 className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
       </Link>
     </div>
   );

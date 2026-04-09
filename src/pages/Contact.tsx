@@ -104,7 +104,7 @@ const Contact = () => {
         title="Contact Us"
         subtitle={`${BRAND_NAME} — Chennai Centres`}
         description="Connect with our therapy team for appointments, programme guidance, and centre information. Share your child's age, concerns, and goals — we'll guide you to the right starting plan."
-        backgroundImage="https://images.pexels.com/photos/33999/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        backgroundImage="/contact.png"
         metaDescription="Contact Arura Integral Therapy Services: Villivakkam HQ + TWINKLEZZ, UNICARE, SMINGA partner centres across Chennai. Book a paediatric therapy appointment today."
       />
 
@@ -308,8 +308,8 @@ const Contact = () => {
                       <Phone className={`w-4 h-4 ${center.textAccent}`} />
                     </div>
                     <div>
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium mb-1">Phone</p>
-                      <p className="text-sm text-neutral-600">Use common partner numbers below.</p>
+                      <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium mb-1">Partner Helpline</p>
+                      <p className="text-sm text-neutral-700 font-medium">Call shared partner desk for this centre</p>
                     </div>
                   </div>
 
@@ -331,17 +331,23 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="mt-8 rounded-2xl border border-primary-200 bg-white p-5 shadow-sm"
+            className="mt-8 rounded-2xl border border-primary-200 bg-white p-6 shadow-sm"
           >
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">Common clinical partner numbers</p>
-            <div className="mt-3 flex flex-wrap gap-3">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">Partner Centre Helpline</p>
+                <p className="mt-1 text-sm text-neutral-600">Use these numbers to connect with TWINKLEZZ, UNICARE, and SMINGA support desks.</p>
+              </div>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {COMMON_PARTNER_NUMBERS.map((ph) => (
                 <a
                   key={ph}
                   href={`tel:+91${ph}`}
-                  className="inline-flex items-center rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-sm font-bold text-primary-700 transition hover:bg-primary-100"
+                  className="group flex items-center justify-between rounded-xl border border-primary-200 bg-primary-50 px-4 py-3 text-sm font-bold text-primary-800 transition hover:-translate-y-0.5 hover:border-primary-300 hover:bg-white hover:shadow"
                 >
-                  +91 {ph}
+                  <span>+91 {ph}</span>
+                  <Phone className="h-4 w-4 text-primary-600 transition group-hover:scale-110" />
                 </a>
               ))}
             </div>
@@ -495,7 +501,7 @@ const Contact = () => {
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 h-[450px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.0851017001037!2d80.19916081464523!3d13.10246869075978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264078822b9f3%3A0xd8999e6aad7ae91f!2sVillivakkam%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1635152086578!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.9828918456064!2d80.20060147597633!3d13.100270287227165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526565df512807%3A0xce1e37d7d6b81572!2sARURA%20PAEDIATRIC%20THERAPY%20SERVICES%2F%20occupational%20Therapy%20%2F%20speech%20therapy%20%2F%20special%20education%2F%20Behaviour%20Therapy!5e0!3m2!1sen!2sin!4v1775758527718!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}

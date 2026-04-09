@@ -38,7 +38,7 @@ const About: React.FC = () => {
         subtitle="Excellence in healthcare education since 2020"
         description="Pioneering specialized healthcare education with innovation, hands-on training, and compassionate leadership."
         showFramework
-        backgroundImage="https://images.pexels.com/photos/45842/clinic-medical-health-medicine-45842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        backgroundImage="/about_us.png"
         metaDescription="About Arura: mission, vision, leadership, facilities, and why families and students choose us."
       />
 
