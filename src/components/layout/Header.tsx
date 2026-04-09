@@ -209,18 +209,18 @@ const Header = () => {
       }`}
     >
       <div className="container-custom grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
-        <Link to="/" className="flex items-center gap-3 min-w-0" onClick={() => setIsMenuOpen(false)}>
+        <Link to="/" className="group flex items-center gap-3 min-w-0" onClick={() => setIsMenuOpen(false)}>
           <img
             src="/logo.png"
             alt="Arura Integral Therapy Services logo"
             className="w-12 h-12 md:w-14 md:h-14 object-contain flex-shrink-0 drop-shadow-md"
           />
           <span className="min-w-0 leading-tight">
-            <span className="block text-[0.78rem] md:text-[0.9rem] font-semibold uppercase tracking-[0.2em] text-primary-700">
-              Arura Integral
+            <span className="brand-arura block text-[1rem] font-black uppercase md:text-[1.22rem]">
+              ARURA
             </span>
-            <span className="block text-[1.08rem] md:text-[1.3rem] font-heading font-black tracking-[0.01em] text-neutral-900 truncate">
-              Therapy Services
+            <span className="block text-[0.72rem] md:text-[0.84rem] font-heading font-bold tracking-[0.08em] text-neutral-800 truncate">
+              INTEGRAL THERAPY SERVICES
             </span>
           </span>
         </Link>

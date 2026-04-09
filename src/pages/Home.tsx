@@ -111,7 +111,6 @@ const Home = () => {
   const canonical = siteUrl ? `${siteUrl}/` : undefined;
   const ogUrl = canonical ?? undefined;
   const ogImage = siteUrl ? `${siteUrl}/specialised_therapy.png` : '/specialised_therapy.png';
-  const totalTherapyPrograms = services.length + additionalPrograms.length + 1; // + School Readiness Program
 
   const faqStructuredData = useMemo(
     () => ({
@@ -239,16 +238,16 @@ const Home = () => {
                 <motion.div
                   variants={fadeUp}
                   transition={{ duration: 0.55 }}
-                  className="grid grid-cols-3 gap-4 rounded-2xl border border-primary-200/60 bg-white/50 px-3 py-6 backdrop-blur-md sm:gap-6 sm:px-4"
+                  className="grid gap-3 rounded-2xl border border-primary-200/60 bg-white/50 p-3 backdrop-blur-md sm:grid-cols-3 sm:gap-4 sm:p-4"
                 >
                   {[
-                    { label: 'Therapy programs', value: `${totalTherapyPrograms}` },
-                    { label: 'Families since', value: '2015' },
-                    { label: 'Clinic', value: 'Villivakkam' },
+                    { label: 'Core services', value: `${services.length}+` },
+                    { label: 'Special programs', value: `${additionalPrograms.length}+` },
+                    { label: 'Chennai centres', value: '4' },
                   ].map((item) => (
-                    <div key={item.label} className="text-center lg:text-left">
-                      <p className="font-heading text-2xl font-bold text-primary-800 md:text-3xl">{item.value}</p>
-                      <p className="text-xs text-neutral-600 sm:text-sm">{item.label}</p>
+                    <div key={item.label} className="rounded-xl border border-primary-100/70 bg-white/75 px-3 py-3 text-center sm:px-4 sm:py-4 lg:text-left">
+                      <p className="font-heading text-2xl font-bold text-primary-800 sm:text-[1.7rem]">{item.value}</p>
+                      <p className="text-xs font-medium uppercase tracking-wide text-neutral-600">{item.label}</p>
                     </div>
                   ))}
                 </motion.div>

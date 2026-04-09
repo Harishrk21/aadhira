@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,4 +94,29 @@
   .icon-circle {
     @apply flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600;
   }
+
+  .brand-arura {
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    letter-spacing: 0.18em;
+    background: linear-gradient(90deg, #1a7feb 0%, #f59e0b 50%, #1a7feb 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: aruraGlow 2.2s ease-in-out infinite, aruraGradientShift 4s linear infinite;
+  }
+}
+
+@keyframes aruraGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(26, 127, 235, 0.35)) drop-shadow(0 0 8px rgba(245, 158, 11, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(26, 127, 235, 0.65)) drop-shadow(0 0 16px rgba(245, 158, 11, 0.45));
+  }
+}
+
+@keyframes aruraGradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
