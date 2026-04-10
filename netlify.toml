@@ -1,0 +1,25 @@
+# Netlify build (Vite). If you override these in the Netlify UI, those settings still apply;
+# this file documents the intended setup and fixes stale-SPA chunk 404s masked as HTML.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# After a new deploy, hashed JS under /assets/ changes. If index.html is cached, the browser
+# still requests old chunk URLs; they 404 and /* rewrites to index.html → MIME type text/html
+# errors on module scripts. Keep HTML entry points fresh; cache immutable hashed assets hard.
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
