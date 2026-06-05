@@ -36,6 +36,8 @@ import {
 import AreasWeServe from '../components/seo-growth/AreasWeServe';
 import TestimonialPreview from '../components/seo-growth/TestimonialPreview';
 import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
+import { HOME_KEYWORDS } from '../config/seoContent';
+import TrustSignals from '../components/seo-growth/TrustSignals';
 
 const serviceIcons: Record<string, JSX.Element> = {
   'occupational-therapy': <Activity className="w-6 h-6" />,
@@ -47,9 +49,9 @@ const serviceIcons: Record<string, JSX.Element> = {
 };
 
 /** Hero — local brand imagery (paediatric therapy at Arura) */
-const HERO_MAIN = '/specialised_therapy.png';
-const HERO_CHILD_A = '/speech_therapy.png';
-const HERO_CHILD_B = '/occupationa_therapy.png';
+const HERO_MAIN = '/images/pages/specialised_therapy.png';
+const HERO_CHILD_A = '/images/services/speech_therapy.png';
+const HERO_CHILD_B = '/images/services/occupationa_therapy.png';
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -110,7 +112,7 @@ const Home = () => {
   const siteUrl = getSiteUrl();
   const canonical = siteUrl ? `${siteUrl}/` : undefined;
   const ogUrl = canonical ?? undefined;
-  const ogImage = siteUrl ? `${siteUrl}/specialised_therapy.png` : '/specialised_therapy.png';
+  const ogImage = siteUrl ? `${siteUrl}/images/pages/specialised_therapy.png` : '/images/pages/specialised_therapy.png';
 
   const faqStructuredData = useMemo(
     () => ({
@@ -128,7 +130,7 @@ const Home = () => {
     [],
   );
 
-  const pageTitle = `Paediatric Therapy Chennai Centers | ${BRAND_NAME}`;
+  const pageTitle = `Best Paediatric Therapy Centre in Chennai | ${BRAND_NAME}`;
   const pageDescription = `${BRAND_NAME} (${BRAND_TAGLINE}). Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam: OT, speech & language, ABA, sensory integration, early intervention, special education, school readiness, parent training, play therapy, Brain Gym, mindfulness, feeding & oral motor, assistive technology.`;
 
   return (
@@ -136,10 +138,7 @@ const Home = () => {
       <Helmet htmlAttributes={{ lang: 'en-IN' }}>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content="Arura Integral Therapy, paediatric therapy Chennai, Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam, occupational therapy, speech language therapy, ABA, sensory integration, early intervention, special education, play therapy, Brain Gym, mindfulness, Arura"
-        />
+        <meta name="keywords" content={HOME_KEYWORDS.join(', ')} />
         <meta name="robots" content="index, follow" />
         <meta name="author" content={BRAND_NAME} />
         <meta name="geo.region" content="IN-TN" />
@@ -528,6 +527,7 @@ const Home = () => {
       </section>
 
       <AreasWeServe />
+      <TrustSignals />
       <TestimonialPreview />
       <SearchIntentLinks
         problemHref="/blog/early-signs-speech-therapy"

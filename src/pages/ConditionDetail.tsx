@@ -5,6 +5,8 @@ import { ArrowLeft, CheckCircle, Brain, Activity, MessageSquare } from 'lucide-r
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import ConditionPageTemplate from '../components/seo-growth/ConditionPageTemplate';
+import { conditionMetaDescription, conditionKeywords, localSeoTitle } from '../config/seoContent';
+import { Helmet } from 'react-helmet-async';
 
 const ConditionDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,14 +25,22 @@ const ConditionDetail = () => {
   }
 
   if (condition.id === 'autism') {
+    const autismTitle = localSeoTitle('Autism Therapy and ABA Support');
+    const autismDescription = conditionMetaDescription('Autism Spectrum Disorder');
     return (
       <>
+        <Helmet>
+          <title>{autismTitle}</title>
+          <meta name="description" content={autismDescription} />
+          <meta name="keywords" content={conditionKeywords('Autism Spectrum Disorder', ['ABA therapy', 'speech therapy', 'occupational therapy', 'sensory integration'])} />
+        </Helmet>
         <PageHeader
           title="Autism Support in Chennai"
           subtitle="Condition-based therapy pathway"
           description="Understand symptoms, causes, and coordinated therapy options for autism support at Arura."
           backgroundImage={condition.image}
-          metaDescription="Autism support in Chennai with OT, speech, ABA, and parent-guided strategies."
+          metaTitle={autismTitle}
+          metaDescription={autismDescription}
           frameworkSummary="Autism support at Arura combines early understanding of sensory, communication, and behaviour patterns with coordinated therapy that builds meaningful everyday functioning."
           frameworkIdeas={[
             { label: 'Core Concern', text: 'Social communication and sensory-behaviour profile mapping' },
@@ -52,6 +62,9 @@ const ConditionDetail = () => {
       </>
     );
   }
+
+  const seoTitle = localSeoTitle(`${condition.title} Therapy`);
+  const seoDescription = conditionMetaDescription(condition.title);
   
   return (
     <>
@@ -60,7 +73,8 @@ const ConditionDetail = () => {
         subtitle="Understanding and treating developmental conditions"
         description={`We evaluate ${condition.title.toLowerCase()} with a child-centred lens, then build coordinated therapy strategies across communication, sensory, behaviour, learning, and functional participation based on your child’s profile.`}
         backgroundImage={condition.image}
-        metaDescription={`Learn about ${condition.title} — therapeutic support at Arura Integral Therapy Services (Chennai centers (Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam)). Signs, strategies, and our approach.`}
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary={`Our ${condition.title} care plan translates assessment findings into targeted therapy goals, structured intervention, and family-led carryover for sustainable progress.`}
         frameworkIdeas={[
           { label: 'Assessment Lens', text: 'Understand strengths, concerns, and developmental priorities' },

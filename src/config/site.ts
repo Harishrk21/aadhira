@@ -1,5 +1,5 @@
 /** Production host for canonicals / sitemap (no trailing slash). Override with `VITE_SITE_URL` in `.env`. */
-const PRODUCTION_SITE_URL = 'https://aruratherapy.com';
+const PRODUCTION_SITE_URL = 'https://aruratherapy.in';
 
 /** Public site origin for canonical URLs, Open Graph, and JSON-LD. */
 export function getSiteUrl(): string {

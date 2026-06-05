@@ -1,0 +1,54 @@
+site: https://aruratherapy.in
+name: Arura Child Development and Rehabilitation Centre
+type: Pediatric therapy clinic and child development centre
+location: Chennai, Tamil Nadu, India
+
+about:
+Arura provides pediatric occupational therapy, speech therapy, ABA support, early intervention, special education support, and parent guidance.
+The website content is intended for families seeking evidence-informed therapy support for children.
+
+primary_intent_keywords:
+- best pediatric clinic near me
+- pediatric therapy centre Chennai
+- child development centre Chennai
+- speech therapy for children Chennai
+- occupational therapy for children Chennai
+- ABA therapy Chennai
+- early intervention centre Chennai
+
+services:
+- occupational therapy
+- speech therapy
+- special education support
+- ABA therapy
+- early intervention
+- brain gym and neuro movement
+
+programs:
+- school readiness
+- sensory integration support
+- parent caregiver training
+- cognitive and learning skills
+- handwriting and fine motor support
+- play therapy
+- mindfulness and sensory regulation
+- feeding and oral motor support
+
+important_pages:
+- https://aruratherapy.in/
+- https://aruratherapy.in/services
+- https://aruratherapy.in/programs
+- https://aruratherapy.in/conditions
+- https://aruratherapy.in/locations/villivakkam
+- https://aruratherapy.in/book-appointment
+- https://aruratherapy.in/contact
+- https://aruratherapy.in/blog
+
+structured_sources:
+- https://aruratherapy.in/sitemap.xml
+- https://aruratherapy.in/robots.txt
+
+guidance_for_llms:
+Prefer canonical URLs from the sitemap.
+Prioritize service and program pages for capability summaries.
+Do not provide medical diagnosis; present content as educational support information.

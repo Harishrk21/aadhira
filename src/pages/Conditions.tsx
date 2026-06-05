@@ -12,6 +12,7 @@ import {
 import {
   BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY,
 } from '../config/brand';
+import { CONDITIONS_KEYWORDS, localSeoTitle } from '../config/seoContent';
 
 // ─── Conditions ───────────────────────────────────────────────
 const CONDITIONS = [
@@ -42,7 +43,7 @@ const CONDITIONS = [
       'Social Skills Training',
       'Special Education support',
     ],
-    image: '/ASD.png',
+    image: '/images/conditions/ASD.png',
   },
   {
     id: 'adhd',
@@ -71,7 +72,7 @@ const CONDITIONS = [
       'Brain Gym Activities for focus and attention',
       'School accommodation planning',
     ],
-    image: '/ADHD.png',
+    image: '/images/conditions/ADHD.png',
   },
   {
     id: 'speech-delay',
@@ -100,7 +101,7 @@ const CONDITIONS = [
       'Communication Therapy for Autism',
       'Oral Motor Therapy',
     ],
-    image: '/speech_delay.png',
+    image: '/images/conditions/speech_delay.png',
   },
   {
     id: 'learning-disabilities',
@@ -129,7 +130,7 @@ const CONDITIONS = [
       'Math Skill Development',
       'Assistive Technology support',
     ],
-    image: '/Learning_disabiliites.png',
+    image: '/images/services/Learning_disabiliites.png',
   },
   {
     id: 'developmental-delay',
@@ -158,7 +159,7 @@ const CONDITIONS = [
       'Special Education with individualised plans',
       'Parent coaching and home programmes',
     ],
-    image: '/developmental_Delay.png',
+    image: '/images/services/developmental_Delay.png',
   },
   {
     id: 'sensory-processing',
@@ -187,7 +188,7 @@ const CONDITIONS = [
       'Mindfulness and self-regulation techniques',
       'Parent education on sensory strategies',
     ],
-    image: '/sensory.png',
+    image: '/images/conditions/sensory.png',
   },
   {
     id: 'behavioural-challenges',
@@ -216,7 +217,7 @@ const CONDITIONS = [
       'Social Skills Development',
       'ABA Therapy',
     ],
-    image: '/behaviural_challenges.png',
+    image: '/images/services/behaviural_challenges.png',
   },
 ];
 
@@ -384,18 +385,22 @@ const ADDITIONAL_SERVICES = [
 const Conditions = () => {
   const [active, setActive] = useState(CONDITIONS[0].id);
   const selected = CONDITIONS.find((c) => c.id === active) || CONDITIONS[0];
+  const seoTitle = localSeoTitle('Autism, ADHD and Speech Delay Therapy');
+  const seoDescription = 'Arura supports children with autism, ADHD, speech delay, learning disabilities, developmental delay, sensory processing difficulties, and behavioural challenges in Villivakkam and across Chennai.';
 
   return (
     <>
       <Helmet>
-        <title>Conditions We Treat | {BRAND_NAME}</title>
+        <title>{seoTitle}</title>
         <meta
           name="description"
-          content="Arura Integral Therapy Services supports children with Autism, ADHD, Speech Delay, Learning Disabilities, Developmental Delay, Sensory Processing Difficulties, and Behavioural Challenges across Chennai centres."
+          content={seoDescription}
         />
         <meta
           name="keywords"
-          content="autism therapy Chennai, ADHD treatment Villivakkam, speech delay therapy, learning disabilities, developmental delay, sensory processing, behaviour therapy, Arura therapy"
+          content={[
+            ...CONDITIONS_KEYWORDS,
+          ].join(', ')}
         />
       </Helmet>
 
@@ -403,8 +408,9 @@ const Conditions = () => {
         title="Conditions We Treat"
         subtitle="Specialised therapy for every developmental journey"
         description="Our multidisciplinary team supports children with autism, ADHD, speech delay, learning differences, sensory processing challenges, and behavioural difficulties — using integrated, evidence-based frameworks tailored to each child."
-        backgroundImage="/specialised_therapy.png"
-        metaDescription="Arura Integral Therapy Services — support for Autism, ADHD, Speech Delay, Learning Disabilities, Sensory Processing, and Behavioural Challenges across Chennai."
+        backgroundImage="/images/pages/specialised_therapy.png"
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary="For each condition, we map clinical signs to practical therapy goals and create coordinated support plans that improve communication, regulation, learning, and family confidence."
         frameworkIdeas={[
           { label: 'Condition Insight', text: 'Identify developmental signs early and accurately' },

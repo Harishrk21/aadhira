@@ -211,7 +211,7 @@ const Header = () => {
       <div className="container-custom grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
         <Link to="/" className="group flex items-center gap-3 min-w-0" onClick={() => setIsMenuOpen(false)}>
           <img
-            src="/logo.png"
+            src="/images/branding/logo.png"
             alt="Arura Integral Therapy Services logo"
             className="w-12 h-12 md:w-14 md:h-14 object-contain flex-shrink-0 drop-shadow-md"
           />

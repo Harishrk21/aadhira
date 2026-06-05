@@ -1,4 +1,4 @@
-# SEO Checklist — aruratherapy.com
+# SEO Checklist — aruratherapy.in
 
 Last updated: 2026-04-09
 
@@ -12,7 +12,7 @@ Last updated: 2026-04-09
 |------|------------------|
 | Canonical URLs | `src/components/seo/SeoTechnical.tsx` — per **indexable** route (`src/config/seoRoutes.ts`); query strings preserved |
 | Soft 404 control | Unknown paths → `noindex, nofollow`; valid slugs only for services / conditions / programs |
-| Site URL | `src/config/site.ts` — production defaults to `https://aruratherapy.com`; optional `VITE_SITE_URL` in `.env` |
+| Site URL | `src/config/site.ts` — production defaults to `https://aruratherapy.in`; optional `VITE_SITE_URL` in `.env` |
 | robots.txt | `public/robots.txt` — `Allow: /` + sitemap URL |
 | XML sitemap | `public/sitemap.xml` — static URLs + service / condition / program slugs |
 | Env template | `.env.example` |
@@ -135,7 +135,7 @@ Last updated: 2026-04-09
 
 | Item | Owner |
 |------|--------|
-| GA4 on `aruratherapy.com` | You |
+| GA4 on `aruratherapy.in` | You |
 | Google Search Console — verify, sitemap, **manual actions** / security issues | You |
 | **Bing Webmaster Tools** — verify, sitemap | You |
 | Conversion events (call, WhatsApp, form, booking) | Dev + you |
@@ -190,4 +190,4 @@ Last updated: 2026-04-09
 
 ## Domain
 
-Production: **https://aruratherapy.com** — align Search Console, Bing Webmaster Tools, GA4, and GBP with this URL (HTTPS).
+Production: **https://aruratherapy.in** — align Search Console, Bing Webmaster Tools, GA4, and GBP with this URL (HTTPS).

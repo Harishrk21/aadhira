@@ -13,6 +13,7 @@ import {
   BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY, EMAIL,
 } from '../config/brand';
 import { additionalPrograms } from '../data/additionalProgramsData';
+import { SERVICES_KEYWORDS, localSeoTitle } from '../config/seoContent';
 
 // ─── Core services with rich metadata ────────────────────────
 const CORE_SERVICES = [
@@ -37,7 +38,7 @@ const CORE_SERVICES = [
       'Activities of Daily Living',
       'Motor Coordination Therapy',
     ],
-    image: '/occupationa_therapy.png',
+    image: '/images/services/occupationa_therapy.png',
     link: '/services/occupational-therapy',
   },
   {
@@ -61,7 +62,7 @@ const CORE_SERVICES = [
       'Communication Therapy for Autism',
       'Oral Motor Therapy',
     ],
-    image: '/speech_therapy.png',
+    image: '/images/services/speech_therapy.png',
     link: '/services/speech-therapy',
   },
   {
@@ -85,7 +86,7 @@ const CORE_SERVICES = [
       'Math Skill Development',
       'Individualised Education Plans',
     ],
-    image: '/Learning_disabiliites.png',
+    image: '/images/services/Learning_disabiliites.png',
     link: '/services/special-education',
   },
   {
@@ -109,7 +110,7 @@ const CORE_SERVICES = [
       'Social Skills Development',
       'Parent-implemented ABA',
     ],
-    image: '/behaviural_challenges.png',
+    image: '/images/services/behaviural_challenges.png',
     link: '/services/aba-therapy',
   },
   {
@@ -133,7 +134,7 @@ const CORE_SERVICES = [
       'Parent Coaching',
       'Milestone Progress Tracking',
     ],
-    image: '/developmental_Delay.png',
+    image: '/images/services/developmental_Delay.png',
     link: '/services/early-intervention',
   },
   {
@@ -157,7 +158,7 @@ const CORE_SERVICES = [
       'Emotional Regulation Training',
       'Mindfulness Practices',
     ],
-    image: '/brain_gym.png',
+    image: '/images/services/brain_gym.png',
     link: '/services/brain-gym',
   },
 ];
@@ -257,17 +258,22 @@ const Services = () => {
     return matchCat && matchSearch;
   });
 
+  const seoTitle = localSeoTitle('Paediatric Therapy Services');
+  const seoDescription = 'Arura Integral Therapy Services offers occupational therapy, speech therapy, ABA, special education, early intervention, school readiness, sensory integration, and more from Villivakkam for families across Chennai.';
+
   return (
     <>
       <Helmet>
-        <title>Our Services | {BRAND_NAME}</title>
+        <title>{seoTitle}</title>
         <meta
           name="description"
-          content="Arura Integral Therapy Services offers occupational therapy, speech therapy, ABA, special education, early intervention, school readiness, brain gym, play therapy, sensory integration, and more — across 4 Chennai centres."
+          content={seoDescription}
         />
         <meta
           name="keywords"
-          content="occupational therapy Chennai, speech therapy Villivakkam, ABA therapy, special education, early intervention, school readiness, brain gym, sensory integration, paediatric therapy Chennai"
+          content={[
+            ...SERVICES_KEYWORDS,
+          ].join(', ')}
         />
       </Helmet>
 
@@ -276,7 +282,8 @@ const Services = () => {
         subtitle={`${BRAND_NAME}`}
         description="Evidence-based occupational therapy, speech & language, ABA, sensory integration, early intervention, and 15+ specialised programmes — all coordinated into one child-specific plan across clinic, home, and school."
         backgroundImage="https://images.pexels.com/photos/8941590/pexels-photo-8941590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Arura Integral Therapy Services: 15+ services including occupational therapy, speech, ABA, sensory integration, special education, school readiness, brain gym, mindfulness, feeding & oral motor, assistive technology — Chennai."
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary="Our services model combines multidisciplinary expertise, measurable goals, and coordinated therapist-parent planning so each child receives one integrated care path."
         frameworkIdeas={[
           { label: 'Integrated Team', text: 'OT, Speech, ABA, and Special Education aligned together' },

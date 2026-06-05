@@ -2,6 +2,7 @@ import { services } from '../data/servicesData';
 import { conditions } from '../data/conditionsData';
 import { additionalPrograms } from '../data/additionalProgramsData';
 import { blogPosts } from '../data/blogPostsData';
+import { locationSeoPages } from '../data/locationSeoData';
 
 const STATIC_LABELS: Record<string, string> = {
   about: 'About Us',
@@ -13,6 +14,7 @@ const STATIC_LABELS: Record<string, string> = {
   blog: 'Blog',
   contact: 'Contact',
   'book-appointment': 'Book Appointment',
+  locations: 'Locations',
 };
 
 /**
@@ -47,6 +49,10 @@ export function getBreadcrumbJsonLd(pathname: string, siteUrl: string): Record<s
     if (i > 0 && segments[i - 1] === 'blog') {
       const post = blogPosts.find((x) => x.slug === seg);
       if (post) name = post.title;
+    }
+    if (i > 0 && segments[i - 1] === 'locations') {
+      const location = locationSeoPages.find((x) => x.slug === seg);
+      if (location) name = location.area;
     }
 
     items.push({ name, item: `${siteUrl}${acc}` });

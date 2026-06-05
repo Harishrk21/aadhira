@@ -10,6 +10,9 @@ import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { additionalPrograms } from '../data/additionalProgramsData';
 import { BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY } from '../config/brand';
+import { bestLocalSeoTitle, programKeywords, programMetaDescription } from '../config/seoContent';
+import { getDunmarkPathwaysForProgram } from '../config/dunmarkPathways';
+import { getSiteUrl } from '../config/site';
 
 const PROGRAM_THEME: Record<string, {
   gradient: string; softBg: string; border: string; text: string;
@@ -94,6 +97,319 @@ const PROGRAM_SLUG_ALIASES: Record<string, string> = {
   'handwriting-training': 'handwriting-fine-motor',
 };
 
+type ProgramProcessStep = {
+  title: string;
+  description: string;
+  assessments?: string[];
+};
+
+const PROGRAM_PROCESS_OVERRIDES: Record<string, ProgramProcessStep[]> = {
+  'school-readiness': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "A comprehensive evaluation to understand the child's current developmental, cognitive, and social readiness for formal schooling.",
+      assessments: [
+        'School Readiness Test (SRT)',
+        'DTVP-3 (Developmental Test of Visual Perception)',
+        'Bracken School Readiness Assessment (BSRA-3)',
+        'DIAL-4 (Developmental Indicators for Assessment of Learning)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        'Setting specific, achievable goals around pre-academic skills, attention, following instructions, and classroom behaviour.',
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Structured activities targeting letter and number recognition, listening skills, pencil grip, sitting tolerance, and peer interaction to prepare the child for school life.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Small group activities simulating classroom settings to build turn-taking, group listening, and peer interaction skills.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Guiding parents on how to build school readiness routines at home - including structured play, pre-writing activities, and attention-building exercises.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Regular reassessment using standardised tools to track readiness milestones and adjust the program before and after school entry.',
+    },
+  ],
+  'cognitive-learning-skills': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "A thorough evaluation of the child's cognitive abilities, memory, attention, processing speed, and academic skill levels.",
+      assessments: [
+        'WISC-V (Wechsler Intelligence Scale for Children)',
+        'CAS-2 (Cognitive Assessment System)',
+        'KABC-II (Kaufman Assessment Battery for Children)',
+        'NIMHANS SLD Battery',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        'Developing individualised goals targeting specific cognitive areas such as working memory, problem solving, planning, and academic performance.',
+    },
+    {
+      title: 'Intervention',
+      description:
+        "Evidence-based activities including memory games, sequencing tasks, reasoning exercises, and structured learning strategies tailored to the child's cognitive profile.",
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Collaborative learning activities in small groups to build peer-based problem solving, discussion skills, and cooperative learning habits.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Training parents to reinforce cognitive strategies at home through daily routines, homework support techniques, and learning-friendly environments.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Periodic reassessment to track cognitive growth, academic improvements, and strategy effectiveness, with goals updated accordingly.',
+    },
+  ],
+  'sensory-integration': [
+    {
+      title: 'Initial Assessment',
+      description:
+        'A detailed sensory evaluation to understand how the child receives, processes, and responds to sensory information from their environment and body.',
+      assessments: [
+        'Sensory Profile 2',
+        'SIPT (Sensory Integration and Praxis Tests)',
+        'SPM (Sensory Processing Measure)',
+        'DeGangi-Berk Test of Sensory Integration',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        "Setting goals focused on improving sensory tolerance, self-regulation, motor planning, and daily functional participation based on the child's sensory profile.",
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Structured sensory-rich activities using swings, tactile materials, proprioceptive input, and vestibular challenges in a controlled therapeutic environment guided by Ayres Sensory Integration principles.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Small group sensory circuits and co-regulation activities to help children manage sensory input in social and school-like settings.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        "Educating parents on their child's sensory needs, creating sensory diets at home, and managing sensory meltdowns or avoidance behaviours effectively.",
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Regular review of sensory processing patterns and functional improvements, with reassessment tools used to measure real-world changes in behaviour and participation.',
+    },
+  ],
+  'play-therapy': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "An observational and structured evaluation of the child's play skills, emotional expression, social interaction, and developmental stage through play-based methods.",
+      assessments: [
+        'TPBA-2 (Transdisciplinary Play-Based Assessment)',
+        'PIPPS (Penn Interactive Peer Play Scale)',
+        'ChIPPA (Child-Initiated Pretend Play Assessment)',
+        'Developmental Play Assessment (DPA)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        'Identifying goals around emotional regulation, social connection, trauma processing, communication, and developmental growth through the language of play.',
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Child-led and therapist-guided play sessions using expressive arts, sand tray, puppets, role play, and storytelling to help children process experiences and build emotional resilience.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Structured group play activities to build cooperative play, sharing, empathy, conflict resolution, and friendship skills in a safe environment.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Involving parents in Filial Therapy techniques - teaching parents to conduct special play sessions at home to strengthen the parent-child bond.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Ongoing observation and reassessment of play complexity, emotional themes, and social engagement to evaluate therapeutic progress and adjust approaches.',
+    },
+  ],
+  mindfulness: [
+    {
+      title: 'Initial Assessment',
+      description:
+        "An evaluation of the child's or adolescent's current emotional regulation, attention levels, anxiety, and stress responses to establish a mindfulness baseline.",
+      assessments: [
+        'CAMM (Child and Adolescent Mindfulness Measure)',
+        'MAAS-A (Mindful Attention Awareness Scale - Adolescent)',
+        'SCARED (Screen for Child Anxiety Related Disorders)',
+        'SDQ (Strengths and Difficulties Questionnaire)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        "Setting goals around improving present-moment awareness, emotional regulation, focus, anxiety reduction, and stress management tailored to the child's age and needs.",
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Age-appropriate mindfulness practices including breathing exercises, body scans, guided visualisation, mindful movement, and emotion-labelling activities delivered in individual or group formats.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Group mindfulness circles to build shared regulation skills, peer support, and a sense of calm community among children and adolescents.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Teaching parents mindfulness-based parenting strategies to co-regulate with their child, reduce household stress, and model calm, present-moment awareness.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Regular reassessment of anxiety levels, attention, and emotional regulation using standardised tools to measure the impact of mindfulness practice over time.',
+    },
+  ],
+  'feeding-oral-motor': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "A comprehensive evaluation of the child's feeding behaviours, oral motor function, sensory responses to food textures, and mealtime patterns.",
+      assessments: [
+        'SOMA (Schedule for Oral Motor Assessment)',
+        'BPAS (Behavioral Pediatrics Feeding Assessment Scale)',
+        'Oral Motor Assessment Scale (OMAS)',
+        'NOMAS (Neonatal Oral Motor Assessment Scale)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        "Developing goals targeting safe swallowing, oral motor strength, food texture tolerance, mealtime behaviour, and nutritional variety based on the child's feeding profile.",
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Structured oral motor exercises, sensory food exploration, texture progression programs, and positive mealtime routines using evidence-based feeding therapy approaches such as SOS and GET Permission.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Food exploration groups where children engage with new foods in a low-pressure, playful setting alongside peers to reduce food anxiety.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Training parents on safe feeding positions, texture grading, managing mealtime stress, and building a positive food environment at home.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Regular reassessment of oral motor skills, food acceptance range, and mealtime behaviour to track progress and advance the feeding program systematically.',
+    },
+  ],
+  'assistive-technology-support': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "A thorough evaluation of the child's communication, mobility, learning, and daily living needs to identify where assistive technology can bridge functional gaps.",
+      assessments: [
+        'SETT Framework (Student, Environment, Task, Tools)',
+        'WATI (Wisconsin Assistive Technology Initiative Assessment)',
+        'AAATE AT Needs Assessment',
+        'AAC Profile (for communication device needs)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        'Defining clear goals for how specific assistive technology tools will support communication, learning, independence, and participation in school and daily life.',
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Trialling and training the child on appropriate AT tools - including AAC devices, communication apps, adapted keyboards, switch access, or screen readers - with gradual integration into daily routines.',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Peer-based AT practice sessions where children use their devices to interact, communicate, and participate together in structured activities.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Training parents and caregivers on how to operate, maintain, and integrate AT devices at home, and how to advocate for AT use in school settings.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        "Regular review of how effectively the AT tools are meeting the child's goals, with adjustments to device settings, vocabulary, or tool selection as needed.",
+    },
+  ],
+  'handwriting-fine-motor': [
+    {
+      title: 'Initial Assessment',
+      description:
+        "A detailed assessment of the child's pencil grip, letter formation, writing speed, fine motor strength, and visual-motor integration skills.",
+      assessments: [
+        'DASH (Detailed Assessment of Speed of Handwriting)',
+        "ETCH (Evaluation Tool of Children's Handwriting)",
+        'VMI (Beery-Buktenica Developmental Test of Visual-Motor Integration)',
+        'PDMS-2 (Peabody Developmental Motor Scales)',
+      ],
+    },
+    {
+      title: 'Goal Setting',
+      description:
+        'Setting goals around legible letter formation, consistent sizing and spacing, writing speed, pencil control, and functional fine motor skills needed for classroom performance.',
+    },
+    {
+      title: 'Intervention',
+      description:
+        'Targeted activities including pencil grip correction, pre-writing pattern practice, finger strengthening exercises, scissor skills, and structured handwriting programs such as Handwriting Without Tears (HWT).',
+    },
+    {
+      title: 'Group Sessions (When Suitable)',
+      description:
+        'Small group fine motor stations where children practise cutting, threading, colouring, and writing tasks alongside peers in a structured setting.',
+    },
+    {
+      title: 'Parent Coaching',
+      description:
+        'Providing parents with home practice sheets, finger gym activity ideas, and guidance on the right tools (pencil grips, paper positioning) to support handwriting development at home.',
+    },
+    {
+      title: 'Progress Monitoring',
+      description:
+        'Regular reassessment of handwriting samples and fine motor skills to measure legibility, speed improvements, and motor coordination gains, with goals refined accordingly.',
+    },
+  ],
+};
+
 const ProgramDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -109,18 +425,36 @@ const ProgramDetail = () => {
   if (!program) return null;
 
   const related = additionalPrograms.filter((p) => p.id !== program.id).slice(0, 3);
+  const processSteps = PROGRAM_PROCESS_OVERRIDES[program.id] ?? program.process;
+  const dunmarkPathways = getDunmarkPathwaysForProgram(program.id);
   const programFrameworkSummary = `The ${program.title} pathway combines structured sessions, clear milestones, and parent-guided carryover to improve daily performance and confidence in real environments.`;
   const programFrameworkIdeas = [
     { label: 'Program Goal', text: program.benefits[0] ?? 'Functional skills for real-life participation' },
     { label: 'Session Focus', text: program.benefits[1] ?? 'Skill practice through guided therapeutic activities' },
     { label: 'Home Follow-up', text: 'Family routines aligned with clinic strategies' },
   ];
+  const seoTitle = bestLocalSeoTitle(program.title);
+  const seoDescription = programMetaDescription(program.title, program.shortDescription);
+  const siteUrl = getSiteUrl();
+  const programPageUrl = siteUrl ? `${siteUrl}/programs/${program.id}` : '';
+  const ogImage = program.image.startsWith('http') ? program.image : siteUrl ? `${siteUrl}${program.image}` : program.image;
 
   return (
     <>
       <Helmet>
-        <title>{program.title} | {BRAND_NAME}</title>
-        <meta name="description" content={`${program.title} at ${BRAND_NAME}. ${program.shortDescription} Evidence-based programme for children in Chennai.`} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={programKeywords(program.title)} />
+        {programPageUrl ? <meta property="og:url" content={programPageUrl} /> : null}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={`${program.title} programme at ${BRAND_NAME}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <PageHeader
@@ -128,7 +462,8 @@ const ProgramDetail = () => {
         subtitle={theme.tagline}
         description={`This ${program.title.toLowerCase()} programme combines targeted clinic sessions and family guidance to improve real-world participation, confidence, and functional outcomes for children.`}
         backgroundImage={program.image}
-        metaDescription={`${program.title} at ${BRAND_NAME}. ${program.shortDescription}`}
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary={programFrameworkSummary}
         frameworkIdeas={programFrameworkIdeas}
       />
@@ -167,15 +502,44 @@ const ProgramDetail = () => {
                   <h3 className={`font-extrabold text-base mb-4 flex items-center gap-2 ${theme.text}`}><span className="text-lg">🔍</span> Signs to Look For</h3>
                   <ul className="space-y-2.5">{theme.signs.map((s) => (<li key={s} className="flex items-start gap-2.5 text-sm text-neutral-700"><div className={`w-5 h-5 rounded-full bg-gradient-to-br ${theme.gradient} flex items-center justify-center shrink-0 mt-0.5`}><div className="w-1.5 h-1.5 rounded-full bg-white" /></div>{s}</li>))}</ul>
                 </motion.div>
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} viewport={{ once: true }} className="rounded-2xl p-6 border-2 border-primary-100 bg-primary-50">
-                  <h3 className="font-extrabold text-base mb-4 flex items-center gap-2 text-primary-700"><span className="text-lg">👶</span> Who Benefits</h3>
-                  <ul className="space-y-2.5">{theme.whoFor.map((w) => (<li key={w} className="flex items-start gap-2.5 text-sm text-neutral-700"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />{w}</li>))}</ul>
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} viewport={{ once: true }} className={`rounded-2xl p-6 border-2 ${theme.border} ${theme.softBg}`}>
+                  <h3 className={`font-extrabold text-base mb-4 flex items-center gap-2 ${theme.text}`}><span className="text-lg">👶</span> Who Benefits</h3>
+                  <ul className="space-y-2.5">{theme.whoFor.map((w) => (<li key={w} className="flex items-start gap-2.5 text-sm text-neutral-700"><CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${theme.text}`} />{w}</li>))}</ul>
                 </motion.div>
               </div>
 
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }} viewport={{ once: true }} className="rounded-2xl border border-neutral-100 bg-neutral-50 p-6">
                 <h3 className="font-extrabold text-xl text-neutral-900 mb-5 flex items-center gap-2"><Sparkles className={`w-5 h-5 ${theme.text}`} /> Benefits of {program.title}</h3>
                 <div className="grid sm:grid-cols-2 gap-3">{program.benefits.map((b, i) => (<div key={i} className={`flex items-start gap-3 ${theme.softBg} border ${theme.border} rounded-xl p-4`}><div className={`w-7 h-7 rounded-full bg-gradient-to-br ${theme.gradient} flex items-center justify-center text-white text-xs font-bold shrink-0`}>{i + 1}</div><p className="text-sm text-neutral-700 leading-relaxed">{b}</p></div>))}</div>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }} viewport={{ once: true }}>
+                <h3 className="font-extrabold text-xl text-neutral-900 mb-6 flex items-center gap-2"><Target className={`w-5 h-5 ${theme.text}`} /> Our Therapy Process</h3>
+                <div className="space-y-4">
+                  {processSteps.map((step, i) => (
+                    <div key={`${step.title}-${i}`} className="flex gap-4 items-start">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${theme.gradient} text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md`}>
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <div className={`flex-1 rounded-xl p-4 border ${theme.border} ${theme.softBg}`}>
+                        <p className={`font-bold text-sm ${theme.text} mb-1`}>{step.title}</p>
+                        <p className="text-neutral-600 text-sm leading-relaxed">{step.description}</p>
+                        {step.assessments?.length ? (
+                          <div className="mt-3 rounded-xl border border-white/80 bg-white/80 p-3">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Standardised Assessments Used</p>
+                            <div className="grid gap-2 sm:grid-cols-2">
+                              {step.assessments.map((assessment) => (
+                                <p key={assessment} className="rounded-lg border border-primary-100 bg-primary-50 px-3 py-2 text-xs font-medium text-neutral-700">
+                                  {assessment}
+                                </p>
+                              ))}
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
 
@@ -216,6 +580,32 @@ const ProgramDetail = () => {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-12">
+        <div className="container-custom">
+          <div className="rounded-2xl border border-sky-100 bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sky-700">Arura x Dunmark Pathway</p>
+            <h2 className="mt-2 text-xl font-extrabold text-neutral-900">Related Institute Courses for {program.title}</h2>
+            <p className="mt-2 text-sm text-neutral-700">
+              This programme is connected to relevant Dunmark Institute course pathways for families and learners exploring both intervention and education tracks.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {dunmarkPathways.map((pathway) => (
+                <a
+                  key={pathway.url}
+                  href={pathway.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-sky-100 bg-sky-50 p-4 transition hover:border-sky-200 hover:bg-white"
+                >
+                  <p className="text-sm font-bold text-sky-800">{pathway.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-neutral-600">{pathway.reason}</p>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

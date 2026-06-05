@@ -23,7 +23,7 @@ export const parentPrograms: ParentProgram[] = [
     ],
     duration: 'Weekly or bi-weekly',
     mode: 'In-clinic / Online',
-    image: '/gallery/interior2.png',
+    image: '/images/gallery/interior2.png',
   },
   {
     id: 'home-program-training',
@@ -38,7 +38,7 @@ export const parentPrograms: ParentProgram[] = [
     ],
     duration: 'Custom plan by child needs',
     mode: 'In-clinic demonstration + home follow-up',
-    image: '/gallery/int3.png',
+    image: '/images/gallery/int3.png',
   },
   {
     id: 'child-progress-reviews',
@@ -53,7 +53,7 @@ export const parentPrograms: ParentProgram[] = [
     ],
     duration: 'Every 4-8 weeks',
     mode: 'In-clinic review',
-    image: '/gallery/open_nag.png',
+    image: '/images/gallery/open_nag.png',
   },
 ];
 

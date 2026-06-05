@@ -4,16 +4,22 @@ import { testimonials } from '../data/testimonialsData';
 import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
 import CTASection from '../components/ui/CTASection';
+import { Helmet } from 'react-helmet-async';
+import { localSeoTitle, TESTIMONIALS_KEYWORDS } from '../config/seoContent';
 
 const Testimonials = () => {
   return (
     <>
+      <Helmet>
+        <meta name="keywords" content={TESTIMONIALS_KEYWORDS.join(', ')} />
+      </Helmet>
       <PageHeader
         title="Testimonials"
         subtitle="Google-style reviews from our families"
         description="See 5-star parent feedback for Arura Therapy Services. Read real stories from families and scan the QR to leave your Google review."
-        backgroundImage="/Testimonial.png"
-        metaDescription="Read success stories from families at Arura Integral Therapy Services — paediatric therapy across Chennai centers including Villivakkam, Valasaravakkam, Chengalpattu, and Nungambakkam."
+        backgroundImage="/images/pages/Testimonial.png"
+        metaTitle={localSeoTitle('Parent Reviews and Testimonials')}
+        metaDescription="Read parent reviews and testimonials for Arura Integral Therapy Services, a paediatric therapy centre serving Villivakkam and families across Chennai."
       />
 
       <section className="bg-white py-16 md:py-20">
@@ -71,7 +77,7 @@ const Testimonials = () => {
                   Scan this QR to review us on Google.
                 </p>
                 <img
-                  src="/review.png"
+                  src="/images/pages/review.png"
                   alt="Google review page QR code"
                   className="mt-4 w-full rounded-xl border border-neutral-200"
                   loading="lazy"

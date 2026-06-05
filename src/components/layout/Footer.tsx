@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Brain, Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
 import {
   BRAND_NAME,
   BRAND_SHORT,
@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <Brain className="w-8 h-8 text-primary-600" />
+              <img src="/images/branding/logo.png" alt="Arura logo" className="w-9 h-9 object-contain" />
               <span className="text-xl font-heading font-bold text-neutral-900">{BRAND_SHORT}</span>
             </Link>
             <p className="text-sm font-medium text-primary-800 mb-1">{BRAND_NAME}</p>
@@ -118,6 +118,16 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/glossary" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                  Therapy Glossary
+                </Link>
+              </li>
+              <li>
+                <Link to="/best-occupational-therapy-in-chennai" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                  Best OT in Chennai
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-neutral-700 hover:text-primary-600 transition-colors">
                   Contact Us
                 </Link>
@@ -166,6 +176,26 @@ const Footer = () => {
           </div>
         </div>
 
+        <div className="mt-10 rounded-2xl border border-primary-100 bg-white p-5 shadow-sm">
+          <h3 className="text-lg font-semibold text-neutral-900">Areas We Serve</h3>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              ['Villivakkam', '/locations/villivakkam'],
+              ['Anna Nagar', '/locations/anna-nagar'],
+              ['Korattur', '/locations/korattur'],
+              ['Ambattur', '/locations/ambattur'],
+            ].map(([label, href]) => (
+              <Link
+                key={href}
+                to={href}
+                className="rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-sm font-semibold text-primary-800 transition hover:border-primary-300 hover:bg-white"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-10 grid md:grid-cols-3 gap-4">
           {CENTER_LOCATIONS.map((center) => (
             <div key={center.name} className="rounded-xl border border-primary-100 bg-white p-4 shadow-sm">
@@ -192,14 +222,6 @@ const Footer = () => {
             <p className="text-neutral-600 text-sm">
               © {currentYear} {BRAND_NAME}. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy-policy" className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms-of-service" className="text-sm text-neutral-600 hover:text-primary-600 transition-colors">
-                Terms of Service
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -13,9 +13,9 @@ import CTASection from '../components/ui/CTASection';
 import { BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY } from '../config/brand';
 import { getSiteUrl } from '../config/site';
 import { clinicId } from '../config/structuredDataClinic';
-import ServicePageTemplate from '../components/seo-growth/ServicePageTemplate';
-import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
 import { getKeywordProfile } from '../config/keywordEngine';
+import { bestLocalSeoTitle, serviceKeywords, serviceMetaDescription } from '../config/seoContent';
+import { getDunmarkPathwaysForService } from '../config/dunmarkPathways';
 
 // ─── Per-service colour theme ─────────────────────────────────
 const SERVICE_THEME: Record<string, {
@@ -182,6 +182,66 @@ const SERVICE_SLUG_ALIASES: Record<string, string> = {
   'behaviour-therapy': 'aba-therapy',
 };
 
+type ProcessStep = {
+  title: string;
+  description: string;
+  assessments?: Array<{ name: string; measures: string }>;
+};
+
+const STANDARDISED_ASSESSMENTS: Record<string, Array<{ name: string; measures: string }>> = {
+  'occupational-therapy': [
+    { name: 'DAYC-2', measures: 'Developmental milestones in children 0-5 years' },
+    { name: 'Sensory Profile 2', measures: 'Sensory processing patterns affecting daily life' },
+    { name: 'Peabody Developmental Motor Scales (PDMS-2)', measures: 'Fine and gross motor skills' },
+    { name: 'BOT-2 (Bruininks-Oseretsky Test)', measures: 'Motor proficiency in children 4-21 years' },
+  ],
+  'speech-therapy': [
+    { name: 'SLSE', measures: 'Speech, language, fluency, and voice in school-age children' },
+    { name: 'LEST', measures: 'Early language milestones (0-6 years), widely used in South India' },
+    { name: 'REELS (Receptive-Expressive Emergent Language Scale)', measures: 'Early receptive and expressive language' },
+    { name: 'GFTA-3 (Goldman-Fristoe Test of Articulation)', measures: 'Articulation and phonological skills' },
+  ],
+  'special-education': [
+    { name: 'WISC-V (Wechsler Intelligence Scale for Children)', measures: 'Cognitive ability and intellectual functioning' },
+    { name: 'Vineland Adaptive Behavior Scales (VABS-3)', measures: 'Adaptive behaviour and daily living skills' },
+    { name: 'WRAT-5 (Wide Range Achievement Test)', measures: 'Reading, spelling, and math achievement' },
+    { name: 'NIMHANS Index for Specific Learning Disabilities', measures: 'Learning disabilities screening (widely used in India)' },
+  ],
+  'aba-therapy': [
+    { name: 'VB-MAPP', measures: 'Verbal behaviour milestones, language, and social skills' },
+    { name: 'PEAK', measures: 'Advanced knowledge, symbolic learning, and problem solving' },
+    { name: 'ABLLS-R (Assessment of Basic Language and Learning Skills)', measures: 'Language, learning readiness, and academic skills' },
+    { name: 'AFLS (Assessment of Functional Living Skills)', measures: 'Real-world independent living skills' },
+  ],
+  'early-intervention': [
+    { name: 'DASII', measures: 'Developmental norms for Indian infants and toddlers' },
+    { name: 'DAYC-2', measures: 'Early developmental milestones' },
+    { name: 'M-CHAT-R (Modified Checklist for Autism in Toddlers)', measures: 'Early autism screening (16-30 months)' },
+    { name: 'Portage Guide to Early Education', measures: 'Developmental skills for early intervention planning' },
+  ],
+  'brain-gym': [
+    { name: 'DTVP-3 (Developmental Test of Visual Perception)', measures: 'Visual-motor integration and perception' },
+    { name: 'VMI (Beery-Buktenica Developmental Test)', measures: 'Visual-motor integration skills' },
+    { name: 'TVPS-4 (Test of Visual Perceptual Skills)', measures: 'Visual processing without motor involvement' },
+    { name: 'Sensory Profile 2', measures: 'Sensory processing patterns linked to movement and attention' },
+  ],
+};
+
+const withAssessmentStep = (process: ProcessStep[], serviceId: string): ProcessStep[] => {
+  const assessments = STANDARDISED_ASSESSMENTS[serviceId];
+  if (!assessments?.length) return process;
+
+  const assessmentStep = {
+    title: 'Standardised Assessments Used',
+    description: 'We use validated tools to identify baseline skills and create a precise therapy plan.',
+    assessments,
+  };
+
+  const firstStep = process[0];
+  const remainingSteps = process.slice(1);
+  return firstStep ? [firstStep, assessmentStep, ...remainingSteps] : [assessmentStep];
+};
+
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const normalizedSlug = slug ? decodeURIComponent(slug).trim().toLowerCase() : '';
@@ -215,58 +275,15 @@ const ServiceDetail = () => {
     );
   }
   const keywordProfile = getKeywordProfile(`/services/${service.id}`);
-
-  if (service.id === 'speech-therapy') {
-    return (
-      <>
-        <Helmet>
-          <title>{service.title} in Chennai | {BRAND_NAME}</title>
-          <meta
-            name="description"
-            content="Speech Therapy in Chennai for speech delay, language development, and child communication confidence."
-          />
-          {keywordProfile ? <meta name="keywords" content={[keywordProfile.primary, ...keywordProfile.secondary, ...keywordProfile.local].join(', ')} /> : null}
-        </Helmet>
-        <PageHeader
-          title="Speech Therapy in Chennai"
-          subtitle="Solution-based service page"
-          description="Personalized speech and language intervention for children across Chennai, Korattur, Anna Nagar, and Ambattur."
-          backgroundImage={service.image}
-          metaDescription="Speech therapy at Arura for speech delay, language support, and communication outcomes."
-          frameworkSummary={serviceFrameworkSummary}
-          frameworkIdeas={serviceFrameworkIdeas}
-        />
-        <ServicePageTemplate
-          title="Speech Therapy"
-          intro="Our speech therapy program helps children improve articulation, expressive language, receptive understanding, and social communication through structured and play-based sessions."
-          benefits={service.benefits}
-          whoNeedsThis={[
-            'Children with delayed first words or language milestones',
-            'Kids with unclear speech or articulation concerns',
-            'Children needing communication support in school and home',
-            'Children with autism or ADHD with communication challenges',
-          ]}
-          process={service.process}
-          faq={[
-            { q: 'When should speech therapy start?', a: 'Early intervention is best. If milestones are delayed, starting sooner usually improves outcomes.' },
-            { q: 'How many sessions are needed?', a: 'Frequency depends on assessment and goals. Most children begin with weekly sessions and regular reviews.' },
-            { q: 'Can parents help at home?', a: 'Yes. Parent carryover is essential. We provide practical home strategies after sessions.' },
-          ]}
-        />
-        <SearchIntentLinks
-          problemHref="/blog/early-signs-speech-therapy"
-          solutionHref="/services/speech-therapy"
-          trustHref="/testimonials"
-        />
-      </>
-    );
-  }
+  const seoTitle = bestLocalSeoTitle(service.title);
+  const seoDescription = serviceMetaDescription(service.title, service.shortDescription);
 
   const relatedServices = services.filter((s) => s.id !== resolvedSlug).slice(0, 3);
-  const processSteps = service.process.some((step) => step.title.toLowerCase().includes('group session'))
-    ? service.process
+  const serviceProcessWithAssessments = withAssessmentStep(service.process, service.id);
+  const processSteps = serviceProcessWithAssessments.some((step) => step.title.toLowerCase().includes('group session'))
+    ? serviceProcessWithAssessments
     : [
-      ...service.process,
+      ...serviceProcessWithAssessments,
       {
         title: 'Group Sessions (When Suitable)',
         description: 'Small-group sessions are available to support peer interaction, communication, and shared skill practice.',
@@ -274,7 +291,9 @@ const ServiceDetail = () => {
     ];
 
   const siteUrl = getSiteUrl();
+  const dunmarkPathways = getDunmarkPathwaysForService(service.id);
   const servicePageUrl = siteUrl ? `${siteUrl}/services/${service.id}` : '';
+  const ogImage = service.image.startsWith('http') ? service.image : siteUrl ? `${siteUrl}${service.image}` : service.image;
   const serviceJsonLd = useMemo(() => {
     if (!siteUrl || !servicePageUrl) return null;
     return {
@@ -293,8 +312,19 @@ const ServiceDetail = () => {
   return (
     <>
       <Helmet>
-        <title>{service.title} | {BRAND_NAME}</title>
-        <meta name="description" content={`${service.title} at ${BRAND_NAME}. ${service.shortDescription} Evidence-based therapy for children in Chennai — Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam.`} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={serviceKeywords(service.title)} />
+        {servicePageUrl ? <meta property="og:url" content={servicePageUrl} /> : null}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={`${service.title} support for children at ${BRAND_NAME}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={ogImage} />
         {serviceJsonLd ? (
           <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
         ) : null}
@@ -305,7 +335,8 @@ const ServiceDetail = () => {
         subtitle={theme.tagline}
         description={theme.heroSummary}
         backgroundImage={service.image}
-        metaDescription={`${service.title} at ${BRAND_NAME}. ${service.shortDescription}`}
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary={serviceFrameworkSummary}
         frameworkIdeas={serviceFrameworkIdeas}
       >
@@ -454,6 +485,16 @@ const ServiceDetail = () => {
                       <div className={`flex-1 rounded-xl p-4 border ${theme.border} ${theme.softBg}`}>
                         <p className={`font-bold text-sm ${theme.text} mb-1`}>{step.title}</p>
                         <p className="text-neutral-600 text-sm leading-relaxed">{step.description}</p>
+                        {step.assessments?.length ? (
+                          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                            {step.assessments.map((assessment) => (
+                              <div key={assessment.name} className="rounded-lg border border-white bg-white/80 p-3">
+                                <p className="text-sm font-semibold text-neutral-900">{assessment.name}</p>
+                                <p className="mt-1 text-xs leading-relaxed text-neutral-600">{assessment.measures}</p>
+                              </div>
+                            ))}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   ))}
@@ -573,6 +614,55 @@ const ServiceDetail = () => {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {keywordProfile ? (
+        <section className="bg-white py-12">
+          <div className="container-custom">
+            <div className="rounded-2xl border border-primary-100 bg-primary-50 p-6">
+              <h2 className="text-xl font-extrabold text-neutral-900">
+                Popular {service.title} searches we support
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-700">
+                Families commonly reach this page while searching for {keywordProfile.primary}, plus nearby support in
+                Villivakkam, Korattur, Anna Nagar, Ambattur, Kolathur, Perambur, and Ayanavaram.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {[keywordProfile.primary, ...keywordProfile.secondary, ...keywordProfile.local.slice(0, 6)].map((keyword) => (
+                  <span key={keyword} className="rounded-full border border-primary-200 bg-white px-3 py-1.5 text-xs font-semibold text-primary-800">
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="bg-slate-50 py-12">
+        <div className="container-custom">
+          <div className="rounded-2xl border border-sky-100 bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sky-700">Arura x Dunmark Pathway</p>
+            <h2 className="mt-2 text-xl font-extrabold text-neutral-900">Related Institute Courses for {service.title}</h2>
+            <p className="mt-2 text-sm text-neutral-700">
+              Families often ask for both therapy support and future learning pathways. These Dunmark Institute course pages are relevant to this service area.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {dunmarkPathways.map((pathway) => (
+                <a
+                  key={pathway.url}
+                  href={pathway.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-xl border border-sky-100 bg-sky-50 p-4 transition hover:border-sky-200 hover:bg-white"
+                >
+                  <p className="text-sm font-bold text-sky-800">{pathway.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-neutral-600">{pathway.reason}</p>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

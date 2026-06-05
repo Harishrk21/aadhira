@@ -14,11 +14,11 @@ import {
   PHONE_PRIMARY_DISPLAY,
   PHONE_SECONDARY_E164,
   PHONE_SECONDARY_DISPLAY,
+  PHONE_ALL,
   ADDRESS_CHENNAI,
   CENTER_LOCATIONS,
 } from '../config/brand';
-
-const COMMON_PARTNER_NUMBERS = ['7200766120', '7200766143', '7200766720'];
+import { localSeoTitle, CONTACT_KEYWORDS } from '../config/seoContent';
 
 const FAQ_ITEMS = [
   {
@@ -91,21 +91,24 @@ const centerConfig = [
 
 const Contact = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const seoTitle = localSeoTitle('Contact and Book Appointment');
+  const seoDescription = 'Contact Arura Integral Therapy Services in Villivakkam, Chennai. Book paediatric OT, speech therapy, ABA, early intervention, special education, and parent guidance appointments.';
 
   return (
     <>
       <Helmet>
-        <title>Contact Arura Integral Therapy Services | Book Appointment Chennai</title>
-        <meta name="description" content="Contact Arura Integral Therapy Services in Chennai. HQ: Villivakkam + partner centres at Valasaravakkam (TWINKLEZZ), Chengalpattu (UNICARE), Nungambakkam (SMINGA). Call +91 82489 99216 or email info.dunmark@gmail.com." />
-        <meta name="keywords" content="contact Arura therapy Chennai, book appointment paediatric therapy, Villivakkam therapy centre, TWINKLEZZ Valasaravakkam, UNICARE Chengalpattu, SMINGA Nungambakkam" />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={CONTACT_KEYWORDS.join(', ')} />
       </Helmet>
 
       <PageHeader
         title="Contact Us"
         subtitle={`${BRAND_NAME} — Chennai Centres`}
         description="Connect with our therapy team for appointments, programme guidance, and centre information. Share your child's age, concerns, and goals — we'll guide you to the right starting plan."
-        backgroundImage="/contact.png"
-        metaDescription="Contact Arura Integral Therapy Services: Villivakkam HQ + TWINKLEZZ, UNICARE, SMINGA partner centres across Chennai. Book a paediatric therapy appointment today."
+        backgroundImage="/images/pages/contact.png"
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
       />
 
       {/* ── Quick-Connect Bar ── */}
@@ -340,7 +343,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {COMMON_PARTNER_NUMBERS.map((ph) => (
+              {PHONE_ALL.map((ph) => (
                 <a
                   key={ph}
                   href={`tel:+91${ph}`}

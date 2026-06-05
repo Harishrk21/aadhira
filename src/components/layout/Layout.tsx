@@ -110,8 +110,8 @@ const Layout = ({ children }: LayoutProps) => {
               {isBooked && (
                 <div className="inline-flex w-full items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm font-medium text-emerald-700">
                   <img
-                    src="/logo.png"
-                    alt="Aadhira logo"
+                    src="/images/branding/logo.png"
+                    alt="Arura logo"
                     className="mr-2 h-5 w-5 animate-pulse"
                   />
                   <CheckCircle2 className="mr-2 h-5 w-5" />
@@ -128,8 +128,8 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="relative">
               <div className="absolute -inset-6 rounded-full bg-amber-300/30 blur-2xl" aria-hidden />
               <img
-                src="/logo.png"
-                alt="Aadhira logo loading"
+                src="/images/branding/logo.png"
+                alt="Arura logo loading"
                 className="relative h-28 w-28 animate-spin sm:h-36 sm:w-36"
               />
             </div>

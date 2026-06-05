@@ -7,7 +7,9 @@ import { motion } from 'framer-motion';
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { BRAND_NAME } from '../config/brand';
-const AravindImg = '/branding/aravind1.png';
+import { Helmet } from 'react-helmet-async';
+import { localSeoTitle, ABOUT_KEYWORDS } from '../config/seoContent';
+const AravindImg = '/images/branding/aravind1.png';
 
 const About: React.FC = () => {
   const whyChooseData = [
@@ -19,9 +21,9 @@ const About: React.FC = () => {
   ];
 
   const clinicHighlights = [
-    { image: '/gallery/open_nag.png', title: 'Arura Clinic Exterior', description: 'A warm and welcoming therapy center designed for children and families.' },
-    { image: '/gallery/interior2.png', title: 'Therapy Session Space', description: 'Child-friendly interiors that support focused, safe, and engaging sessions.' },
-    { image: '/gallery/int3.png', title: 'Structured Learning Corner', description: 'Activity-based setup for speech, occupational, and developmental interventions.' },
+    { image: '/images/gallery/open_nag.png', title: 'Arura Clinic Exterior', description: 'A warm and welcoming therapy center designed for children and families.' },
+    { image: '/images/gallery/interior2.png', title: 'Therapy Session Space', description: 'Child-friendly interiors that support focused, safe, and engaging sessions.' },
+    { image: '/images/gallery/int3.png', title: 'Structured Learning Corner', description: 'Activity-based setup for speech, occupational, and developmental interventions.' },
   ];
 
   const fadeUp = {
@@ -32,14 +34,18 @@ const About: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="keywords" content={ABOUT_KEYWORDS.join(', ')} />
+      </Helmet>
       <PageHeader
         title={`About ${BRAND_NAME}`}
         eyebrowText="Child-focused therapy support"
-        subtitle="Excellence in healthcare education since 2020"
-        description="Pioneering specialized healthcare education with innovation, hands-on training, and compassionate leadership."
+        subtitle="Integrated child development support in Villivakkam, Chennai"
+        description="Multidisciplinary paediatric therapy with assessment-led goals, parent partnership, and child-friendly intervention planning."
         showFramework
-        backgroundImage="/about_us.png"
-        metaDescription="About Arura: mission, vision, leadership, facilities, and why families and students choose us."
+        backgroundImage="/images/pages/about_us.png"
+        metaTitle={localSeoTitle('About Arura Child Therapy Centre')}
+        metaDescription="About Arura Integral Therapy Services in Villivakkam, Chennai: mission, vision, leadership, child-friendly facilities, multidisciplinary therapy team, and parent partnership model."
       />
 
       <section className="relative overflow-hidden bg-gradient-to-b from-primary-50 to-white py-20">
@@ -114,7 +120,7 @@ const About: React.FC = () => {
               <div className="group relative overflow-hidden rounded-3xl border border-primary-100 bg-white p-3 shadow-2xl">
                 <img
                   src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  alt="Institute overview"
+                  alt="Child therapy support overview"
                   className="h-[460px] w-full rounded-2xl object-cover transition duration-700 group-hover:scale-105"
                 />
               </div>
@@ -189,7 +195,7 @@ const About: React.FC = () => {
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-14 text-center">
             <h2 className="text-4xl font-black text-neutral-900">Our Leadership</h2>
             <p className="mx-auto mt-3 max-w-2xl text-neutral-600">
-              Visionary leadership dedicated to transforming healthcare education with expertise and innovation.
+              Clinical leadership focused on child development, family guidance, and practical therapy outcomes.
             </p>
           </motion.div>
           <motion.article
@@ -301,7 +307,7 @@ const About: React.FC = () => {
       <section className="bg-primary-900 py-20 text-white">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-12 text-center">
-            <h2 className="text-4xl font-black">Affiliations & Recognitions</h2>
+            <h2 className="text-4xl font-black">Clinical Values & Care Standards</h2>
           </motion.div>
           <motion.div
             {...fadeUp}
@@ -312,16 +318,16 @@ const About: React.FC = () => {
               <div className="mx-auto mb-4 inline-flex rounded-full bg-brand-yellow/20 p-4 text-brand-yellow">
                 <Award size={40} />
               </div>
-              <h3 className="text-3xl font-bold">Affiliated by Central Government of India</h3>
+              <h3 className="text-3xl font-bold">A child-first, family-centred care model</h3>
               <p className="mt-4 text-primary-100">
-                Our programs are recognized and approved by relevant government bodies, ensuring high standards of education and professional credibility for our graduates.
+                We keep therapy practical and transparent: assessment findings are translated into goals parents can understand, practise, and review over time.
               </p>
             </div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               {[
-                { icon: Award, title: 'Quality Education', description: 'Meets national education standards' },
-                { icon: GraduationCap, title: 'Recognized Diplomas', description: 'Nationally accepted qualifications' },
-                { icon: Users, title: 'Industry Partners', description: 'Strong professional network' },
+                { icon: Award, title: 'Structured Assessment', description: 'Care begins with baseline observations and clear priorities' },
+                { icon: GraduationCap, title: 'Skill-Based Plans', description: 'Goals are connected to communication, learning, self-care, and participation' },
+                { icon: Users, title: 'Parent Partnership', description: 'Families receive guidance for everyday home carryover' },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
                   <item.icon className="mx-auto mb-3 text-brand-yellow" size={30} />
@@ -335,8 +341,8 @@ const About: React.FC = () => {
       </section>
 
       <CTASection
-        title="Build Your Career With Confidence"
-        subtitle="Join a learning ecosystem focused on practical excellence, compassion, and future-ready healthcare education."
+        title="Start With a Clear Therapy Plan"
+        subtitle="Book an assessment and our team will guide you through the right support pathway for your child."
       />
     </>
   );

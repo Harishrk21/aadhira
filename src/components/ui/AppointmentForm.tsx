@@ -38,7 +38,6 @@ const AppointmentForm = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      console.log('Appointment request:', formData);
       setSubmitStatus('success');
       setFormData({
         parentName: '',
@@ -57,7 +56,6 @@ const AppointmentForm = () => {
         setSubmitStatus('idle');
       }, 5000);
     } catch (error) {
-      console.error('Submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

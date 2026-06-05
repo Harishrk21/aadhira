@@ -11,7 +11,7 @@ interface ServicePageTemplateProps {
   intro: string;
   benefits: string[];
   whoNeedsThis: string[];
-  process: { title: string; description: string }[];
+  process: { title: string; description: string; assessments?: Array<{ name: string; measures: string }> }[];
   faq: ServiceFaq[];
 }
 
@@ -36,7 +36,24 @@ const ServicePageTemplate = ({
         <ul className="mt-3 list-disc pl-5 text-neutral-700 space-y-1">{whoNeedsThis.map((item) => <li key={item}>{item}</li>)}</ul>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Therapy process</h2>
-        <div className="mt-3 space-y-3">{process.map((step) => <div key={step.title} className="rounded-xl border border-primary-100 p-4"><h3 className="font-semibold text-neutral-900">{step.title}</h3><p className="text-neutral-700 text-sm">{step.description}</p></div>)}</div>
+        <div className="mt-3 space-y-3">
+          {process.map((step) => (
+            <div key={step.title} className="rounded-xl border border-primary-100 p-4">
+              <h3 className="font-semibold text-neutral-900">{step.title}</h3>
+              <p className="text-neutral-700 text-sm">{step.description}</p>
+              {step.assessments?.length ? (
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {step.assessments.map((assessment) => (
+                    <div key={assessment.name} className="rounded-lg border border-primary-100 bg-primary-50 p-3">
+                      <p className="text-sm font-semibold text-neutral-900">{assessment.name}</p>
+                      <p className="mt-1 text-xs text-neutral-600 leading-relaxed">{assessment.measures}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">FAQ</h2>
         <div className="mt-3 space-y-2">{faq.map((item) => <details key={item.q} className="rounded-xl border border-primary-100 p-4"><summary className="font-semibold text-neutral-900 cursor-pointer">{item.q}</summary><p className="mt-2 text-neutral-700 text-sm">{item.a}</p></details>)}</div>

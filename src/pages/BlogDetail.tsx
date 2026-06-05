@@ -5,13 +5,14 @@ import { Helmet } from 'react-helmet-async';
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { blogPosts } from '../data/blogPostsData';
-import { BRAND_NAME } from '../config/brand';
 import RelatedServices from '../components/seo-growth/RelatedServices';
 import RelatedConditions from '../components/seo-growth/RelatedConditions';
 import RelatedBlogs from '../components/seo-growth/RelatedBlogs';
 import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
 import { useTracking } from '../hooks/useTracking';
 import { getKeywordProfile } from '../config/keywordEngine';
+import { localSeoTitle } from '../config/seoContent';
+import { getSiteUrl } from '../config/site';
 
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,13 +26,27 @@ const BlogDetail = () => {
   }, [post, navigate]);
 
   if (!post) return null;
+  const seoTitle = localSeoTitle(post.title);
+  const siteUrl = getSiteUrl();
+  const postUrl = siteUrl ? `${siteUrl}/blog/${post.slug}` : '';
+  const ogImage = post.image.startsWith('http') ? post.image : siteUrl ? `${siteUrl}${post.image}` : post.image;
 
   return (
     <>
       <Helmet>
-        <title>{post.title} | {BRAND_NAME}</title>
+        <title>{seoTitle}</title>
         <meta name="description" content={post.excerpt} />
         {keywords ? <meta name="keywords" content={[keywords.primary, ...keywords.secondary, ...keywords.local].join(', ')} /> : null}
+        {postUrl ? <meta property="og:url" content={postUrl} /> : null}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={post.title} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:image" content={ogImage} />
       </Helmet>
 
       <PageHeader
@@ -39,6 +54,7 @@ const BlogDetail = () => {
         subtitle="Arura parent guide"
         description={post.excerpt}
         backgroundImage={post.image}
+        metaTitle={seoTitle}
         metaDescription={post.excerpt}
       />
 

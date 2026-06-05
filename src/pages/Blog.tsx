@@ -5,6 +5,8 @@ import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
 import CTASection from '../components/ui/CTASection';
 import { blogPosts } from '../data/blogPostsData';
+import { Helmet } from 'react-helmet-async';
+import { localSeoTitle, BLOG_INDEX_KEYWORDS } from '../config/seoContent';
 
 const Blog = () => {
   const categories = useMemo(
@@ -19,12 +21,16 @@ const Blog = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="keywords" content={BLOG_INDEX_KEYWORDS.join(', ')} />
+      </Helmet>
       <PageHeader
         title="Blog"
         subtitle="Parent guides and therapy insights"
         description="Read practical articles for child development, therapy support, and home-based strategies."
-        backgroundImage="/blog_post.png"
-        metaDescription="Blog articles from Arura Paediatric Therapy Services."
+        backgroundImage="/images/pages/blog_post.png"
+        metaTitle={localSeoTitle('Parent Guides for Child Therapy')}
+        metaDescription="Parent guides from Arura Integral Therapy Services in Chennai covering speech delay, occupational therapy, sensory integration, school readiness, autism support, and home strategies."
       />
 
       <section className="bg-white py-16 md:py-20">

@@ -3,57 +3,59 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
 import CTASection from '../components/ui/CTASection';
+import { Helmet } from 'react-helmet-async';
+import { localSeoTitle, GALLERY_KEYWORDS } from '../config/seoContent';
 
 const galleryItems = [
   {
     id: 1,
     title: 'Arura Centre Exterior',
-    image: '/gallery/open_nag.png',
+    image: '/images/gallery/open_nag.png',
   },
   {
     id: 2,
     title: 'Centre Front View',
-    image: '/gallery/open_nag2.png',
+    image: '/images/gallery/open_nag2.png',
   },
   {
     id: 3,
     title: 'Centre Entrance',
-    image: '/gallery/open_nag3.png',
+    image: '/images/gallery/open_nag3.png',
   },
   {
     id: 4,
     title: 'Facility Exterior',
-    image: '/gallery/open_nag4.png',
+    image: '/images/gallery/open_nag4.png',
   },
   {
     id: 5,
     title: 'Center Exterior Angle',
-    image: '/gallery/open_nag5.png',
+    image: '/images/gallery/open_nag5.png',
   },
   {
     id: 6,
     title: 'Outdoor View',
-    image: '/gallery/open_nag6.png',
+    image: '/images/gallery/open_nag6.png',
   },
   {
     id: 7,
     title: 'Main Exterior',
-    image: '/gallery/open_nag7.png',
+    image: '/images/gallery/open_nag7.png',
   },
   {
     id: 8,
     title: 'Interior Therapy Room',
-    image: '/gallery/interior2.png',
+    image: '/images/gallery/interior2.png',
   },
   {
     id: 9,
     title: 'Interior Setup',
-    image: '/gallery/int3.png',
+    image: '/images/gallery/int3.png',
   },
   {
     id: 10,
     title: 'Interior Session Space',
-    image: '/gallery/int4.png',
+    image: '/images/gallery/int4.png',
   },
 ];
 
@@ -80,12 +82,16 @@ const Gallery = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="keywords" content={GALLERY_KEYWORDS.join(', ')} />
+      </Helmet>
       <PageHeader
         title="Gallery"
         subtitle="Inside our therapy sessions"
         description="A quick look at our child-friendly environment, activities, and therapy moments."
         backgroundImage="https://images.pexels.com/photos/8363025/pexels-photo-8363025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Gallery of Arura Paediatric Therapy Services in Chennai."
+        metaTitle={localSeoTitle('Therapy Centre Gallery')}
+        metaDescription="View Arura Integral Therapy Services gallery: child-friendly therapy rooms, activities, and clinic spaces for paediatric therapy in Villivakkam, Chennai."
       />
 
       <section className="bg-white py-16 md:py-20">

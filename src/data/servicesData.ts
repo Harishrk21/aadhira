@@ -53,7 +53,7 @@ export const services: Service[] = [
     ],
     ageGroups: "1-18 years",
     borderColor: "border-primary-500",
-    image: "/occupationa_therapy.png"
+    image: "/images/services/occupationa_therapy.png"
   },
   {
     id: "speech-therapy",
@@ -96,7 +96,7 @@ export const services: Service[] = [
     ],
     ageGroups: "1-15 years",
     borderColor: "border-secondary-500",
-    image: "/speech_therapy.png"
+    image: "/images/services/speech_therapy.png"
   },
   {
     id: "special-education",
@@ -139,7 +139,7 @@ export const services: Service[] = [
     ],
     ageGroups: "3-16 years",
     borderColor: "border-accent-500",
-    image: "/Learning_disabiliites.png"
+    image: "/images/services/Learning_disabiliites.png"
   },
   {
     id: "aba-therapy",
@@ -182,7 +182,7 @@ export const services: Service[] = [
     ],
     ageGroups: "2-15 years",
     borderColor: "border-primary-500",
-    image: "/behaviural_challenges.png"
+    image: "/images/services/behaviural_challenges.png"
   },
   {
     id: "early-intervention",
@@ -225,7 +225,7 @@ export const services: Service[] = [
     ],
     ageGroups: "0-3 years",
     borderColor: "border-secondary-500",
-    image: "/developmental_Delay.png"
+    image: "/images/services/developmental_Delay.png"
   },
   {
     id: "brain-gym",
@@ -268,6 +268,6 @@ export const services: Service[] = [
     ],
     ageGroups: "3-18 years",
     borderColor: "border-accent-500",
-    image: "/brain_gym.png"
+    image: "/images/services/brain_gym.png"
   }
 ];

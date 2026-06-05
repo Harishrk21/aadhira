@@ -3,4 +3,5 @@ User-agent: *
 Allow: /
 
 # Sitemap (submit this URL in Google Search Console)
-Sitemap: https://aruratherapy.com/sitemap.xml
+Sitemap: https://aruratherapy.in/sitemap.xml
+LLMs: https://aruratherapy.in/llms.txt

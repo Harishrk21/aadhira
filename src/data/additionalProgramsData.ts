@@ -17,7 +17,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'Our School Readiness Program helps children transition confidently into structured school environments. The program integrates communication support, sensory regulation, early learning tasks, social interaction, and daily routine independence with parent guidance for carryover.',
     ageGroups: '3-7 years',
-    image: '/school_readiness.png',
+    image: '/images/programs/school_readiness.png',
     benefits: [
       'Improved classroom attention and participation',
       'Better self-regulation and transition tolerance',
@@ -50,7 +50,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'Sensory Integration helps children who are over-sensitive or under-responsive to touch, movement, sound, and other sensory inputs. Sessions use structured activities so children can regulate their body, attention, and emotions and participate better at home and school.',
     ageGroups: '2-14 years',
-    image: '/sensory.png',
+    image: '/images/conditions/sensory.png',
     benefits: [
       'Improved attention and body awareness',
       'Better emotional regulation and transitions',
@@ -83,7 +83,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'Parent and caregiver training gives families clear, realistic strategies to support communication, behaviour, and learning goals outside therapy sessions. We focus on routines that fit Indian home and school contexts.',
     ageGroups: 'Parents/caregivers of children 0-18 years',
-    image: '/parent_caregiver.png',
+    image: '/images/programs/parent_caregiver.png',
     benefits: [
       'Greater confidence for parents and caregivers',
       'Consistency between clinic and home strategies',
@@ -150,8 +150,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'Children who struggle with writing often need support in fine motor control, posture, visual-motor integration, and hand endurance. This program uses graded activities to make writing easier and more legible.',
     ageGroups: '4-14 years',
-    image:
-      'https://images.pexels.com/photos/5905720/pexels-photo-5905720.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: '/images/programs/hand-writing-fine-motor.png',
     benefits: [
       'Improved handwriting legibility',
       'Better pencil grip and pressure control',
@@ -184,7 +183,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'Play Therapy uses a child’s natural language of play to support emotional regulation, confidence, social interaction, and coping skills. It is especially helpful when children struggle to express feelings verbally.',
     ageGroups: '3-12 years',
-    image: '/play_therapy.png',
+    image: '/images/programs/play_therapy.png',
     benefits: [
       'Improved emotional expression',
       'Better social interaction and sharing',
@@ -251,7 +250,7 @@ export const additionalPrograms: AdditionalProgram[] = [
     longDescription:
       'This program supports children with feeding difficulties, oral-motor weakness, texture aversions, and selective eating. Sessions are designed for safe progression and positive mealtime experiences for children and families.',
     ageGroups: '0-12 years',
-    image: '/oralmotor_feeding.png',
+    image: '/images/programs/oralmotor_feeding.png',
     benefits: [
       'Safer and more efficient chewing/swallowing patterns',
       'Improved oral-motor control',

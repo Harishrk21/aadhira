@@ -5,15 +5,25 @@ import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { additionalPrograms } from '../data/additionalProgramsData';
 import { BRAND_NAME } from '../config/brand';
+import { PROGRAMS_KEYWORDS, localSeoTitle } from '../config/seoContent';
 
 const Programs = () => {
+  const seoTitle = localSeoTitle('Child Development Programs');
+  const seoDescription = 'Explore Arura child development programs in Chennai: school readiness, sensory integration, handwriting and fine motor, mindfulness, feeding support, play therapy, and parent coaching.';
+
   return (
     <>
       <Helmet>
-        <title>Programs | {BRAND_NAME}</title>
+        <title>{seoTitle}</title>
         <meta
           name="description"
-          content="Explore Arura therapy and support programs including school readiness, sensory integration, handwriting training, mindfulness, feeding support, and more."
+          content={seoDescription}
+        />
+        <meta
+          name="keywords"
+          content={[
+            ...PROGRAMS_KEYWORDS,
+          ].join(', ')}
         />
       </Helmet>
 
@@ -22,7 +32,8 @@ const Programs = () => {
         subtitle="Therapy and support pathways"
         description="Browse our child development programs and choose the right pathway for your child's communication, learning, behavior, and daily-life goals."
         backgroundImage="https://images.pexels.com/photos/8613319/pexels-photo-8613319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        metaDescription="Arura programs for school readiness, sensory integration, cognitive skills, parent coaching, feeding support, and more."
+        metaTitle={seoTitle}
+        metaDescription={seoDescription}
         frameworkSummary="Our programs are designed as focused pathways that strengthen school readiness, regulation, learning, and participation through structured therapist-family collaboration."
         frameworkIdeas={[
           { label: 'Program Mapping', text: 'Choose a pathway based on your child’s functional goals' },

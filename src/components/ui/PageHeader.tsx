@@ -9,6 +9,7 @@ interface PageHeaderProps {
   description?: string;
   children?: ReactNode;
   backgroundImage?: string;
+  metaTitle?: string;
   metaDescription?: string;
   eyebrowText?: string;
   showFramework?: boolean;
@@ -66,6 +67,7 @@ const PageHeader = ({
   description,
   children,
   backgroundImage = "https://images.pexels.com/photos/8363025/pexels-photo-8363025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  metaTitle,
   metaDescription,
   eyebrowText = 'Child-focused therapy support',
   showFramework = true,
@@ -80,8 +82,12 @@ const PageHeader = ({
   return (
     <>
       <Helmet>
-        <title>{`${title} | Arura Integral Therapy Services`}</title>
+        <title>{metaTitle ?? `${title} | Arura Integral Therapy Services`}</title>
         {metaDescription && <meta name="description" content={metaDescription} />}
+        <meta property="og:title" content={metaTitle ?? `${title} | Arura Integral Therapy Services`} />
+        {metaDescription && <meta property="og:description" content={metaDescription} />}
+        <meta name="twitter:title" content={metaTitle ?? `${title} | Arura Integral Therapy Services`} />
+        {metaDescription && <meta name="twitter:description" content={metaDescription} />}
       </Helmet>
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-sky-50/90 to-primary-100">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(59,151,255,0.25),transparent)]" />
