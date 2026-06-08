@@ -7,6 +7,7 @@ import SeoTechnical from '../seo/SeoTechnical';
 import GlobalStructuredData from '../seo/GlobalStructuredData';
 import StickyBookButton from '../seo-growth/StickyBookButton';
 import WhatsAppFloatingButton from '../seo-growth/WhatsAppFloatingButton';
+import GovernmentResources from '../ui/GovernmentResources';
 
 interface LayoutProps {
   children: ReactNode;
@@ -63,6 +64,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-grow">
         {children}
       </main>
+      <GovernmentResources />
       <Footer />
       <StickyBookButton />
       <WhatsAppFloatingButton />
