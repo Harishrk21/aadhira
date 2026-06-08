@@ -1,4 +1,9 @@
-import { BRAND_NAME } from './brand';
+import { BRAND_NAME, BRAND_SHORT } from './brand';
+
+/** Homepage meta — keep title ≤60 chars and description 150–220 chars for SERP display. */
+export const HOME_SEO_TITLE = `Best Paediatric Therapy in Chennai | ${BRAND_SHORT}`;
+export const HOME_SEO_DESCRIPTION =
+  'Paediatric therapy in Villivakkam, Chennai: occupational therapy, speech therapy, ABA, early intervention, special education, and parent training at Arura Integral Therapy Services.';
 
 // ── Core geo constants ────────────────────────────────────────────────────────
 export const SEO_PRIMARY_CITY  = 'Chennai';
@@ -101,12 +106,14 @@ export const INSTITUTE_MOTIVATED_KEYWORDS: string[] = [
 ];
 
 // ── Title helpers ─────────────────────────────────────────────────────────────
-export function localSeoTitle(topic: string, suffix = BRAND_NAME): string {
-  return `${topic} in ${SEO_PRIMARY_CITY} | ${suffix}`;
+export function localSeoTitle(topic: string, suffix = BRAND_SHORT): string {
+  const title = `${topic} in ${SEO_PRIMARY_CITY} | ${suffix}`;
+  return title.length > 60 ? `${topic} in ${SEO_PRIMARY_CITY} | ${BRAND_SHORT}` : title;
 }
 
-export function bestLocalSeoTitle(topic: string, suffix = BRAND_NAME): string {
-  return `Best ${topic} in ${SEO_PRIMARY_CITY} | ${suffix}`;
+export function bestLocalSeoTitle(topic: string, suffix = BRAND_SHORT): string {
+  const title = `Best ${topic} in ${SEO_PRIMARY_CITY} | ${suffix}`;
+  return title.length > 60 ? `Best ${topic} in ${SEO_PRIMARY_CITY} | ${BRAND_SHORT}` : title;
 }
 
 // ── Description helpers ───────────────────────────────────────────────────────

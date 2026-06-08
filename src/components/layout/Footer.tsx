@@ -4,7 +4,6 @@ import {
   BRAND_NAME,
   BRAND_SHORT,
   BRAND_TAGLINE,
-  EMAIL,
   PHONE_PRIMARY_E164,
   PHONE_PRIMARY_DISPLAY,
   PHONE_SECONDARY_E164,
@@ -22,7 +21,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src="/images/branding/logo.png" alt="Arura logo" className="w-9 h-9 object-contain" />
+              <img src="/images/branding/logo.png" alt="Arura logo" className="h-9 w-9 object-contain" width={36} height={36} decoding="async" />
               <span className="text-xl font-heading font-bold text-neutral-900">{BRAND_SHORT}</span>
             </Link>
             <p className="text-sm font-medium text-primary-800 mb-1">{BRAND_NAME}</p>
@@ -168,9 +167,9 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Mail className="w-5 h-5 text-primary-600 flex-shrink-0" />
-                <a href={`mailto:${EMAIL}`} className="ml-3 text-neutral-700 hover:text-primary-600 transition-colors break-all">
-                  {EMAIL}
-                </a>
+                <Link to="/contact" className="ml-3 text-neutral-700 hover:text-primary-600 transition-colors">
+                  Email our team
+                </Link>
               </div>
             </div>
           </div>

@@ -25,6 +25,11 @@ export const PHONE_ALL = [
   '7200766720',
 ] as const;
 
+/** Arura WhatsApp business line */
+export const WHATSAPP_E164 = '+918248999216';
+export const WHATSAPP_DISPLAY = '+91 82489 99216';
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_E164.replace('+', '')}`;
+
 /** Primary clinic — Chennai (Villivakkam) */
 export const ADDRESS_CHENNAI = {
   street: 'No. 90, 15th Block, 13th Street, Thiru Nagar',

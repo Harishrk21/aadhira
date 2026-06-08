@@ -4,6 +4,10 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "20"
+  VITE_SITE_URL = "https://aruratherapy.in"
+
 # ── Redirects ──────────────────────────────────────────────────────────────────
 
 # Redirect www → apex
@@ -13,11 +17,18 @@
   status = 301
   force  = true
 
-# SPA fallback — all routes serve index.html
+# SPA fallback — valid app routes serve index.html (unknown paths handled by edge 404)
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
   status = 200
+
+# Custom 404 page — Netlify serves with HTTP 404 for missing static files
+# Unknown app routes return this via netlify/edge-functions/not-found.ts
+
+[[edge_functions]]
+  function = "not-found"
+  path     = "/*"
 
 # ── Cache headers ──────────────────────────────────────────────────────────────
 
@@ -31,6 +42,12 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/404.html"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag  = "noindex, follow"
 
 # Hashed assets are immutable — cache for 1 year
 [[headers]]
@@ -49,6 +66,12 @@
   for = "/robots.txt"
   [headers.values]
     Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+    Content-Type  = "text/plain; charset=utf-8"
 
 [[headers]]
   for = "/images/*"

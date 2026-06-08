@@ -9,15 +9,17 @@ import {
 } from 'lucide-react';
 import {
   BRAND_NAME,
-  EMAIL,
   PHONE_PRIMARY_E164,
   PHONE_PRIMARY_DISPLAY,
   PHONE_SECONDARY_E164,
   PHONE_SECONDARY_DISPLAY,
   PHONE_ALL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
   ADDRESS_CHENNAI,
   CENTER_LOCATIONS,
 } from '../config/brand';
+import { EMAIL_CONTACT_LABEL, openContactEmail } from '../utils/email';
 import { localSeoTitle, CONTACT_KEYWORDS } from '../config/seoContent';
 
 const FAQ_ITEMS = [
@@ -145,23 +147,24 @@ const Contact = () => {
 
             <div className="hidden md:block w-px h-8 bg-white/20" />
 
-            <a
-              href={`mailto:${EMAIL}`}
-              className="flex items-center gap-2.5 group rounded-xl px-4 py-2 hover:bg-white/10 transition-colors"
+            <button
+              type="button"
+              onClick={openContactEmail}
+              className="flex items-center gap-2.5 group rounded-xl px-4 py-2 hover:bg-white/10 transition-colors text-left"
             >
               <div className="w-8 h-8 rounded-full bg-blue-400/20 flex items-center justify-center group-hover:bg-blue-400/40 transition-colors">
                 <Mail className="w-4 h-4 text-blue-300" />
               </div>
               <div>
                 <p className="text-[10px] text-white/50 uppercase tracking-widest leading-none">Email</p>
-                <p className="font-semibold text-blue-300 group-hover:text-white transition-colors text-sm">{EMAIL}</p>
+                <p className="font-semibold text-blue-300 group-hover:text-white transition-colors text-sm">{EMAIL_CONTACT_LABEL}</p>
               </div>
-            </a>
+            </button>
 
             <div className="hidden md:block w-px h-8 bg-white/20" />
 
             <a
-              href={`https://wa.me/${PHONE_PRIMARY_E164.replace('+', '')}`}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 group rounded-xl px-4 py-2 hover:bg-white/10 transition-colors"
@@ -171,7 +174,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-[10px] text-white/50 uppercase tracking-widest leading-none">WhatsApp</p>
-                <p className="font-semibold text-green-400 group-hover:text-white transition-colors text-sm">Chat Now</p>
+                <p className="font-semibold text-green-400 group-hover:text-white transition-colors text-sm">{WHATSAPP_DISPLAY}</p>
               </div>
             </a>
           </div>
@@ -422,18 +425,22 @@ const Contact = () => {
                   <Phone className="w-4 h-4 text-brand-yellow shrink-0" />
                   <span className="font-bold text-brand-yellow group-hover:text-white transition-colors">{PHONE_SECONDARY_DISPLAY}</span>
                 </a>
-                <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors mb-2 group">
+                <button
+                  type="button"
+                  onClick={openContactEmail}
+                  className="flex w-full items-center gap-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors mb-2 group text-left"
+                >
                   <Mail className="w-4 h-4 text-blue-300 shrink-0" />
-                  <span className="text-blue-300 group-hover:text-white transition-colors font-medium text-sm break-all">{EMAIL}</span>
-                </a>
+                  <span className="text-blue-300 group-hover:text-white transition-colors font-medium text-sm">{EMAIL_CONTACT_LABEL}</span>
+                </button>
                 <a
-                  href={`https://wa.me/${PHONE_PRIMARY_E164.replace('+', '')}`}
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 py-3 px-4 rounded-xl bg-green-600/20 hover:bg-green-600/40 transition-colors group"
                 >
                   <MessageCircle className="w-4 h-4 text-green-400 shrink-0" />
-                  <span className="text-green-400 group-hover:text-white transition-colors font-semibold text-sm">WhatsApp Chat</span>
+                  <span className="text-green-400 group-hover:text-white transition-colors font-semibold text-sm">{WHATSAPP_DISPLAY}</span>
                 </a>
               </div>
 
@@ -473,11 +480,11 @@ const Contact = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#dc2626" strokeWidth="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" /></svg>
                   </a>
                   <a
-                    href={`https://wa.me/${PHONE_PRIMARY_E164.replace('+', '')}`}
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full hover:bg-green-200 transition-colors"
-                    aria-label="WhatsApp"
+                    aria-label={`WhatsApp ${WHATSAPP_DISPLAY}`}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#16a34a" viewBox="0 0 24 24">
                       <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.2.301-.754.966-.924 1.164-.17.199-.34.223-.64.075-.301-.15-1.269-.467-2.419-1.483-.893-.795-1.484-1.77-1.654-2.059-.172-.289-.018-.445.13-.584.134-.124.3-.326.45-.488.149-.162.199-.273.298-.446.099-.174.05-.325-.025-.475-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172 0-.371-.011-.571-.011-.2 0-.523.074-.797.359-.273.285-1.045 1.019-1.045 2.484s1.07 2.883 1.219 3.082c.149.2 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.2-.57-.35m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -602,13 +609,14 @@ const Contact = () => {
                 <Phone className="w-4 h-4" />
                 {PHONE_PRIMARY_DISPLAY}
               </a>
-              <a
-                href={`mailto:${EMAIL}`}
+              <button
+                type="button"
+                onClick={openContactEmail}
                 className="flex items-center gap-2 justify-center border border-white/30 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                {EMAIL}
-              </a>
+                {EMAIL_CONTACT_LABEL}
+              </button>
             </div>
           </div>
         </div>

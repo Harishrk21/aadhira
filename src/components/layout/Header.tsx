@@ -6,7 +6,6 @@ import {
   Brain,
   Hand,
   ChevronDown,
-  Activity,
   MessageSquare,
   Lightbulb,
   Baby,
@@ -213,7 +212,10 @@ const Header = () => {
           <img
             src="/images/branding/logo.png"
             alt="Arura Integral Therapy Services logo"
-            className="w-12 h-12 md:w-14 md:h-14 object-contain flex-shrink-0 drop-shadow-md"
+            className="h-12 w-12 flex-shrink-0 object-contain drop-shadow-md md:h-14 md:w-14"
+            width={56}
+            height={56}
+            decoding="async"
           />
           <span className="min-w-0 leading-tight">
             <span className="brand-arura block text-[1rem] font-black uppercase md:text-[1.22rem]">

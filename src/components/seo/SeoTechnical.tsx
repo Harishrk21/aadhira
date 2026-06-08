@@ -3,9 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { getSiteUrl } from '../../config/site';
 import { isIndexablePathname } from '../../config/seoRoutes';
 import { BRAND_NAME } from '../../config/brand';
+import { HOME_SEO_DESCRIPTION, HOME_SEO_TITLE } from '../../config/seoContent';
 
-const DEFAULT_TITLE = `Best Paediatric Therapy Centre in Chennai | ${BRAND_NAME}`;
-const DEFAULT_DESCRIPTION = `${BRAND_NAME} — occupational therapy, speech & language, ABA, sensory integration, early intervention, and special education for children in Villivakkam, Chennai.`;
+const DEFAULT_TITLE = HOME_SEO_TITLE;
+const DEFAULT_DESCRIPTION = HOME_SEO_DESCRIPTION;
 
 /** Per-route technical SEO: canonical, OG, Twitter card, index/noindex. */
 const SeoTechnical = () => {
@@ -17,8 +18,8 @@ const SeoTechnical = () => {
     pathname === '' ? '/' : pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname;
   const canonicalHref = base ? `${base}${pathNormalized === '/' ? '/' : pathNormalized}` : '';
   const defaultOgImage = base
-    ? `${base}/images/pages/specialised_therapy.png`
-    : '/images/pages/specialised_therapy.png';
+    ? `${base}/images/pages/specialised_therapy.webp`
+    : '/images/pages/specialised_therapy.webp';
 
   return (
     <Helmet>

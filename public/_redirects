@@ -1,1 +1,7 @@
-/* /index.html 200
+/ads.txt              /ads.txt                              200
+/robots.txt           /robots.txt                           200
+/sitemap.xml          /sitemap.xml                          200
+/llms.txt             /llms.txt                             200
+/favicon.ico          /images/branding/branding-logo.png    200
+/404.html             /404.html                             404
+/*                    /index.html                           200

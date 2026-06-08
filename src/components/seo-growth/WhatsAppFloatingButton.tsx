@@ -1,7 +1,5 @@
 import { useTracking } from '../../hooks/useTracking';
-import { PHONE_PRIMARY_E164 } from '../../config/brand';
-
-const WHATSAPP_URL = `https://wa.me/${PHONE_PRIMARY_E164.replace('+', '')}`;
+import { WHATSAPP_URL } from '../../config/brand';
 
 const WhatsAppFloatingButton = () => {
   const { trackEvent } = useTracking();

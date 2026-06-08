@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, ShieldCheck, TrendingUp } from 'lucide-react';
+import ResponsiveImage from './ResponsiveImage';
 
 interface PageHeaderProps {
   title: string;
@@ -165,12 +166,14 @@ const PageHeader = ({
                   <div className="absolute -inset-4 z-0 rounded-[2rem] bg-[linear-gradient(145deg,rgba(255,255,255,0.5)_0%,rgba(59,151,255,0.12)_45%,rgba(14,116,200,0.18)_100%)] opacity-90" />
 
                   <div className="relative z-10 overflow-hidden rounded-[1.75rem] border border-white/90 bg-white/25 shadow-2xl ring-1 ring-primary-200/50 backdrop-blur-md">
-                    <img
+                    <ResponsiveImage
                       src={backgroundImage}
                       alt={`${title} at Arura Integral Therapy Services`}
-                      className="relative z-[1] aspect-[4/3] w-full object-cover object-center md:aspect-[5/4]"
+                      className="relative z-[1] aspect-[4/3] w-full object-cover object-center"
+                      width={720}
+                      height={540}
+                      sizes="(max-width: 1024px) 100vw, 520px"
                       loading="eager"
-                      decoding="async"
                     />
                     <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-br from-primary-600/20 via-transparent to-sky-300/25 mix-blend-soft-light" />
                     <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-primary-900/20 via-transparent to-white/20" />

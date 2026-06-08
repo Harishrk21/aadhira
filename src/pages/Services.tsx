@@ -6,11 +6,11 @@ import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import {
   Activity, MessageSquare, GraduationCap, Lightbulb, Baby, Brain,
-  Search, ChevronRight, ArrowRight, CheckCircle2, Star, Users, Clock,
+  Search, ChevronRight, ArrowRight, CheckCircle2, Star, Users,
   MapPin, Phone, Filter, Sparkles, BookOpen, Heart, Target,
 } from 'lucide-react';
 import {
-  BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY, EMAIL,
+  BRAND_NAME, PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY,
 } from '../config/brand';
 import { additionalPrograms } from '../data/additionalProgramsData';
 import { SERVICES_KEYWORDS, localSeoTitle } from '../config/seoContent';
@@ -774,12 +774,12 @@ const Services = () => {
                   >
                     Ask Our Team <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <a
-                    href={`mailto:${EMAIL}`}
+                  <Link
+                    to="/contact"
                     className="flex-1 flex items-center justify-center gap-2 border-2 border-primary-200 text-primary-700 hover:bg-primary-50 font-bold py-3 rounded-xl text-sm transition-colors"
                   >
                     Email Us
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

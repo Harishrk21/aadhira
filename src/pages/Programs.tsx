@@ -4,7 +4,6 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import CTASection from '../components/ui/CTASection';
 import { additionalPrograms } from '../data/additionalProgramsData';
-import { BRAND_NAME } from '../config/brand';
 import { PROGRAMS_KEYWORDS, localSeoTitle } from '../config/seoContent';
 
 const Programs = () => {

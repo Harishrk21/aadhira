@@ -36,8 +36,9 @@ import {
 import AreasWeServe from '../components/seo-growth/AreasWeServe';
 import TestimonialPreview from '../components/seo-growth/TestimonialPreview';
 import SearchIntentLinks from '../components/seo-growth/SearchIntentLinks';
-import { HOME_KEYWORDS } from '../config/seoContent';
+import { HOME_KEYWORDS, HOME_SEO_DESCRIPTION, HOME_SEO_TITLE } from '../config/seoContent';
 import TrustSignals from '../components/seo-growth/TrustSignals';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
 
 const serviceIcons: Record<string, JSX.Element> = {
   'occupational-therapy': <Activity className="w-6 h-6" />,
@@ -112,7 +113,7 @@ const Home = () => {
   const siteUrl = getSiteUrl();
   const canonical = siteUrl ? `${siteUrl}/` : undefined;
   const ogUrl = canonical ?? undefined;
-  const ogImage = siteUrl ? `${siteUrl}/images/pages/specialised_therapy.png` : '/images/pages/specialised_therapy.png';
+  const ogImage = siteUrl ? `${siteUrl}/images/pages/specialised_therapy.webp` : '/images/pages/specialised_therapy.webp';
 
   const faqStructuredData = useMemo(
     () => ({
@@ -130,8 +131,8 @@ const Home = () => {
     [],
   );
 
-  const pageTitle = `Best Paediatric Therapy Centre in Chennai | ${BRAND_NAME}`;
-  const pageDescription = `${BRAND_NAME} (${BRAND_TAGLINE}). Villivakkam, Valasaravakkam, Chengalpattu, Nungambakkam: OT, speech & language, ABA, sensory integration, early intervention, special education, school readiness, parent training, play therapy, Brain Gym, mindfulness, feeding & oral motor, assistive technology.`;
+  const pageTitle = HOME_SEO_TITLE;
+  const pageDescription = HOME_SEO_DESCRIPTION;
 
   return (
     <div className="bg-brand-cream text-neutral-800">
@@ -284,42 +285,42 @@ const Home = () => {
                       className="pointer-events-none absolute inset-0 z-[4] bg-[linear-gradient(115deg,transparent_35%,rgba(255,255,255,0.45)_48%,rgba(255,255,255,0.08)_55%,transparent_65%)]"
                       aria-hidden
                     />
-                    <img
+                    <ResponsiveImage
                       src={HERO_MAIN}
                       alt={`Paediatric therapist with a child during a therapy activity at ${BRAND_NAME}, Villivakkam Chennai`}
-                      className="relative z-[1] aspect-[4/3] w-full object-cover object-[center_28%] md:aspect-[5/4]"
+                      className="relative z-[1] aspect-[4/3] w-full object-cover object-center"
                       width={720}
-                      height={576}
+                      height={540}
+                      sizes="(max-width: 1024px) 100vw, 600px"
                       loading="eager"
-                      decoding="async"
                       fetchPriority="high"
                     />
                   </div>
 
                   <div className="absolute -left-4 top-6 z-20 w-[32%] max-w-[140px] sm:-left-6 sm:max-w-[160px] md:top-10">
                     <div className="overflow-hidden rounded-2xl border-2 border-white/90 bg-white/75 shadow-lg backdrop-blur-md ring-2 ring-amber-300/50">
-                      <img
+                      <ResponsiveImage
                         src={HERO_CHILD_A}
                         alt="Speech and language therapy session supporting communication skills at our Chennai centre"
-                        className="aspect-square w-full object-cover"
+                        className="aspect-square w-full object-cover object-center"
                         width={160}
                         height={160}
+                        sizes="160px"
                         loading="eager"
-                        decoding="async"
                       />
                     </div>
                   </div>
 
                   <div className="absolute -right-2 bottom-8 z-20 w-[34%] max-w-[150px] sm:-right-4 sm:max-w-[170px] md:bottom-10">
                     <div className="overflow-hidden rounded-2xl border-2 border-white/90 bg-white/75 shadow-lg backdrop-blur-md ring-2 ring-primary-300/55">
-                      <img
+                      <ResponsiveImage
                         src={HERO_CHILD_B}
                         alt="Occupational therapy session — fine motor and daily-living skills at Arura, Chennai"
-                        className="aspect-square w-full object-cover"
+                        className="aspect-square w-full object-cover object-center"
                         width={170}
                         height={170}
+                        sizes="170px"
                         loading="eager"
-                        decoding="async"
                       />
                     </div>
                   </div>
@@ -450,12 +451,14 @@ const Home = () => {
               >
                 <Link to={`/services/${service.id}`} className="block overflow-hidden">
                   <div className="relative aspect-[16/10] overflow-hidden bg-primary-100">
-                    <img
+                    <ResponsiveImage
                       src={service.image}
                       alt={`${service.title} — paediatric therapy at ${BRAND_NAME} Chennai`}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105"
+                      width={640}
+                      height={400}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                       loading="lazy"
-                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary-950/70 via-primary-950/10 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">

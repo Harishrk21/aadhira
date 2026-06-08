@@ -256,6 +256,23 @@ const ServiceDetail = () => {
     { label: 'Carryover Plan', text: theme.heroHighlights[2] ?? 'Parent coaching for daily routine practice' },
   ];
 
+  const siteUrl = getSiteUrl();
+  const servicePageUrl = service && siteUrl ? `${siteUrl}/services/${service.id}` : '';
+  const serviceJsonLd = useMemo(() => {
+    if (!siteUrl || !servicePageUrl || !service) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${servicePageUrl}#service`,
+      name: `${service.title} — ${BRAND_NAME}`,
+      description: service.longDescription,
+      serviceType: service.title,
+      url: servicePageUrl,
+      provider: { '@id': clinicId(siteUrl) },
+      areaServed: { '@type': 'City', name: 'Chennai' },
+    };
+  }, [siteUrl, servicePageUrl, service]);
+
   if (!service) {
     return (
       <section className="bg-white py-24">
@@ -290,24 +307,8 @@ const ServiceDetail = () => {
       },
     ];
 
-  const siteUrl = getSiteUrl();
   const dunmarkPathways = getDunmarkPathwaysForService(service.id);
-  const servicePageUrl = siteUrl ? `${siteUrl}/services/${service.id}` : '';
   const ogImage = service.image.startsWith('http') ? service.image : siteUrl ? `${siteUrl}${service.image}` : service.image;
-  const serviceJsonLd = useMemo(() => {
-    if (!siteUrl || !servicePageUrl) return null;
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      '@id': `${servicePageUrl}#service`,
-      name: `${service.title} — ${BRAND_NAME}`,
-      description: service.longDescription,
-      serviceType: service.title,
-      url: servicePageUrl,
-      provider: { '@id': clinicId(siteUrl) },
-      areaServed: { '@type': 'City', name: 'Chennai' },
-    };
-  }, [siteUrl, servicePageUrl, service.id, service.title, service.longDescription]);
 
   return (
     <>

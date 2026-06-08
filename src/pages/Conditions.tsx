@@ -865,7 +865,7 @@ const Conditions = () => {
 
       <CTASection
         title={`Is Your Child Showing Signs of a Developmental Condition?`}
-        subtitle="Our team at ${BRAND_NAME} can help with assessment, diagnosis, and a personalised therapy plan. Reach out today."
+        subtitle={`Our team at ${BRAND_NAME} can help with assessment, diagnosis, and a personalised therapy plan. Reach out today.`}
       />
     </>
   );
