@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/edge-functions';
-import { paths } from './route-manifest.ts';
+import { paths } from '../lib/valid-routes.ts';
 
 const VALID_PATHS = new Set<string>(paths);
 
