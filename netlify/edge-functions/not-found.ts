@@ -1,7 +1,7 @@
 import type { Config, Context } from '@netlify/edge-functions';
-import manifest from './route-manifest.json';
+import { paths } from './route-manifest.ts';
 
-const VALID_PATHS = new Set(manifest.paths as string[]);
+const VALID_PATHS = new Set<string>(paths);
 
 const ROOT_STATIC = new Set([
   '/images/branding/branding-logo.png',
