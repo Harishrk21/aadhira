@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/edge-functions';
-import manifest from './route-manifest.json';
+import manifest from '../shared/route-manifest.mjs';
 
 const VALID_PATHS = new Set(manifest.paths as string[]);
 

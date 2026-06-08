@@ -22,7 +22,8 @@ paths.add('/services/behaviour-therapy');
 paths.add('/programs/handwriting-training');
 
 const manifest = { paths: [...paths].sort() };
-const outDir = join(root, 'netlify/edge-functions');
+const outDir = join(root, 'netlify/shared');
 mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, 'route-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
-console.log(`route-manifest.json: ${manifest.paths.length} paths`);
+const js = `export default ${JSON.stringify(manifest, null, 2)};\n`;
+writeFileSync(join(outDir, 'route-manifest.mjs'), js);
+console.log(`route-manifest.mjs: ${manifest.paths.length} paths`);
