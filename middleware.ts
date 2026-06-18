@@ -23,6 +23,14 @@ function normalizePath(pathname: string): string {
 
 export default async function middleware(request: Request) {
   const url = new URL(request.url);
+
+  // Redirect www → apex before serving any content. Without this, the HTML loads on
+  // www while assets 301 to apex — browsers block CSS/JS cross-origin (CORS).
+  if (url.hostname === 'www.aruratherapy.in') {
+    url.hostname = 'aruratherapy.in';
+    return Response.redirect(url.toString(), 308);
+  }
+
   const path = url.pathname;
 
   if (ROOT_STATIC.has(path)) {
