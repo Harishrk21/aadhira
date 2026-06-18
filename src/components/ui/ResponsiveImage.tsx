@@ -1,4 +1,4 @@
-import { webpFromRaster } from '../../utils/imagePath';
+import { hasWebpVariant, webpFromRaster } from '../../utils/imagePath';
 
 interface ResponsiveImageProps {
   src: string;
@@ -23,6 +23,24 @@ const ResponsiveImage = ({
   decoding = 'async',
   fetchPriority,
 }: ResponsiveImageProps) => {
+  const useWebp = hasWebpVariant(src);
+
+  if (!useWebp) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        width={width}
+        height={height}
+        sizes={sizes}
+        loading={loading}
+        decoding={decoding}
+        fetchPriority={fetchPriority}
+      />
+    );
+  }
+
   const webp = webpFromRaster(src);
 
   return (

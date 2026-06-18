@@ -13,7 +13,7 @@
   ],
   "rewrites": [
     { "source": "/favicon.ico", "destination": "/images/branding/branding-logo.png" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!assets/|images/|robots\\.txt|sitemap\\.xml|ads\\.txt|llms\\.txt|404\\.html|favicon\\.ico).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
