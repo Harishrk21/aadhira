@@ -1,5 +1,5 @@
-import type { Config, Context } from '@netlify/edge-functions';
-import { paths } from '../lib/valid-routes.ts';
+import { next } from '@vercel/functions';
+import { paths } from './lib/valid-routes';
 
 const VALID_PATHS = new Set<string>(paths);
 
@@ -21,25 +21,25 @@ function normalizePath(pathname: string): string {
   return pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 }
 
-export default async function handler(request: Request, context: Context) {
+export default async function middleware(request: Request) {
   const url = new URL(request.url);
   const path = url.pathname;
 
   if (ROOT_STATIC.has(path)) {
-    return context.next();
+    return next();
   }
 
   if (ASSET_PREFIXES.some((prefix) => path.startsWith(prefix))) {
-    return context.next();
+    return next();
   }
 
   if (STATIC_FILE.test(path)) {
-    return context.next();
+    return next();
   }
 
   const normalized = normalizePath(path);
   if (VALID_PATHS.has(normalized) || VALID_PATHS.has(path)) {
-    return context.next();
+    return next();
   }
 
   const notFoundResponse = await fetch(new URL('/404.html', url.origin).toString());
@@ -55,6 +55,6 @@ export default async function handler(request: Request, context: Context) {
   });
 }
 
-export const config: Config = {
-  path: '/*',
+export const config = {
+  matcher: ['/((?!_vercel).*)'],
 };
