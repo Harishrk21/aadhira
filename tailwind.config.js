@@ -61,7 +61,7 @@ export default {
       },
       fontFamily: {
         heading: ['Nunito', 'sans-serif'],
-        body: ['Open Sans', 'sans-serif'],
+        body: ['Nunito Sans', 'sans-serif'],
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',

@@ -8,6 +8,7 @@ import GlobalStructuredData from '../seo/GlobalStructuredData';
 import StickyBookButton from '../seo-growth/StickyBookButton';
 import WhatsAppFloatingButton from '../seo-growth/WhatsAppFloatingButton';
 import GovernmentResources from '../ui/GovernmentResources';
+import BookingForm from '../ui/BookingForm';
 
 interface LayoutProps {
   children: ReactNode;
@@ -21,9 +22,17 @@ const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     const handleBookAppointmentClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
-      const anchor = target?.closest('a[href="/book-appointment"]') as HTMLAnchorElement | null;
+      const anchor = target?.closest('a') as HTMLAnchorElement | null;
 
       if (!anchor) return;
+
+      const href = anchor.getAttribute('href') ?? '';
+      const isBookAppointmentLink =
+        href === '/book-appointment' ||
+        href.endsWith('/book-appointment') ||
+        anchor.pathname.endsWith('/book-appointment');
+
+      if (!isBookAppointmentLink) return;
 
       event.preventDefault();
       setIsFormOpen(true);
@@ -37,7 +46,7 @@ const Layout = ({ children }: LayoutProps) => {
     };
   }, []);
 
-  const handleSubmittedClick = () => {
+  const handleBookingSuccess = () => {
     setIsSubmitting(true);
     setIsBooked(false);
     window.setTimeout(() => {
@@ -61,7 +70,7 @@ const Layout = ({ children }: LayoutProps) => {
       <SeoTechnical />
       <GlobalStructuredData />
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {children}
       </main>
       <GovernmentResources />
@@ -86,30 +95,12 @@ const Layout = ({ children }: LayoutProps) => {
               <p className="text-xs text-neutral-500 sm:text-sm">Fill and submit the form below</p>
             </div>
 
-            <iframe
-              title="Book appointment Google Form"
-              src="https://forms.gle/4GYRwsD3cvX2B7WF9"
-              className="min-h-0 flex-1 w-full"
-              loading="lazy"
-            >
-              Loading...
-            </iframe>
+            <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4 sm:px-6">
+              <BookingForm compact onSuccess={handleBookingSuccess} />
+            </div>
 
-            <div className="space-y-3 border-t border-primary-100 bg-white px-5 py-4 sm:px-6">
-              <button
-                type="button"
-                onClick={handleSubmittedClick}
-                disabled={isSubmitting}
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-600 via-violet-600 to-indigo-600 px-5 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-violet-500/25 transition hover:scale-[1.01] hover:shadow-xl hover:shadow-violet-500/35 disabled:cursor-not-allowed disabled:opacity-75 sm:text-base"
-              >
-                <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_20%,rgba(255,255,255,0.35)_50%,transparent_80%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                {isSubmitting ? (
-                  'Sending your booking...'
-                ) : (
-                  'Done Submitting? Confirm My Booking'
-                )}
-              </button>
-              {isBooked && (
+            {isBooked && (
+              <div className="border-t border-primary-100 bg-white px-5 py-4 sm:px-6">
                 <div className="inline-flex w-full items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm font-medium text-emerald-700">
                   <img
                     src="/images/branding/logo.png"
@@ -119,8 +110,8 @@ const Layout = ({ children }: LayoutProps) => {
                   <CheckCircle2 className="mr-2 h-5 w-5" />
                   Booked successfully! Closing form...
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}

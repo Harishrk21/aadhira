@@ -110,18 +110,18 @@
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&display=swap"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Nunito:wght@400;500;600;700;800&family=Nunito+Sans:wght@300;400;500;600;700&display=swap"
       />
     </noscript>
     <!-- Google tag (gtag.js) -->
@@ -134,6 +134,20 @@
     </script>
   </head>
   <body>
+    <!-- Netlify form detection (SPA booking form) -->
+    <form name="book-appointment" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" type="text" />
+      <input name="parent-name" type="text" />
+      <input name="child-name" type="text" />
+      <input name="child-age" type="text" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <input name="service" type="text" />
+      <input name="preferred-centre" type="text" />
+      <input name="preferred-date" type="date" />
+      <input name="preferred-time" type="text" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

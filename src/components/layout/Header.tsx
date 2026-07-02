@@ -202,7 +202,9 @@ const Header = () => {
   ];
 
   return (
-    <header 
+    <>
+    <a href="#main-content" className="skip-link">Skip to main content</a>
+    <header
       className={`sticky top-0 w-full z-50 transition-all duration-300 border-b border-primary-100 ${
         isScrolled ? 'bg-white shadow-md py-2' : 'bg-white/95 backdrop-blur-sm py-3'
       }`}
@@ -240,10 +242,12 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="xl:hidden text-neutral-800 focus:outline-none justify-self-end" 
+        <button
+          className="xl:hidden text-neutral-800 justify-self-end rounded-lg p-1.5 transition-colors hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav"
         >
           {isMenuOpen ? (
             <X className="w-6 h-6" />
@@ -257,13 +261,14 @@ const Header = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="xl:hidden bg-white shadow-lg"
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="xl:hidden bg-white shadow-lg border-t border-primary-50"
           >
-            <nav className="container-custom py-5 flex flex-col space-y-3">
+            <nav className="container-custom py-5 flex flex-col space-y-1">
               <NavLink to="/" 
                 className={({ isActive }) => 
                   isActive ? 'nav-link-active' : 'nav-link'
@@ -381,6 +386,7 @@ const Header = () => {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 };
 

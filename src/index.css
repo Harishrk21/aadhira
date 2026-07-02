@@ -6,89 +6,109 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply font-body text-neutral-800;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold text-neutral-900;
   }
-  
+
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
   }
-  
+
   h2 {
     @apply text-3xl md:text-4xl lg:text-5xl;
   }
-  
+
   h3 {
     @apply text-2xl md:text-3xl;
   }
-  
+
   h4 {
     @apply text-xl md:text-2xl;
   }
-  
+
   h5 {
     @apply text-lg md:text-xl;
   }
-  
+
   h6 {
     @apply text-base md:text-lg;
+  }
+
+  /* Visible focus rings for keyboard navigation */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Remove outline for mouse users */
+  :focus:not(:focus-visible) {
+    @apply outline-none;
   }
 }
 
 @layer components {
+  /* Skip to main content link for screen readers / keyboard nav */
+  .skip-link {
+    @apply absolute -top-full left-4 z-[9999] rounded-b-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition-all;
+  }
+  .skip-link:focus {
+    @apply top-0;
+  }
+
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer;
   }
-  
+
   .btn-primary {
-    @apply btn bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500;
+    @apply btn bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white focus-visible:ring-primary-500;
   }
-  
+
   .btn-secondary {
-    @apply btn bg-secondary-600 hover:bg-secondary-700 text-white focus:ring-secondary-500;
+    @apply btn bg-secondary-600 hover:bg-secondary-700 active:bg-secondary-800 text-white focus-visible:ring-secondary-500;
   }
-  
+
   .btn-accent {
-    @apply btn bg-accent-600 hover:bg-accent-700 text-white focus:ring-accent-500;
+    @apply btn bg-accent-600 hover:bg-accent-700 active:bg-accent-800 text-white focus-visible:ring-accent-500;
   }
-  
+
   .btn-outline {
-    @apply btn bg-transparent border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500;
+    @apply btn bg-transparent border-2 border-primary-600 text-primary-600 hover:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-500;
   }
 
   .service-card {
-    @apply bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-t-4;
+    @apply bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 cursor-pointer;
   }
-  
+
   .section-padding {
     @apply py-16 md:py-24;
   }
-  
+
   .section-title {
     @apply text-center mb-12;
   }
-  
+
   .section-subtitle {
-    @apply text-lg text-neutral-600 mt-4 max-w-3xl mx-auto;
+    @apply text-lg text-neutral-600 mt-4 max-w-3xl mx-auto leading-relaxed;
   }
-  
+
   .nav-link {
-    @apply inline-block py-2 px-4 text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-200;
+    @apply inline-block py-2 px-4 text-neutral-700 hover:text-primary-600 font-medium transition-colors duration-200 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1;
   }
-  
+
   .nav-link-active {
     @apply text-primary-600 font-semibold;
   }
-  
+
   .icon-circle {
     @apply flex items-center justify-center w-12 h-12 rounded-full bg-primary-100 text-primary-600;
   }
@@ -117,4 +137,26 @@
 @keyframes aruraGradientShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .brand-arura {
+    animation: none !important;
+    background: #1a7feb;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
