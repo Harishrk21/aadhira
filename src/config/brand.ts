@@ -32,7 +32,7 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_E164.replace('+', '')}`;
 
 /** Primary clinic — Chennai (Villivakkam) */
 export const ADDRESS_CHENNAI = {
-  street: 'No. 90, 15th Block, 13th Street, Thiru Nagar',
+  street: 'SIDCO BUS STOP, 32/1, opp. PADMA SARANGAPANI HR.SEC. SCHOOL, Kumarasamy Nagar, NRN Colony',
   locality: 'Villivakkam',
   city: 'Chennai',
   region: 'Tamil Nadu',

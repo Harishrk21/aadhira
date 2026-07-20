@@ -219,7 +219,7 @@ const Contact = () => {
                 </div>
               </div>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Thiru+Nagar+13th+Street+Villivakkam+Chennai"
+                href="https://www.google.com/maps/search/?api=1&query=SIDCO+BUS+STOP+32/1+Kumarasamy+Nagar+NRN+Colony+Villivakkam+Chennai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-brand-yellow text-primary-900 font-bold text-sm py-2 px-5 rounded-xl hover:bg-yellow-400 transition-colors"
@@ -523,10 +523,10 @@ const Contact = () => {
           </div>
           <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: '🚌', title: 'By Bus', text: 'Villivakkam Bus Station — 10-min walk from our centre.' },
+              { icon: '🚌', title: 'By Bus', text: 'SIDCO Bus Stop — at our centre location.' },
               { icon: '🚆', title: 'By Train', text: 'Villivakkam Railway Station — 1.5 km, auto-rickshaws available.' },
-              { icon: '🚗', title: 'By Car', text: '13th Street, Thiru Nagar. Limited on-site parking available.' },
-              { icon: '📍', title: 'Landmark', text: 'Near Thiru Nagar Park. Look for the Arura signboard.' },
+              { icon: '🚗', title: 'By Car', text: 'Kumarasamy Nagar, NRN Colony. Limited on-site parking available.' },
+              { icon: '📍', title: 'Landmark', text: 'Opposite Padma Sarangapani HR. Sec. School. Look for the Arura signboard.' },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-xl p-4 shadow-sm border border-neutral-100 flex items-start gap-3 hover:shadow-md transition-shadow">
                 <span className="text-2xl">{item.icon}</span>

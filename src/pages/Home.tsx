@@ -66,7 +66,7 @@ const faqItems: { q: string; a: string }[] = [
   },
   {
     q: 'Do you serve only Villivakkam, or all of Chennai?',
-    a: 'Our centre is in Villivakkam (Thiru Nagar). Families visit us from across North Chennai and nearby areas. Call us to discuss your location and appointment options.',
+    a: 'Our centre is in Villivakkam (Kumarasamy Nagar, near SIDCO Bus Stop). Families visit us from across North Chennai and nearby areas. Call us to discuss your location and appointment options.',
   },
   {
     q: 'How is occupational therapy different from speech therapy?',

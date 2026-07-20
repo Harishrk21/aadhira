@@ -13,7 +13,7 @@ export const locationSeoPages: LocationSeoPage[] = [
     area: 'Villivakkam',
     title: 'Paediatric Therapy Centre in Villivakkam',
     summary:
-      'Arura Integral Therapy Services is based in Thiru Nagar, Villivakkam, Chennai, providing occupational therapy, speech therapy, ABA, early intervention, special education, sensory integration, and parent guidance for children.',
+      'Arura Integral Therapy Services is based at SIDCO Bus Stop, Kumarasamy Nagar, Villivakkam, Chennai, providing occupational therapy, speech therapy, ABA, early intervention, special education, sensory integration, and parent guidance for children.',
     nearbyContext:
       'Families from Villivakkam, Korattur, Kolathur, Perambur, Ayanavaram, Anna Nagar, and Ambattur can reach the centre for assessment-led paediatric therapy support.',
     searchFocus: [
