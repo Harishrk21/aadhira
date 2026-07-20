@@ -11,8 +11,6 @@ import {
   BRAND_NAME,
   PHONE_PRIMARY_E164,
   PHONE_PRIMARY_DISPLAY,
-  PHONE_SECONDARY_E164,
-  PHONE_SECONDARY_DISPLAY,
   PHONE_ALL,
   WHATSAPP_DISPLAY,
   WHATSAPP_URL,
@@ -132,21 +130,6 @@ const Contact = () => {
 
             <div className="hidden md:block w-px h-8 bg-white/20" />
 
-            <a
-              href={`tel:${PHONE_SECONDARY_E164}`}
-              className="flex items-center gap-2.5 group rounded-xl px-4 py-2 hover:bg-white/10 transition-colors"
-            >
-              <div className="w-8 h-8 rounded-full bg-brand-yellow/20 flex items-center justify-center group-hover:bg-brand-yellow/40 transition-colors">
-                <Phone className="w-4 h-4 text-brand-yellow" />
-              </div>
-              <div>
-                <p className="text-[10px] text-white/50 uppercase tracking-widest leading-none">Alternate</p>
-                <p className="font-bold text-brand-yellow group-hover:text-white transition-colors text-sm">{PHONE_SECONDARY_DISPLAY}</p>
-              </div>
-            </a>
-
-            <div className="hidden md:block w-px h-8 bg-white/20" />
-
             <button
               type="button"
               onClick={openContactEmail}
@@ -249,9 +232,6 @@ const Contact = () => {
                   <p className="font-semibold text-neutral-800 text-sm mb-1">Phone</p>
                   <a href={`tel:${PHONE_PRIMARY_E164}`} className="block text-primary-600 hover:text-primary-800 font-semibold text-sm transition-colors">
                     {PHONE_PRIMARY_DISPLAY}
-                  </a>
-                  <a href={`tel:${PHONE_SECONDARY_E164}`} className="block text-primary-600 hover:text-primary-800 font-semibold text-sm transition-colors">
-                    {PHONE_SECONDARY_DISPLAY}
                   </a>
                 </div>
               </div>
@@ -420,10 +400,6 @@ const Contact = () => {
                 <a href={`tel:${PHONE_PRIMARY_E164}`} className="flex items-center gap-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors mb-2 group">
                   <Phone className="w-4 h-4 text-brand-yellow shrink-0" />
                   <span className="font-bold text-brand-yellow group-hover:text-white transition-colors">{PHONE_PRIMARY_DISPLAY}</span>
-                </a>
-                <a href={`tel:${PHONE_SECONDARY_E164}`} className="flex items-center gap-3 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors mb-2 group">
-                  <Phone className="w-4 h-4 text-brand-yellow shrink-0" />
-                  <span className="font-bold text-brand-yellow group-hover:text-white transition-colors">{PHONE_SECONDARY_DISPLAY}</span>
                 </a>
                 <button
                   type="button"

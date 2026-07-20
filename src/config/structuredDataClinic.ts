@@ -4,7 +4,6 @@ import {
   ADDRESS_CHENNAI,
   CENTER_LOCATIONS,
   PHONE_PRIMARY_E164,
-  PHONE_SECONDARY_E164,
   PHONE_TERTIARY_E164,
   PHONE_QUATERNARY_E164,
 } from './brand';
@@ -75,13 +74,6 @@ export function getMedicalClinicJsonLd(siteUrl: string) {
         telephone: PHONE_PRIMARY_E164,
         contactType: 'customer service',
         url: `${siteUrl}/contact`,
-        areaServed: 'IN',
-        availableLanguage: ['en', 'ta'],
-      },
-      {
-        '@type': 'ContactPoint',
-        telephone: PHONE_SECONDARY_E164,
-        contactType: 'customer service',
         areaServed: 'IN',
         availableLanguage: ['en', 'ta'],
       },

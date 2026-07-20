@@ -9,9 +9,6 @@ export const EMAIL = 'info.dunmark@gmail.com';
 export const PHONE_PRIMARY_E164 = '+916379262127';
 export const PHONE_PRIMARY_DISPLAY = '+91 63792 62127';
 
-export const PHONE_SECONDARY_E164 = '+917200766120';
-export const PHONE_SECONDARY_DISPLAY = '+91 72007 66120';
-
 export const PHONE_TERTIARY_E164 = '+917200766143';
 export const PHONE_TERTIARY_DISPLAY = '+91 72007 66143';
 
@@ -20,7 +17,6 @@ export const PHONE_QUATERNARY_DISPLAY = '+91 72007 66720';
 
 export const PHONE_ALL = [
   '6379262127',
-  '7200766120',
   '7200766143',
   '7200766720',
 ] as const;

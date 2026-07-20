@@ -6,8 +6,6 @@ import {
   BRAND_TAGLINE,
   PHONE_PRIMARY_E164,
   PHONE_PRIMARY_DISPLAY,
-  PHONE_SECONDARY_E164,
-  PHONE_SECONDARY_DISPLAY,
   ADDRESS_CHENNAI,
   CENTER_LOCATIONS,
 } from '../../config/brand';
@@ -162,12 +160,6 @@ const Footer = () => {
                     className="block text-neutral-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-400 rounded"
                   >
                     {PHONE_PRIMARY_DISPLAY}
-                  </a>
-                  <a
-                    href={`tel:${PHONE_SECONDARY_E164}`}
-                    className="block text-neutral-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-400 rounded"
-                  >
-                    {PHONE_SECONDARY_DISPLAY}
                   </a>
                 </div>
               </div>
