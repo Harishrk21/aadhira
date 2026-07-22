@@ -57,7 +57,7 @@ const About: React.FC = () => {
               <p className="inline-flex rounded-full bg-primary-100 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-700">
                 Welcome to Arura Integral Therapy Services
               </p>
-              <h2 className="mt-4 text-4xl font-black text-neutral-900">Integrated Child Development & Rehabilitation Support</h2>
+              <h2 className="mt-4 text-3xl font-black text-neutral-900 md:text-4xl">Integrated Child Development & Rehabilitation Support</h2>
               <p className="mt-4 text-lg leading-relaxed text-neutral-700">
                 Arura Integral Therapy Services is a multidisciplinary child development centre dedicated to supporting children with developmental, learning,
                 behavioural, and communication challenges through personalized and evidence-based care.
@@ -132,7 +132,7 @@ const About: React.FC = () => {
       <section className="bg-primary-900 py-20 text-white">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-12 text-center">
-            <h2 className="text-4xl font-bold">Our Vision & Mission</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Our Vision & Mission</h2>
             <p className="mx-auto mt-3 max-w-2xl text-primary-100">
               The foundation of how we support every child and family at Arura.
             </p>
@@ -170,7 +170,7 @@ const About: React.FC = () => {
       <section className="bg-gradient-to-b from-white to-slate-50 py-20">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-14 text-center">
-            <h2 className="text-4xl font-black text-neutral-900">{`Why Choose ${BRAND_NAME.toUpperCase()}?`}</h2>
+            <h2 className="text-3xl font-black text-neutral-900 md:text-4xl">{`Why Choose ${BRAND_NAME.toUpperCase()}?`}</h2>
           </motion.div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {whyChooseData.map((item, idx) => (
@@ -193,7 +193,7 @@ const About: React.FC = () => {
       <section className="bg-white py-20">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-14 text-center">
-            <h2 className="text-4xl font-black text-neutral-900">Our Leadership</h2>
+            <h2 className="text-3xl font-black text-neutral-900 md:text-4xl">Our Leadership</h2>
             <p className="mx-auto mt-3 max-w-2xl text-neutral-600">
               Clinical leadership focused on child development, family guidance, and practical therapy outcomes.
             </p>
@@ -260,7 +260,7 @@ const About: React.FC = () => {
       <section className="bg-slate-50 py-20">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-14 text-center">
-            <h2 className="text-4xl font-black text-neutral-900">Our Clinic & Therapy Sessions</h2>
+            <h2 className="text-3xl font-black text-neutral-900 md:text-4xl">Our Clinic & Therapy Sessions</h2>
             <p className="mx-auto mt-3 max-w-2xl text-neutral-600">
               A quick look at our real therapy environment and child-focused session spaces at Arura.
             </p>
@@ -307,7 +307,7 @@ const About: React.FC = () => {
       <section className="bg-primary-900 py-20 text-white">
         <div className="container-custom">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="mb-12 text-center">
-            <h2 className="text-4xl font-black">Clinical Values & Care Standards</h2>
+            <h2 className="text-3xl font-black md:text-4xl">Clinical Values & Care Standards</h2>
           </motion.div>
           <motion.div
             {...fadeUp}

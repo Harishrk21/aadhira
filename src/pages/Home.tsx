@@ -193,7 +193,7 @@ const Home = () => {
                 <motion.h1
                   variants={fadeUp}
                   transition={{ duration: 0.55 }}
-                  className="mb-6 font-heading text-4xl font-bold leading-tight text-primary-950 md:text-5xl lg:text-[3.1rem] lg:leading-[1.12]"
+                  className="mb-6 font-heading text-3xl font-bold leading-tight text-primary-950 md:text-4xl lg:text-[2.65rem] lg:leading-[1.15]"
                 >
                   Where children{' '}
                   <span className="relative inline-block">
@@ -246,7 +246,7 @@ const Home = () => {
                     { label: 'Chennai centres', value: '4' },
                   ].map((item) => (
                     <div key={item.label} className="rounded-xl border border-primary-100/70 bg-white/75 px-3 py-3 text-center sm:px-4 sm:py-4 lg:text-left">
-                      <p className="font-heading text-2xl font-bold text-primary-800 sm:text-[1.7rem]">{item.value}</p>
+                      <p className="font-heading text-xl font-bold text-primary-800 sm:text-2xl">{item.value}</p>
                       <p className="text-xs font-medium uppercase tracking-wide text-neutral-600">{item.label}</p>
                     </div>
                   ))}

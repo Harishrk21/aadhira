@@ -112,7 +112,7 @@ const PageHeader = ({
                 )}
                 <h1 className="mb-5 text-primary-950">{title}</h1>
                 {subtitle && (
-                  <p className="mx-auto mb-5 max-w-xl text-lg leading-relaxed text-neutral-700 lg:mx-0 lg:max-w-2xl">
+                  <p className="mx-auto mb-5 max-w-xl text-base leading-relaxed text-neutral-700 lg:mx-0 lg:max-w-2xl">
                     {highlightKeywords(subtitle)}
                   </p>
                 )}

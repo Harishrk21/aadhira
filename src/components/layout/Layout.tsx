@@ -6,8 +6,7 @@ import Footer from './Footer';
 import ScrollToTop from '../utils/ScrollToTop';
 import SeoTechnical from '../seo/SeoTechnical';
 import GlobalStructuredData from '../seo/GlobalStructuredData';
-import StickyBookButton from '../seo-growth/StickyBookButton';
-import WhatsAppFloatingButton from '../seo-growth/WhatsAppFloatingButton';
+import FloatingActionButtons from '../seo-growth/FloatingActionButtons';
 import GovernmentResources from '../ui/GovernmentResources';
 import GoogleBookingForm from '../ui/GoogleBookingForm';
 
@@ -87,8 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       {!hideGovernmentResources && <GovernmentResources />}
       <Footer />
-      {!hideFloatingActions && <StickyBookButton />}
-      {!hideFloatingActions && <WhatsAppFloatingButton />}
+      {!hideFloatingActions && <FloatingActionButtons />}
 
       {isFormOpen && (
         <div className="fixed inset-0 z-[70] flex items-end justify-center bg-primary-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-4 md:p-5">
