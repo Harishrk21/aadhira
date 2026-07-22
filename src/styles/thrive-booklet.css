@@ -1,0 +1,383 @@
+
+.thrive-booklet{
+  --navy: #0D1B3E;
+  --deep: #0a1628;
+  --indigo: #1B3A6B;
+  --gold: #C8922A;
+  --gold-light: #E8B84B;
+  --orange: #E87722;
+  --teal: #1B6CA8;
+  --rose: #C24B5E;
+  --light-bg: #F8F9FB;
+  --cream: #FBF7EE;
+  --white: #ffffff;
+  --text: #1a1a2e;
+  --muted: #5a6070;
+  --border: #e2e6f0;
+}
+
+/* ─────────────────────────────────────────
+   COVER
+───────────────────────────────────────── */
+.thrive-booklet .cover{
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0D1B3E 0%, #0a1628 45%, #1B3A6B 75%, #0D1B3E 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 40px;
+  text-align: center;
+}
+.thrive-booklet .cover::before{
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,146,42,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 100% 50%, rgba(27,108,168,0.14) 0%, transparent 60%);
+}
+.thrive-booklet .cover-pattern{
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 40px);
+}
+.thrive-booklet .cover-inner{ position: relative; z-index: 2; max-width: 920px; }
+.thrive-booklet .cover-logos{ display: flex; align-items: center; justify-content: center; gap: clamp(16px, 4vw, 40px); margin-bottom: 46px; flex-wrap: wrap; }
+.thrive-booklet .cover-logo{ height: 72px; width: auto; max-width: min(180px, 42vw); object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); border-radius: 8px; }
+.thrive-booklet .cover-logo.arura{ height: 84px; max-width: min(160px, 40vw); border-radius: 0; }
+.thrive-booklet .cover-divider-v{ width: 1px; height: 60px; background: linear-gradient(180deg, transparent, rgba(200,146,42,0.6), transparent); }
+.thrive-booklet .cover-badge{
+  display: inline-block; background: rgba(200,146,42,0.15); border: 1px solid rgba(200,146,42,0.4);
+  border-radius: 50px; padding: 8px 28px; color: var(--gold-light); font-size: 11px;
+  letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 28px;
+}
+.thrive-booklet .cover h1{
+  font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 68px);
+  color: var(--white); line-height: 1.08; margin-bottom: 14px; letter-spacing: -1px;
+}
+.thrive-booklet .cover h1 .accent{ color: var(--gold-light); }
+.thrive-booklet .cover-subtitle{
+  font-size: clamp(14px, 2vw, 17px); color: rgba(255,255,255,0.68);
+  max-width: 680px; margin: 0 auto 36px; font-weight: 300; line-height: 1.85; letter-spacing: 0.3px;
+}
+.thrive-booklet .cover-rule{ width: 100px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 40px; border-radius: 2px; }
+.thrive-booklet .cover-meta{ display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.thrive-booklet .cover-meta-item{ color: rgba(255,255,255,0.85); font-size: 13px; text-align: center; }
+.thrive-booklet .cover-meta-item strong{ display: block; color: var(--gold-light); font-size: 22px; font-family: 'Playfair Display', serif; }
+
+.thrive-booklet .cover-profile{
+  display: flex; align-items: center; gap: 26px; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 26px 34px;
+  backdrop-filter: blur(10px); text-align: left; max-width: 600px; margin: 0 auto;
+}
+.thrive-booklet .cover-photo{ width: 92px; height: 92px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; flex-shrink: 0; }
+.thrive-booklet .cover-name{ font-family: 'Playfair Display', serif; font-size: 19px; color: var(--white); margin-bottom: 4px; }
+.thrive-booklet .cover-role{ font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.thrive-booklet .cover-links{ display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
+.thrive-booklet .cover-link{ color: var(--gold-light); font-size: 11.5px; text-decoration: none; border-bottom: 1px solid rgba(200,146,42,0.4); }
+
+.thrive-booklet .scroll-cue{ position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; z-index: 2; }
+
+/* ─────────────────────────────────────────
+   STATS BAR
+───────────────────────────────────────── */
+.thrive-booklet .stats-bar{ background: linear-gradient(135deg, var(--rose), var(--indigo), var(--navy)); padding: 46px 20px; }
+.thrive-booklet .stats-inner{ max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
+.thrive-booklet .stat-item h2{ font-family: 'Playfair Display', serif; font-size: 42px; color: var(--gold-light); line-height: 1; }
+.thrive-booklet .stat-item p{ font-size: 12px; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px; font-weight: 600; }
+
+/* ─────────────────────────────────────────
+   GENERIC SECTION
+───────────────────────────────────────── */
+.thrive-booklet .section{ padding: 80px 30px; }
+.thrive-booklet .section.alt{ background: linear-gradient(180deg, #eef1f8, #fdfdfe); }
+.thrive-booklet .section.dark{ background: linear-gradient(135deg, var(--navy), var(--deep)); color: var(--white); }
+.thrive-booklet .container{ max-width: 1080px; margin: 0 auto; }
+
+.thrive-booklet .sec-eyebrow{ display: block; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--rose); font-weight: 700; margin-bottom: 10px; }
+.thrive-booklet .section.dark .sec-eyebrow{ color: var(--gold-light); }
+.thrive-booklet .sec-title{ font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+.thrive-booklet .section.dark .sec-title{ color: var(--white); }
+.thrive-booklet .sec-rule{ width: 64px; height: 4px; background: linear-gradient(90deg, var(--gold), var(--rose)); border-radius: 2px; margin-bottom: 34px; }
+.thrive-booklet .sec-intro{ font-size: 15px; color: var(--muted); max-width: 720px; line-height: 1.85; margin-bottom: 10px; }
+.thrive-booklet .section.dark .sec-intro{ color: rgba(255,255,255,0.72); }
+
+/* ─────────────────────────────────────────
+   FOUNDER
+───────────────────────────────────────── */
+.thrive-booklet .founder-grid{ display: grid; grid-template-columns: 280px 1fr; gap: 50px; align-items: start; }
+.thrive-booklet .founder-photo-wrap{ text-align: center; position: sticky; top: 20px; }
+.thrive-booklet .founder-photo{ width: 100%; max-width: 260px; border-radius: 18px; object-fit: cover; border: 4px solid var(--gold); box-shadow: 0 20px 50px rgba(13,27,62,0.25); margin: 0 auto; }
+.thrive-booklet .founder-badge{ margin-top: 16px; background: var(--navy); color: var(--gold-light); font-size: 11.5px; font-weight: 700; padding: 8px 18px; border-radius: 30px; display: inline-block; letter-spacing: 0.5px; }
+.thrive-booklet .founder-name{ font-family: 'Playfair Display', serif; font-size: 30px; color: var(--navy); margin-bottom: 6px; }
+.thrive-booklet .founder-credentials{ font-size: 13px; color: var(--rose); font-weight: 600; margin-bottom: 22px; letter-spacing: 0.3px; }
+.thrive-booklet .founder-orgs{ display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+.thrive-booklet .org-chip{ display: flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 10px 16px; font-size: 12.5px; font-weight: 600; color: var(--navy); box-shadow: 0 2px 10px rgba(0,0,0,0.04); max-width: 100%; }
+.thrive-booklet .org-chip img{
+  height: 28px;
+  width: auto;
+  max-width: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.thrive-booklet .founder-bio{ font-size: 14.5px; color: var(--text); line-height: 1.9; margin-bottom: 16px; }
+.thrive-booklet .expertise-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 22px; }
+.thrive-booklet .expertise-item{ background: var(--light-bg); border-left: 3px solid var(--gold); border-radius: 8px; padding: 10px 14px; font-size: 12.5px; font-weight: 600; color: var(--navy); }
+
+/* ─────────────────────────────────────────
+   QUOTE BANNER
+───────────────────────────────────────── */
+.thrive-booklet .quote-banner{ background: linear-gradient(135deg, var(--navy), var(--deep)); padding: 64px 40px; text-align: center; position: relative; overflow: hidden; }
+.thrive-booklet .quote-banner::before{ content: '❝'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 160px; color: rgba(255,255,255,0.04); font-family: 'Playfair Display', serif; }
+.thrive-booklet .quote-text{ font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.6vw, 26px); color: var(--white); line-height: 1.6; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; font-style: italic; }
+.thrive-booklet .quote-attr{ display: block; margin-top: 22px; color: var(--gold-light); font-size: 13.5px; font-weight: 700; letter-spacing: 0.5px; }
+
+/* ─────────────────────────────────────────
+   ABOUT / VISION CARDS
+───────────────────────────────────────── */
+.thrive-booklet .about-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+.thrive-booklet .about-card{ background: var(--white); border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(13,27,62,0.07); border-top: 4px solid; transition: transform 0.2s; }
+.thrive-booklet .about-card:nth-child(1){ border-color: var(--rose); }
+.thrive-booklet .about-card:nth-child(2){ border-color: var(--indigo); }
+.thrive-booklet .about-card:nth-child(3){ border-color: var(--teal); }
+.thrive-booklet .about-card:nth-child(4){ border-color: var(--gold); }
+.thrive-booklet .about-card .icon{ font-size: 30px; margin-bottom: 14px; }
+.thrive-booklet .about-card h3{ font-size: 16px; color: var(--navy); margin-bottom: 8px; font-weight: 700; }
+.thrive-booklet .about-card p{ font-size: 13.5px; color: var(--muted); line-height: 1.75; }
+
+.thrive-booklet .vm-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 10px; }
+.thrive-booklet .vm-card{ background: var(--white); border-radius: 18px; padding: 34px; box-shadow: 0 4px 20px rgba(13,27,62,0.06); }
+.thrive-booklet .vm-card.vision{ border-left: 4px solid var(--teal); }
+.thrive-booklet .vm-card.mission{ border-left: 4px solid var(--rose); }
+.thrive-booklet .vm-card-icon{ font-size: 28px; display: block; margin-bottom: 12px; }
+.thrive-booklet .vm-card h3{ font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 14px; }
+.thrive-booklet .vm-list{ list-style: none; padding: 0; }
+.thrive-booklet .vm-list li{ font-size: 13.5px; color: var(--text); line-height: 1.7; padding-left: 22px; position: relative; margin-bottom: 10px; }
+.thrive-booklet .vm-list li::before{ content: '—'; position: absolute; left: 0; color: var(--rose); font-weight: 700; }
+
+/* ─────────────────────────────────────────
+   SERVICES
+───────────────────────────────────────── */
+.thrive-booklet .services-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 30px; }
+.thrive-booklet .service-chip{ background: var(--white); border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 12px; border-left: 4px solid; }
+.thrive-booklet .service-chip:nth-child(odd){ border-color: var(--rose); }
+.thrive-booklet .service-chip:nth-child(even){ border-color: var(--indigo); }
+.thrive-booklet .service-chip .s-icon{ font-size: 21px; }
+.thrive-booklet .service-chip span.s-label{ font-size: 13px; font-weight: 600; color: var(--text); }
+
+/* ─────────────────────────────────────────
+   FIVE / SEVEN STAGE PATHWAY
+───────────────────────────────────────── */
+.thrive-booklet .stages-wrapper{ margin-top: 10px; position: relative; }
+.thrive-booklet .stage-card{ display: flex; gap: 26px; align-items: flex-start; background: var(--white); border-radius: 18px; padding: 30px; margin-bottom: 18px; box-shadow: 0 4px 20px rgba(13,27,62,0.06); position: relative; }
+.thrive-booklet .stage-num{ min-width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 22px; color: var(--white); flex-shrink: 0; }
+.thrive-booklet .stage-card:nth-child(1) .stage-num{ background: linear-gradient(135deg, var(--rose), #8e2f3f); }
+.thrive-booklet .stage-card:nth-child(2) .stage-num{ background: linear-gradient(135deg, var(--indigo), #122a52); }
+.thrive-booklet .stage-card:nth-child(3) .stage-num{ background: linear-gradient(135deg, var(--teal), #124a73); }
+.thrive-booklet .stage-card:nth-child(4) .stage-num{ background: linear-gradient(135deg, var(--gold), #a8741c); }
+.thrive-booklet .stage-card:nth-child(5) .stage-num{ background: linear-gradient(135deg, #16a085, #0d6e5c); }
+.thrive-booklet .stage-card:nth-child(6) .stage-num{ background: linear-gradient(135deg, var(--orange), #b25613); }
+.thrive-booklet .stage-card:nth-child(7) .stage-num{ background: linear-gradient(135deg, var(--navy), var(--deep)); }
+.thrive-booklet .stage-body h3{ font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); margin-bottom: 8px; }
+.thrive-booklet .stage-body p{ font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+.thrive-booklet .stage-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.thrive-booklet .tag{ background: var(--light-bg); color: var(--indigo); font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+
+.thrive-booklet .zone-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.thrive-booklet .zone-card{ border-radius: 14px; padding: 18px; text-align: center; border: 2px solid; }
+.thrive-booklet .zone-card.blue{ border-color: #1B6CA8; background: #eef6fb; }
+.thrive-booklet .zone-card.yellow{ border-color: #E8B84B; background: #fdf8ec; }
+.thrive-booklet .zone-card.red{ border-color: #C24B5E; background: #fcedf0; }
+.thrive-booklet .zone-card.black{ border-color: #2c2c34; background: #f0f0f2; }
+.thrive-booklet .zone-dot{ font-size: 22px; margin-bottom: 6px; }
+.thrive-booklet .zone-card h4{ font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.thrive-booklet .zone-card p{ font-size: 11.5px; color: var(--muted); margin-bottom: 8px; }
+.thrive-booklet .zone-action{ font-size: 10.5px; font-weight: 700; color: var(--navy); background: rgba(255,255,255,0.7); padding: 3px 10px; border-radius: 20px; }
+
+.thrive-booklet .highlight-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.thrive-booklet .highlight-card{ background: var(--light-bg); border-radius: 14px; padding: 22px; }
+.thrive-booklet .highlight-icon{ font-size: 26px; margin-bottom: 10px; }
+.thrive-booklet .highlight-card h3{ font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+.thrive-booklet .highlight-card p{ font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+
+/* ─────────────────────────────────────────
+   TABLE
+───────────────────────────────────────── */
+.thrive-booklet .assess-table{ width: 100%; border-collapse: collapse; margin-top: 26px; background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(13,27,62,0.06); font-size: 13px; }
+.thrive-booklet .assess-table th{ background: var(--navy); color: var(--gold-light); text-align: left; padding: 14px 18px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.8px; }
+.thrive-booklet .assess-table td{ padding: 13px 18px; border-bottom: 1px solid var(--border); color: var(--text); }
+.thrive-booklet .assess-table tr:last-child td{ border-bottom: none; }
+.thrive-booklet .assess-table tr:nth-child(even) td{ background: #f7f8fc; }
+
+/* ─────────────────────────────────────────
+   LEARNING TYPES
+───────────────────────────────────────── */
+.thrive-booklet .learning-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 26px; }
+.thrive-booklet .learning-card{ background: var(--white); border-radius: 14px; padding: 24px; box-shadow: 0 3px 16px rgba(13,27,62,0.06); border-top: 3px solid var(--teal); }
+.thrive-booklet .learning-icon{ font-size: 24px; }
+.thrive-booklet .learning-card h4{ font-size: 15px; color: var(--navy); margin: 8px 0 8px; }
+.thrive-booklet .learning-card p{ font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+.thrive-booklet .learning-sub{ font-size: 11px; color: var(--rose); font-weight: 600; }
+
+/* ─────────────────────────────────────────
+   THERAPY GRID
+───────────────────────────────────────── */
+.thrive-booklet .therapy-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 28px; }
+.thrive-booklet .therapy-card{ display: flex; gap: 18px; background: var(--white); border-radius: 14px; padding: 24px; box-shadow: 0 3px 16px rgba(13,27,62,0.06); }
+.thrive-booklet .therapy-icon{ font-size: 28px; flex-shrink: 0; }
+.thrive-booklet .therapy-card h4{ font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+.thrive-booklet .therapy-card p{ font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+
+/* ─────────────────────────────────────────
+   BENEFITS
+───────────────────────────────────────── */
+.thrive-booklet .benefits-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 28px; }
+.thrive-booklet .benefit-card{ background: var(--white); border-radius: 16px; padding: 28px; box-shadow: 0 3px 16px rgba(13,27,62,0.06); }
+.thrive-booklet .benefit-card h4{ font-size: 15px; color: var(--navy); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.thrive-booklet .benefit-card h4 span{ font-size: 22px; }
+.thrive-booklet .benefit-list{ list-style: none; padding: 0; }
+.thrive-booklet .benefit-list li{ font-size: 12.5px; color: var(--text); line-height: 1.7; padding-left: 20px; position: relative; margin-bottom: 10px; }
+.thrive-booklet .benefit-list li::before{ content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* ─────────────────────────────────────────
+   CONVERGENCE
+───────────────────────────────────────── */
+.thrive-booklet .convergence-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-top: 28px; }
+.thrive-booklet .conv-item{ background: linear-gradient(135deg, #f8f9ff, #fff); border: 2px solid #e8ecff; border-radius: 14px; padding: 24px 18px; text-align: center; }
+.thrive-booklet .conv-item .c-icon{ font-size: 28px; margin-bottom: 10px; }
+.thrive-booklet .conv-item p{ font-size: 12.5px; font-weight: 600; color: var(--navy); }
+
+/* ─────────────────────────────────────────
+   GALLERY
+───────────────────────────────────────── */
+.thrive-booklet .gallery-intro{ margin-bottom: 30px; }
+.thrive-booklet .gallery-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.thrive-booklet .gallery-item{ position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; box-shadow: 0 4px 16px rgba(13,27,62,0.1); }
+.thrive-booklet .gallery-item .gallery-item:hover .gallery-item .caption{ position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(10,16,40,0.88)); color: #fff; font-size: 12px; padding: 26px 14px 12px; font-weight: 600; line-height: 1.4; }
+.thrive-booklet .gallery-item .caption .cap-sub{ display: block; font-size: 10.5px; font-weight: 400; color: var(--gold-light); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+.thrive-booklet .gallery-item.large{ grid-column: span 2; }
+.thrive-booklet .gallery-item.tall{ grid-row: span 2; aspect-ratio: auto; }
+
+/* ─────────────────────────────────────────
+   ROADMAP / PHASES
+───────────────────────────────────────── */
+.thrive-booklet .roadmap{ position: relative; margin-top: 20px; }
+.thrive-booklet .phase{ display: flex; gap: 24px; margin-bottom: 8px; }
+.thrive-booklet .phase-num-wrap{ display: flex; flex-direction: column; align-items: center; }
+.thrive-booklet .phase-circle{ width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--rose)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'Playfair Display', serif; flex-shrink: 0; }
+.thrive-booklet .phase-line{ width: 2px; flex: 1; background: linear-gradient(180deg, var(--gold), transparent); margin: 4px 0; min-height: 30px; }
+.thrive-booklet .phase-.phase-body h4{ font-size: 16px; color: var(--navy); margin-bottom: 6px; font-family: 'Playfair Display', serif; }
+.thrive-booklet .phase-body p{ font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 640px; }
+
+/* ─────────────────────────────────────────
+   DECLARATION
+───────────────────────────────────────── */
+.thrive-booklet .declaration{ background: linear-gradient(135deg, #fff7e8, #fff); border: 1px solid #f0dba8; border-radius: 18px; padding: 38px; text-align: center; }
+.thrive-booklet .declaration h3{ font-family: 'Playfair Display', serif; font-size: 20px; color: var(--gold); margin-bottom: 14px; }
+.thrive-booklet .declaration p{ font-size: 13.5px; color: var(--muted); line-height: 1.9; max-width: 760px; margin: 0 auto; }
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.thrive-booklet .footer{ background: linear-gradient(135deg, var(--navy), var(--deep)); color: var(--white); padding: 60px 30px 30px; }
+.thrive-booklet .footer-inner{ max-width: 1080px; margin: 0 auto; }
+.thrive-booklet .footer-top{ display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.thrive-booklet .footer-logo-row{ display: flex; gap: 16px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+.thrive-booklet .footer-logo{ height: 44px; width: auto; max-width: 120px; object-fit: contain; border-radius: 6px; }
+.thrive-booklet .footer-col p{ font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.thrive-booklet .footer-col h4{ font-size: 13px; color: var(--gold-light); margin-bottom: 14px; letter-spacing: 0.5px; }
+.thrive-booklet .footer-col a{ display: block; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 12.5px; margin-bottom: 10px; }
+.thrive-booklet .footer-motto{ text-align: center; font-family: 'Playfair Display', serif; font-style: italic; font-size: 14px; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 24px 0; margin-bottom: 24px; }
+.thrive-booklet .footer-bottom{ display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 11.5px; color: rgba(255,255,255,0.4); }
+
+/* ─────────────────────────────────────────
+   IEP / BRAIN GYM PANELS
+───────────────────────────────────────── */
+.thrive-booklet .split-panel{ display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.thrive-booklet .panel-box{ background: var(--light-bg); border-radius: 12px; padding: 20px; }
+.thrive-booklet .panel-box strong.panel-title{ display: block; margin-bottom: 6px; }
+
+.thrive-booklet .iep-panel{ margin-top: 40px; background: linear-gradient(135deg, var(--navy), var(--indigo)); border-radius: 20px; padding: 40px; color: var(--white); }
+.thrive-booklet .iep-panel h3{ font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold-light); margin-bottom: 20px; }
+.thrive-booklet .iep-grid{ display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.thrive-booklet .iep-item{ background: rgba(255,255,255,0.08); border-radius: 12px; padding: 18px; }
+.thrive-booklet .iep-item .iep-icon{ font-size: 18px; margin-bottom: 6px; }
+.thrive-booklet .iep-item strong{ color: var(--gold-light); font-size: 12.5px; display: block; margin-bottom: 6px; }
+.thrive-booklet .iep-item p{ font-size: 11.5px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+.thrive-booklet {
+  font-family: Inter, sans-serif;
+  background: var(--light-bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.thrive-booklet img {
+  max-width: 100%;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .thrive-booklet .section { padding: 64px 24px; }
+  .thrive-booklet .founder-grid { grid-template-columns: 220px 1fr; gap: 32px; }
+  .thrive-booklet .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .thrive-booklet .gallery-item.large { grid-column: span 2; }
+}
+
+@media (max-width: 900px) {
+  .thrive-booklet .cover { min-height: auto; padding: 56px 24px 72px; }
+  .thrive-booklet .cover h1 { font-size: clamp(28px, 8vw, 48px); }
+  .thrive-booklet .cover-logo { height: 64px; max-width: 140px; }
+  .thrive-booklet .cover-logo.arura { height: 72px; max-width: 120px; }
+  .thrive-booklet .founder-grid { grid-template-columns: 1fr; }
+  .thrive-booklet .founder-photo-wrap { position: static; margin-bottom: 8px; }
+  .thrive-booklet .founder-photo { max-width: 220px; }
+  .thrive-booklet .founder-name { font-size: clamp(24px, 5vw, 30px); }
+  .thrive-booklet .founder-orgs { flex-direction: column; align-items: stretch; }
+  .thrive-booklet .org-chip { width: 100%; }
+  .thrive-booklet .vm-grid { grid-template-columns: 1fr; }
+  .thrive-booklet .split-panel { grid-template-columns: 1fr; }
+  .thrive-booklet .iep-grid { grid-template-columns: repeat(2, 1fr); }
+  .thrive-booklet .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .thrive-booklet .about-grid { grid-template-columns: 1fr 1fr; }
+  .thrive-booklet .cover-meta { gap: 20px; }
+  .thrive-booklet .quote-banner { padding: 48px 24px; }
+}
+
+@media (max-width: 640px) {
+  .thrive-booklet .section { padding: 48px 16px; }
+  .thrive-booklet .cover { padding: 48px 16px 64px; }
+  .thrive-booklet .cover-logo { height: 52px; max-width: 120px; }
+  .thrive-booklet .cover-logo.arura { height: 60px; max-width: 100px; }
+  .thrive-booklet .cover-divider-v { height: 40px; }
+  .thrive-booklet .cover-badge { letter-spacing: 2px; padding: 6px 16px; font-size: 10px; }
+  .thrive-booklet .cover-profile { flex-direction: column; text-align: center; padding: 20px; gap: 16px; }
+  .thrive-booklet .cover-links { justify-content: center; }
+  .thrive-booklet .cover-meta { gap: 16px; }
+  .thrive-booklet .cover-meta-item strong { font-size: 18px; }
+  .thrive-booklet .stats-bar { padding: 32px 16px; }
+  .thrive-booklet .stat-item h2 { font-size: 32px; }
+  .thrive-booklet .gallery-grid { grid-template-columns: 1fr; gap: 12px; }
+  .thrive-booklet .gallery-item,
+  .thrive-booklet .gallery-item.large { grid-column: span 1; }
+  .thrive-booklet .about-grid { grid-template-columns: 1fr; }
+  .thrive-booklet .services-grid { grid-template-columns: 1fr; }
+  .thrive-booklet .expertise-grid { grid-template-columns: 1fr 1fr; }
+  .thrive-booklet .stage-card { flex-direction: column; }
+  .thrive-booklet .iep-grid { grid-template-columns: 1fr; }
+  .thrive-booklet .footer { padding: 48px 16px 24px; }
+  .thrive-booklet .footer-logo { height: 36px; max-width: 96px; }
+  .thrive-booklet .footer-bottom { flex-direction: column; text-align: center; }
+  .thrive-booklet .org-chip img { height: 24px; max-width: 36px; }
+  .thrive-booklet .founder-photo { max-width: 200px; }
+  .thrive-booklet .scroll-cue { display: none; }
+}

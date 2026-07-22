@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import PageHeader from '../components/ui/PageHeader';
 import SectionTitle from '../components/ui/SectionTitle';
 import PrivacyConsentModal from '../components/ui/PrivacyConsentModal';
-import BookingForm from '../components/ui/BookingForm';
+import GoogleBookingForm from '../components/ui/GoogleBookingForm';
 import { localSeoTitle, BOOK_APPOINTMENT_KEYWORDS } from '../config/seoContent';
 import { PHONE_PRIMARY_E164, PHONE_PRIMARY_DISPLAY } from '../config/brand';
+
+const SUCCESS_MESSAGE = 'Your appointment has been booked successfully';
 
 const BookAppointment = () => {
   const [showModal, setShowModal] = useState(true);
   const [consentGiven, setConsentGiven] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const seoTitle = localSeoTitle('Book Paediatric Therapy Appointment');
   const seoDescription =
     'Book a therapy appointment at Arura Integral Therapy Services in Villivakkam, Chennai for occupational therapy, speech therapy, ABA, early intervention, and child development support.';
+
+  useEffect(() => {
+    if (!showSuccess) return;
+    const timer = window.setTimeout(() => setShowSuccess(false), 3000);
+    return () => window.clearTimeout(timer);
+  }, [showSuccess]);
 
   const handleAccept = () => {
     setConsentGiven(true);
@@ -46,15 +55,13 @@ const BookAppointment = () => {
         <div className="container-custom">
           <SectionTitle
             title="Book / Consult Appointment"
-            subtitle="Complete the booking form below — our team will confirm your appointment"
+            subtitle="Complete the Google Form below — then press Submit to confirm"
           />
 
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               {consentGiven ? (
-                <div className="overflow-hidden rounded-2xl border border-primary-100 bg-white p-6 shadow-sm sm:p-8">
-                  <BookingForm />
-                </div>
+                <GoogleBookingForm onConfirmSubmit={() => setShowSuccess(true)} />
               ) : (
                 <div className="flex min-h-[480px] flex-col items-center justify-center gap-6 rounded-2xl border-2 border-dashed border-primary-200 bg-primary-50/40 px-8 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-100 text-primary-600">
@@ -145,6 +152,28 @@ const BookAppointment = () => {
           </div>
         </div>
       </section>
+
+      {showSuccess && (
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-primary-950/70 p-4 backdrop-blur-sm">
+          <div
+            role="status"
+            aria-live="polite"
+            className="flex max-w-md flex-col items-center rounded-3xl border border-white/10 bg-primary-950/40 px-6 py-8 text-center shadow-2xl sm:px-8 sm:py-10"
+          >
+            <div className="relative">
+              <div className="absolute -inset-8 rounded-full bg-amber-300/25 blur-2xl" aria-hidden />
+              <img
+                src="/images/branding/logo.png"
+                alt="Arura logo"
+                className="relative h-24 w-24 animate-spin sm:h-36 sm:w-36"
+              />
+            </div>
+            <p className="mt-6 text-base font-bold text-white sm:mt-8 sm:text-xl">{SUCCESS_MESSAGE}</p>
+            <p className="mt-2 text-sm text-primary-100">Our team will contact you shortly to confirm.</p>
+            <p className="mt-4 text-xs text-primary-200/80">Closing automatically…</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

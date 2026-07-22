@@ -7,6 +7,7 @@ import { seoLandingPages } from './data/seoLandingPagesData';
 // Lazy loaded pages for better performance
 const Home = lazy(() => import('./pages/Home.tsx'));
 const About = lazy(() => import('./pages/About.tsx'));
+const Thrive = lazy(() => import('./pages/Thrive.tsx'));
 const Services = lazy(() => import('./pages/Services.tsx'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.tsx'));
 const Programs = lazy(() => import('./pages/Programs.tsx'));
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/thrive" element={<Thrive />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/programs" element={<Programs />} />

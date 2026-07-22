@@ -10,6 +10,7 @@ import { seoLandingPages } from '../data/seoLandingPagesData';
 const STATIC_INDEXABLE = new Set([
   '/',
   '/about',
+  '/thrive',
   '/services',
   '/programs',
   '/conditions',

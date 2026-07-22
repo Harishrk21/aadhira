@@ -193,7 +193,6 @@ const Header = () => {
       ],
     },
     { id: 4, label: 'Programs', link: '/programs' },
-    { id: 5, label: 'Parent Programs', link: '/parent-programs' },
     { id: 6, label: 'Conditions', link: '/conditions' },
     { id: 7, label: 'Testimonials', link: '/testimonials' },
     { id: 8, label: 'Gallery', link: '/gallery' },
@@ -326,14 +325,6 @@ const Header = () => {
                 onClick={toggleMenu}
               >
                 Programs
-              </NavLink>
-              <NavLink to="/parent-programs"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link-active' : 'nav-link'
-                }
-                onClick={toggleMenu}
-              >
-                Parent Programs
               </NavLink>
               <NavLink to="/conditions" 
                 className={({ isActive }) => 

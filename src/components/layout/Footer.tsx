@@ -4,8 +4,8 @@ import {
   BRAND_NAME,
   BRAND_SHORT,
   BRAND_TAGLINE,
-  PHONE_PRIMARY_E164,
-  PHONE_PRIMARY_DISPLAY,
+  WHATSAPP_E164,
+  WHATSAPP_DISPLAY,
   ADDRESS_CHENNAI,
   CENTER_LOCATIONS,
 } from '../../config/brand';
@@ -116,6 +116,7 @@ const Footer = () => {
             <ul className="space-y-2.5">
               {[
                 ['About Us', '/about'],
+                ['THRIVE Initiative', '/thrive'],
                 ['Conditions We Treat', '/conditions'],
                 ['School Readiness Program', '/programs/school-readiness'],
                 ['Testimonials', '/testimonials'],
@@ -156,10 +157,10 @@ const Footer = () => {
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-primary-400" aria-hidden />
                 <div className="space-y-1 text-sm">
                   <a
-                    href={`tel:${PHONE_PRIMARY_E164}`}
+                    href={`tel:${WHATSAPP_E164}`}
                     className="block text-neutral-400 transition hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-400 rounded"
                   >
-                    {PHONE_PRIMARY_DISPLAY}
+                    {WHATSAPP_DISPLAY}
                   </a>
                 </div>
               </div>
