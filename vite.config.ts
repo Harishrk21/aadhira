@@ -18,5 +18,13 @@ export default defineConfig({
         comments: false,
       },
     },
+    // Avoid awkward hashes like `index--xxxx.js` that can confuse caches/proxies.
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/entry-[hash].js',
+        chunkFileNames: 'assets/chunk-[hash].js',
+        assetFileNames: 'assets/asset-[hash][extname]',
+      },
+    },
   },
 });
