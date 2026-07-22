@@ -20,6 +20,7 @@ const SUCCESS_MESSAGE = 'Your appointment has been booked successfully';
 const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useLocation();
   const hideGovernmentResources = pathname === '/thrive' || pathname.startsWith('/thrive/');
+  const hideFloatingActions = hideGovernmentResources;
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -86,8 +87,8 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       {!hideGovernmentResources && <GovernmentResources />}
       <Footer />
-      <StickyBookButton />
-      <WhatsAppFloatingButton />
+      {!hideFloatingActions && <StickyBookButton />}
+      {!hideFloatingActions && <WhatsAppFloatingButton />}
 
       {isFormOpen && (
         <div className="fixed inset-0 z-[70] flex items-end justify-center bg-primary-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-4 md:p-5">

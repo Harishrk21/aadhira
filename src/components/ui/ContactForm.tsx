@@ -128,7 +128,7 @@ const ContactForm = () => {
       )}
 
       {/* Row 1 — Parent + Child names */}
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label htmlFor="parentName" className={labelCls}>Parent / Guardian Name <span className="text-red-500">*</span></label>
           <input
@@ -157,7 +157,7 @@ const ContactForm = () => {
       </div>
 
       {/* Row 2 — Email + Phone */}
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label htmlFor="email" className={labelCls}>Email Address <span className="text-red-500">*</span></label>
           <input
@@ -187,7 +187,7 @@ const ContactForm = () => {
       </div>
 
       {/* Row 3 — Age + Concern */}
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label htmlFor="childAge" className={labelCls}>Child's Age Range <span className="text-red-500">*</span></label>
           <div className="relative">
@@ -229,7 +229,7 @@ const ContactForm = () => {
       </div>
 
       {/* Row 4 — Centre + Time */}
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
           <label htmlFor="preferredCentre" className={labelCls}>Preferred Centre</label>
           <div className="relative">

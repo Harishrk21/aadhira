@@ -84,7 +84,7 @@ const About: React.FC = () => {
                   ))}
                 </div>
               </div>
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
                   { icon: ShieldCheck, text: '5+ Years Experience' },
                   { icon: GraduationCap, text: 'Multidisciplinary Team' },
@@ -121,7 +121,7 @@ const About: React.FC = () => {
                 <img
                   src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1200"
                   alt="Child therapy support overview"
-                  className="h-[460px] w-full rounded-2xl object-cover transition duration-700 group-hover:scale-105"
+                  className="h-64 w-full rounded-2xl object-cover transition duration-700 group-hover:scale-105 sm:h-80 md:h-[460px]"
                 />
               </div>
             </motion.div>

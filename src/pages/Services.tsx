@@ -295,7 +295,7 @@ const Services = () => {
       {/* ── Stats Bar ── */}
       <section className="bg-primary-900 text-white py-6">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 text-center">
             {[
               { value: '15+', label: 'Services & Programmes', icon: <Sparkles className="w-5 h-5" /> },
               { value: '0–18', label: 'Years — All Ages Covered', icon: <Users className="w-5 h-5" /> },
@@ -471,7 +471,7 @@ const Services = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+              className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4"
             >
               {filteredPrograms.length > 0 ? (
                 filteredPrograms.map((prog) => {
@@ -601,7 +601,7 @@ const Services = () => {
           <div className="relative">
             {/* Connector line */}
             <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-white/10 z-0" />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
+            <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-6 relative z-10">
               {PROCESS_STEPS.map((step, idx) => (
                 <motion.div
                   key={step.step}

@@ -58,12 +58,12 @@ const BookAppointment = () => {
             subtitle="Complete the Google Form below — then press Submit to confirm"
           />
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
               {consentGiven ? (
                 <GoogleBookingForm onConfirmSubmit={() => setShowSuccess(true)} />
               ) : (
-                <div className="flex min-h-[480px] flex-col items-center justify-center gap-6 rounded-2xl border-2 border-dashed border-primary-200 bg-primary-50/40 px-8 text-center">
+                <div className="flex min-h-[40dvh] flex-col items-center justify-center gap-6 rounded-2xl border-2 border-dashed border-primary-200 bg-primary-50/40 px-6 py-8 text-center sm:min-h-[480px] sm:px-8">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-100 text-primary-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

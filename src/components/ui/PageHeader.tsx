@@ -126,7 +126,7 @@ const PageHeader = ({
                     <p className="mx-auto mb-4 max-w-2xl rounded-xl border border-primary-100/80 bg-white/75 px-4 py-3 text-sm leading-relaxed text-neutral-700 shadow-sm lg:mx-0">
                       {frameworkSummary}
                     </p>
-                    <div className="mx-auto mb-6 grid max-w-2xl gap-3 sm:grid-cols-3 lg:mx-0">
+                    <div className="mx-auto mb-6 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2 lg:mx-0 lg:grid-cols-3">
                       {ideasToShow.map((item, index) => (
                         <div key={item.label} className="rounded-xl border border-primary-100 bg-white/80 p-3 shadow-sm backdrop-blur-sm">
                           <p className="mb-1 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary-700">

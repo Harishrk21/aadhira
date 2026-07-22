@@ -487,7 +487,7 @@ const ProgramDetail = () => {
 
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-10">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
                 <div className="flex items-center gap-3 mb-4">
@@ -567,7 +567,7 @@ const ProgramDetail = () => {
       <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50/30">
         <div className="container-custom">
           <div className="text-center mb-10"><h2 className="text-2xl font-extrabold text-neutral-900 mb-2">Related Programmes</h2><p className="text-neutral-600 text-sm">These programmes often complement {program.title}.</p></div>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {related.map((rel, idx) => {
               const relTheme = PROGRAM_THEME[rel.id] ?? DEFAULT_THEME;
               return (

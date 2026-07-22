@@ -13,9 +13,9 @@ const CTASection = ({
   backgroundImage = "https://images.pexels.com/photos/3979150/pexels-photo-3979150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 }: CTASectionProps) => {
   return (
-    <section 
-      className="relative py-20 bg-cover bg-center"
-      style={{ 
+    <section
+      className="relative py-14 sm:py-20 bg-cover bg-center"
+      style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
@@ -24,7 +24,7 @@ const CTASection = ({
       <div className="container-custom relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
-          <p className="text-xl text-primary-100 mb-8">{subtitle}</p>
+          <p className="text-base sm:text-lg md:text-xl text-primary-100 mb-8">{subtitle}</p>
           
           <Link 
             to="/book-appointment" 

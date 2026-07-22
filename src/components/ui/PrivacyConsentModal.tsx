@@ -50,7 +50,7 @@ const PrivacyConsentModal = ({ onAccept, onDecline }: Props) => {
 
       {/* Card */}
       <div
-        className={`relative w-full max-w-lg transform rounded-3xl bg-white shadow-2xl ring-1 ring-neutral-200 transition-all duration-500 ${visible ? 'translate-y-0 scale-100' : 'translate-y-6 scale-95'}`}
+        className={`relative w-full max-w-lg max-h-[90dvh] overflow-y-auto overscroll-contain transform rounded-3xl bg-white shadow-2xl ring-1 ring-neutral-200 transition-all duration-500 ${visible ? 'translate-y-0 scale-100' : 'translate-y-6 scale-95'}`}
       >
         {/* Close */}
         <button

@@ -9,7 +9,7 @@ const WhatsAppFloatingButton = () => {
       target="_blank"
       rel="noreferrer"
       onClick={() => trackEvent('whatsapp_click', { source: 'floating_button' })}
-      className="fixed bottom-20 right-4 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg shadow-green-500/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/40 sm:right-5"
+      className="fixed bottom-[4.75rem] right-4 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg shadow-green-500/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-green-600 hover:shadow-xl hover:shadow-green-500/40 safe-bottom sm:bottom-20 sm:right-5"
       aria-label="Chat on WhatsApp"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden="true">

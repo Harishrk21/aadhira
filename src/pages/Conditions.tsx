@@ -470,10 +470,10 @@ const Conditions = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.35 }}
-              className="grid lg:grid-cols-5 gap-8 items-start"
+              className="grid grid-cols-1 gap-8 items-start xl:grid-cols-5"
             >
               {/* Left Image + Summary */}
-              <div className="lg:col-span-2">
+              <div className="xl:col-span-2">
                 <div className={`rounded-2xl overflow-hidden shadow-xl border-2 ${selected.border}`}>
                   <div className={`bg-gradient-to-br ${selected.gradient} p-5 flex items-center gap-4`}>
                     <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white">
@@ -505,7 +505,7 @@ const Conditions = () => {
               </div>
 
               {/* Right Signs + Approach */}
-              <div className="lg:col-span-3 grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:col-span-3">
                 <div className={`rounded-2xl p-6 border ${selected.border} ${selected.softBg}`}>
                   <h4 className={`font-extrabold text-base mb-4 flex items-center gap-2 ${selected.text}`}>
                     <span className="text-lg">🔍</span> Common Signs
@@ -728,7 +728,7 @@ const Conditions = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+          <div className="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-5">
             {WHY_CHOOSE.map((item, idx) => (
               <motion.div
                 key={item.title}

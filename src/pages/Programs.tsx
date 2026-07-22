@@ -48,7 +48,7 @@ const Programs = () => {
             These programs complement our <Link to="/services" className="text-primary-700 font-semibold hover:underline">core therapy services</Link> and are built for real-world progress at home, school, and in social settings.
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {additionalPrograms.map((program) => (
               <article key={program.id} className="rounded-2xl border border-primary-100 bg-white shadow-sm overflow-hidden">
                 <img src={program.image} alt={program.title} className="h-44 w-full object-cover" loading="lazy" />

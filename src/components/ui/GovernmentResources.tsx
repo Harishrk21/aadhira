@@ -109,9 +109,9 @@ const GovernmentResources = () => {
           {resources.map((resource) => (
             <div
               key={resource.id}
-              className="flex items-start gap-4 rounded-2xl border border-primary-100 bg-white p-5 shadow-sm transition hover:border-primary-300 hover:shadow-md"
+              className="flex flex-col gap-3 rounded-2xl border border-primary-100 bg-white p-5 shadow-sm transition hover:border-primary-300 hover:shadow-md sm:flex-row sm:items-start"
             >
-              <span className="text-3xl flex-shrink-0 leading-none mt-0.5" aria-hidden="true">
+              <span className="text-3xl flex-shrink-0 leading-none" aria-hidden="true">
                 {resource.emoji}
               </span>
               <div className="flex-1 min-w-0">
@@ -126,7 +126,7 @@ const GovernmentResources = () => {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg bg-primary-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                className="inline-flex w-full shrink-0 items-center justify-center gap-1 rounded-lg bg-primary-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:w-auto sm:py-1.5"
                 aria-label={`Visit ${resource.name} (opens in new tab)`}
               >
                 Visit&nbsp;→

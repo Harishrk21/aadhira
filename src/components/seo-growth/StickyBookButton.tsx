@@ -5,7 +5,7 @@ import { useTracking } from '../../hooks/useTracking';
 const StickyBookButton = () => {
   const { trackEvent } = useTracking();
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-5 sm:right-5">
+    <div className="fixed bottom-4 right-4 z-50 safe-bottom sm:bottom-5 sm:right-5">
       <Link
         to="/book-appointment"
         onClick={() => trackEvent('sticky_book_click', { source: 'global_sticky_button' })}

@@ -41,7 +41,7 @@ const NotFound = () => {
             </button>
           </div>
 
-          <div className="mb-10 grid gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {helpfulLinks.map(({ to, label, icon: Icon }) => (
               <Link
                 key={to}

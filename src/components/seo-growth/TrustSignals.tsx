@@ -73,7 +73,7 @@ const TrustSignals = () => (
       </div>
 
       <motion.div
-        className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5"
+        className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

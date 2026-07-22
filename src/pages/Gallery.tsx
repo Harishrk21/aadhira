@@ -100,7 +100,7 @@ const Gallery = () => {
             title="Our Gallery"
             subtitle="Therapy spaces, sessions, and real learning moments"
           />
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {galleryItems.map((item, index) => (
               <button
                 key={item.id}

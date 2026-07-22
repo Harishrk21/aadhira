@@ -211,7 +211,7 @@ const Contact = () => {
                 Get Directions
               </a>
             </div>
-            <div className="bg-white p-6 grid sm:grid-cols-3 gap-6">
+            <div className="bg-white p-4 sm:p-6 grid grid-cols-1 gap-6 md:grid-cols-3">
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-primary-600" />
@@ -362,7 +362,7 @@ const Contact = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-5 gap-10 items-start">
+          <div className="grid grid-cols-1 gap-8 items-start lg:grid-cols-5 xl:gap-10">
             {/* Sidebar */}
             <div className="lg:col-span-2 space-y-5">
               {/* Hours */}
@@ -485,7 +485,7 @@ const Contact = () => {
             <h2 className="text-3xl font-extrabold text-neutral-900 mb-2">Find Us on the Map</h2>
             <p className="text-neutral-600">Main HQ: Villivakkam, Chennai — easily accessible by road, rail, and bus</p>
           </div>
-          <div className="rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 h-[450px]">
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 h-64 sm:h-80 md:h-[450px]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.9828918456064!2d80.20060147597633!3d13.100270287227165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526565df512807%3A0xce1e37d7d6b81572!2sARURA%20PAEDIATRIC%20THERAPY%20SERVICES%2F%20occupational%20Therapy%20%2F%20speech%20therapy%20%2F%20special%20education%2F%20Behaviour%20Therapy!5e0!3m2!1sen!2sin!4v1775758527718!5m2!1sen!2sin"
               width="100%"

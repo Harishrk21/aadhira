@@ -378,7 +378,7 @@ const ServiceDetail = () => {
       {/* ── About + Signs + Who For ── */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
 
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-10">
@@ -585,7 +585,7 @@ const ServiceDetail = () => {
             <h2 className="text-2xl font-extrabold text-neutral-900 mb-2">Related Services</h2>
             <p className="text-neutral-600 text-sm">These therapies often work best when combined with {service.title}.</p>
           </div>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {relatedServices.map((rel, idx) => {
               const relTheme = SERVICE_THEME[rel.id];
               return (

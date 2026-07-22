@@ -238,7 +238,7 @@ const Home = () => {
                 <motion.div
                   variants={fadeUp}
                   transition={{ duration: 0.55 }}
-                  className="grid gap-3 rounded-2xl border border-primary-200/60 bg-white/50 p-3 backdrop-blur-md sm:grid-cols-3 sm:gap-4 sm:p-4"
+                  className="grid grid-cols-1 gap-3 rounded-2xl border border-primary-200/60 bg-white/50 p-3 backdrop-blur-md sm:grid-cols-3 sm:gap-4 sm:p-4"
                 >
                   {[
                     { label: 'Core services', value: `${services.length}+` },

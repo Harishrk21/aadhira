@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
@@ -28,94 +28,97 @@ type Props = {
 
 export function DropdownNavigation({ navItems }: Props) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const { pathname } = useLocation();
+
+  const isLinkActive = (link?: string) => {
+    if (!link) return false;
+    if (link === '/') return pathname === '/';
+    return pathname === link || pathname.startsWith(`${link}/`);
+  };
+
+  const navItemClass = (active: boolean) =>
+    [
+      'relative z-10 flex items-center justify-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-200',
+      active
+        ? 'text-primary-700 bg-primary-50'
+        : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900',
+    ].join(' ');
 
   return (
     <div className="relative">
-      <ul className="relative flex items-center space-x-0">
+      <ul className="relative flex flex-wrap items-center justify-center gap-0.5">
         {navItems.map((navItem) => {
-          const isActive = hoveredId === navItem.id || openMenu === navItem.label;
+          const linkActive = navItem.link ? isLinkActive(navItem.link) : pathname.startsWith('/services');
 
           return (
             <li
               key={navItem.label}
               className="relative"
               onMouseEnter={() => {
-                setHoveredId(navItem.id);
                 setOpenMenu(navItem.subMenus ? navItem.label : null);
               }}
               onMouseLeave={() => {
-                setHoveredId(null);
                 setOpenMenu(null);
               }}
             >
               {navItem.subMenus ? (
                 <button
-                  className="text-sm py-1.5 px-4 flex cursor-pointer group transition-colors duration-300 items-center justify-center gap-1 text-neutral-700 hover:text-neutral-900 relative z-10"
+                  className={navItemClass(linkActive)}
                   onClick={() => setOpenMenu(openMenu === navItem.label ? null : navItem.label)}
                   type="button"
+                  aria-expanded={openMenu === navItem.label}
                 >
                   <span>{navItem.label}</span>
                   <ChevronDown
-                    className={`h-4 w-4 duration-300 transition-transform ${
+                    className={`h-4 w-4 transition-transform duration-200 ${
                       openMenu === navItem.label ? 'rotate-180' : ''
                     }`}
                   />
-                  {isActive && (
-                    <motion.div
-                      layoutId="hover-bg"
-                      className="absolute inset-0 size-full bg-primary-100"
-                      style={{ borderRadius: 999 }}
-                    />
-                  )}
                 </button>
               ) : (
-                <Link
+                <NavLink
                   to={navItem.link ?? '#'}
-                  className="text-sm py-1.5 px-4 flex cursor-pointer transition-colors duration-300 items-center justify-center gap-1 text-neutral-700 hover:text-neutral-900 relative z-10"
+                  className={navItemClass(linkActive)}
+                  onClick={() => setOpenMenu(null)}
                 >
                   <span>{navItem.label}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="hover-bg"
-                      className="absolute inset-0 size-full bg-primary-100"
-                      style={{ borderRadius: 999 }}
-                    />
-                  )}
-                </Link>
+                </NavLink>
               )}
 
               <AnimatePresence>
                 {openMenu === navItem.label && navItem.subMenus && (
-                  <div className="w-auto absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50">
+                  <div className="absolute left-1/2 top-full z-50 w-auto max-w-[calc(100vw-1rem)] -translate-x-1/2 pt-3">
                     <motion.div
-                      className="bg-white border border-primary-100 p-4 w-max shadow-xl"
-                      style={{ borderRadius: 16 }}
+                      className="w-max max-w-[calc(100vw-1rem)] overflow-x-auto rounded-2xl border border-primary-100 bg-white p-5 shadow-xl"
                       layoutId="menu"
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                     >
-                      <div className="w-fit shrink-0 flex space-x-8 overflow-hidden">
+                      <div className="flex w-fit shrink-0 gap-10 overflow-hidden">
                         {navItem.subMenus.map((sub) => (
-                          <motion.div layout className="w-full" key={sub.title}>
-                            <h3 className="mb-4 text-sm font-semibold capitalize text-neutral-500">{sub.title}</h3>
-                            <ul className="space-y-4">
+                          <motion.div layout className="min-w-[200px]" key={sub.title}>
+                            <h3 className="mb-3 border-b border-neutral-100 pb-2 text-xs font-bold uppercase tracking-wider text-neutral-500">
+                              {sub.title}
+                            </h3>
+                            <ul className="space-y-3">
                               {sub.items.map((item) => {
                                 const Icon = item.icon;
                                 return (
                                   <li key={item.label}>
                                     <Link
                                       to={item.link}
-                                      className="flex items-start space-x-3 group"
+                                      className={`flex items-start gap-3 rounded-lg p-1.5 transition-colors hover:bg-primary-50/60 ${
+                                        pathname === item.link ? 'bg-primary-50/80' : ''
+                                      }`}
                                       onClick={() => setOpenMenu(null)}
                                     >
-                                      <div className="border border-primary-100 text-neutral-800 rounded-md flex items-center justify-center size-9 shrink-0 group-hover:bg-primary-50 group-hover:text-primary-700 transition-colors duration-300">
-                                        <Icon className="h-5 w-5 flex-none" />
+                                      <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-primary-100 bg-white text-neutral-800 transition-colors group-hover:border-primary-200 group-hover:text-primary-700">
+                                        <Icon className="h-4 w-4 flex-none" />
                                       </div>
-                                      <div className="leading-5 w-max">
-                                        <p className="text-sm font-medium text-neutral-900 shrink-0">{item.label}</p>
-                                        <p className="text-xs text-neutral-500 shrink-0 group-hover:text-neutral-700 transition-colors duration-300 max-w-[220px]">
+                                      <div className="min-w-0 leading-snug">
+                                        <p className="text-sm font-semibold text-neutral-900">{item.label}</p>
+                                        <p className="max-w-[220px] text-xs leading-relaxed text-neutral-500">
                                           {item.description}
                                         </p>
                                       </div>

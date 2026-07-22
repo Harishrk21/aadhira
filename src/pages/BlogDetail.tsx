@@ -105,7 +105,7 @@ const BlogDetail = () => {
           </div>
           {post.sourceUrl ? (
             <p className="mt-6 text-xs text-neutral-500">
-              Original source inspiration: <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-primary-700 hover:underline">{post.sourceUrl}</a>
+              Original source inspiration: <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="break-all text-primary-700 hover:underline">{post.sourceUrl}</a>
             </p>
           ) : null}
         </div>
